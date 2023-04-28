@@ -7,7 +7,7 @@
 		response.sendRedirect("./product");	
 		return;
 	}
-	
+	// ciao
 	ProductBean product = (ProductBean) request.getAttribute("product");
 %>
 
@@ -40,11 +40,11 @@
 		<tr>
 			<td><%=bean.getCode()%></td>
 			<td><%=bean.getName()%></td>
-			<td><img src = "img<%=bean.getCode()%>.jpg" class = "tdclass"></td>
+			<td><img src = "img<%=bean.getCode()%>.jpg" width = 20%></td>
 			<td><%=bean.getDescription()%></td>
 			<td>
-				<a href="product?action=delete&id=<%=bean.getCode()%>" class = "button button3">Delete</a><br>
-				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Details</a><br>
+				<a href="product?action=delete&id=<%=bean.getCode()%>" class = "button button3">Delete</a>
+				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Details</a>
 				<a href="cart?action=addC&id=<%=bean.getCode()%>" class = "button button1">Add to cart</a>
 			</td>
 		</tr>
@@ -82,12 +82,12 @@
 		<label for="quantity">Quantità:</label> 
 		<input name="quantity" type="number" min="1" value="1" required><br>
 		
-		<label for="type">Tipo:</label><br> 
+		<label for="type">Tipo:</label>
         <input name="type" type="text" maxlength="40" required placeholder="enter type"><br>
 		
 		<br>
 		
-		<input type="submit" value="Add" class = "buttonform button1"> &nbsp;
+		<input type="submit" value="Add" class = "buttonform button1">
 		<input type="reset" value="Reset" class = "buttonform button2">
 		</fieldset>
 	</form>	
