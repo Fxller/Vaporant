@@ -35,7 +35,8 @@
 				</tr>
     	</tbody>
   		</table>
-  		<img src="C:\Users\matte\OneDrive\Desktop\UNISA\TSW\storagesession ok\StorageSession\WebContent\img<%=product.getCode()%>.jpg" alt="Zaino" class="img">
+  		<br>
+  		<img src="img<%=product.getCode()%>.jpg" class="img">
   		<p><a href="product" class = "button">Torna al catalogo</a></p>
 	</div>
 </body>
