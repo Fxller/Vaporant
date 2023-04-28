@@ -40,7 +40,7 @@
 		<tr>
 			<td><%=bean.getCode()%></td>
 			<td><%=bean.getName()%></td>
-			<td><img src = "img<%=bean.getCode()%>.jpg" width = 10%></td>
+			<td><img src = "img<%=bean.getCode()%>.jpg" class = "tdclass"></td>
 			<td><%=bean.getDescription()%></td>
 			<td>
 				<a href="product?action=delete&id=<%=bean.getCode()%>" class = "button button3">Delete</a><br>
