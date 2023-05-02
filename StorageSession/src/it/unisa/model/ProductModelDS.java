@@ -172,4 +172,10 @@ public class ProductModelDS implements ProductModel {
 		return products;
 	}
 
+	@Override
+	public ProductBean doRetrieveByKey2(int id) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

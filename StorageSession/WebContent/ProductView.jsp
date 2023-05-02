@@ -7,7 +7,6 @@
 		response.sendRedirect("./product");	
 		return;
 	}
-	// ciao
 	ProductBean product = (ProductBean) request.getAttribute("product");
 %>
 
@@ -25,11 +24,12 @@
 	<h2>Prodotti <a href="cart">🛒</a></h2>
 	<table border = "1">
 		<tr>
-            <th>Code <a href="product?action=sort&sort=id">Sort</a></th>
-            <th>Name <a href="product?action=sort&sort=nome">Sort</a></th>
-            <th>Image </th>
-            <th>Description <a href="product?action=sort&sort=descrizione">Sort</a></th>
-            <th>Action</th>
+            <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>
+            <th>Nome <a href="product?action=sort&sort=nome" class = "button">Sort</a></th>
+            <th>Immagine </th>
+            <th>Descrizione <a href="product?action=sort&sort=descrizione" class = "button">Sort</a></th>
+            <th>Quantita'</th>
+            <th>Azione</th>
         </tr>
 		<%
 			if (products != null && products.size() != 0) {
@@ -42,6 +42,7 @@
 			<td><%=bean.getName()%></td>
 			<td><img src = "img<%=bean.getCode()%>.jpg" width = 20%></td>
 			<td><%=bean.getDescription()%></td>
+			<td><%=bean.getQuantity()%></td>
 			<td>
 				<a href="product?action=delete&id=<%=bean.getCode()%>" class = "button button3">Delete</a>
 				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Details</a>
@@ -84,6 +85,7 @@
 		
 		<label for="type">Tipo:</label>
         <input name="type" type="text" maxlength="40" required placeholder="enter type"><br>
+		
 		
 		<br>
 		

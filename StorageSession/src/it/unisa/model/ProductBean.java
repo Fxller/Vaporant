@@ -69,5 +69,8 @@ public class ProductBean implements Serializable {
 	public String toString() {
 		return name + " (" + id + "), " + price + " " + quantity + ". " + description + type;
 	}
-
+	
+	public String toStringProduct() {
+		return name + " (" + id + "), " + price + "  " + description + type;
+	}
 }
