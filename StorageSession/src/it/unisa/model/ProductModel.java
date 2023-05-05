@@ -12,5 +12,4 @@ public interface ProductModel {
 	
 	public Collection<ProductBean> doRetrieveAll(String order) throws SQLException;
 
-	public ProductBean doRetrieveByKey2(int id) throws SQLException;
 }

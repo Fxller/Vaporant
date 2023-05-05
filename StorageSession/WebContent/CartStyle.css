@@ -48,6 +48,7 @@ th:last-child, td:last-child {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .checkout-btn:hover {

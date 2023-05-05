@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import it.unisa.model.ProductBean;
 import it.unisa.model.ProductModel;
 import it.unisa.model.ProductModelDM;
-import it.unisa.model.ProductModelDS;
 /**
  * Servlet implementation class ProductControl
  */
@@ -23,15 +22,7 @@ public class ProductControl extends HttpServlet {
 	// ProductModelDM usa il DriverManager	
 	static boolean isDataSource = true;
 	
-	static ProductModel model;
-	
-	static {
-		if (isDataSource) {
-			model = new ProductModelDS();
-		} else {
-			model = new ProductModelDM();
-		}
-	}
+	static ProductModel model = new ProductModelDM();
 	
 	public ProductControl() {
 		super();
@@ -63,7 +54,7 @@ public class ProductControl extends HttpServlet {
                     bean.setName(name);
                     bean.setDescription(description);
                     bean.setPrice(price);
-                    bean.setQuantity(quantity);
+                    bean.setQuantityStorage(quantity);
                     bean.setType(type);
                     model.doSave(bean);
                 }

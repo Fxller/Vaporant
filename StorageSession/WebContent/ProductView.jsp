@@ -8,6 +8,13 @@
 		return;
 	}
 	ProductBean product = (ProductBean) request.getAttribute("product");
+	
+	String user = null;
+	if(session.getAttribute("user") == null)
+		response.sendRedirect("loginForm.jsp");
+	else
+		user = (String)session.getAttribute("user");
+
 %>
 
 <!DOCTYPE html>
@@ -21,6 +28,7 @@
 </head>
 
 <body>
+	<h3>Si o nummr 1 ${user}</h3>
 	<h2>Prodotti <a href="cart">🛒</a></h2>
 	<table border = "1">
 		<tr>
@@ -42,11 +50,11 @@
 			<td><%=bean.getName()%></td>
 			<td><img src = "img<%=bean.getCode()%>.jpg" width = 20%></td>
 			<td><%=bean.getDescription()%></td>
-			<td><%=bean.getQuantity()%></td>
+			<td><%=bean.getQuantityStorage()%></td>
 			<td>
 				<a href="product?action=delete&id=<%=bean.getCode()%>" class = "button button3">Delete</a>
 				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Details</a>
-				<a href="cart?action=addC&id=<%=bean.getCode()%>" class = "button button1">Add to cart</a>
+				<a href="cart?action=addC&id=<%=bean.getCode()%>&user=${user}" class = "button button1">Add to cart</a>
 			</td>
 		</tr>
 		<%

@@ -25,13 +25,14 @@ public class ProductModelDM implements ProductModel {
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, product.getName());
 			preparedStatement.setString(2, product.getDescription());
-			preparedStatement.setInt(3, product.getQuantity());
+			preparedStatement.setInt(3, product.getQuantityStorage());
 			preparedStatement.setInt(4, product.getPrice());
 			preparedStatement.setString(5, product.getType());
 
 			preparedStatement.executeUpdate();
 
 			connection.commit();
+			
 		} finally {
 			try {
 				if (preparedStatement != null)
@@ -63,43 +64,7 @@ public class ProductModelDM implements ProductModel {
 				bean.setName(rs.getString("nome"));
 				bean.setDescription(rs.getString("descrizione"));
 				bean.setPrice(rs.getInt("prezzoAttuale"));
-				bean.setQuantity(rs.getInt("quantita"));
-				bean.setType(rs.getString("tipologia"));
-			}
-
-		} finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				DriverManagerConnectionPool.releaseConnection(connection);
-			}
-		}
-		return bean;
-	}
-	
-	@Override
-	public synchronized ProductBean doRetrieveByKey2(int id) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-
-		ProductBean bean = new ProductBean();
-
-		String selectSQL = "SELECT * FROM " + ProductModelDM.TABLE_NAME + " WHERE ID = ?";
-
-		try {
-			connection = DriverManagerConnectionPool.getConnection();
-			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setInt(1, id);
-
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				bean.setCode(rs.getInt("ID"));
-				bean.setName(rs.getString("nome"));
-				bean.setDescription(rs.getString("descrizione"));
-				bean.setPrice(rs.getInt("prezzoAttuale"));
-				bean.setQuantity(1);
+				bean.setQuantityStorage(rs.getInt("quantita"));
 				bean.setType(rs.getString("tipologia"));
 			}
 
@@ -167,7 +132,7 @@ public class ProductModelDM implements ProductModel {
 				bean.setName(rs.getString("nome"));
 				bean.setDescription(rs.getString("descrizione"));
 				bean.setPrice(rs.getInt("prezzoAttuale"));
-				bean.setQuantity(rs.getInt("quantita"));
+				bean.setQuantityStorage(rs.getInt("quantita"));
 				bean.setType(rs.getString("tipologia"));
 				
 				products.add(bean);

@@ -2,7 +2,13 @@
 	pageEncoding="UTF-8"%>
 	
 <%
-	Cart cart = (Cart) request.getAttribute("cart");
+	Cart cart = (Cart) request.getSession().getAttribute("cart");
+
+	String user = null;
+	if(session.getAttribute("user") == null)
+		response.sendRedirect("loginForm.jsp");
+	else
+		user = (String)session.getAttribute("user");
 %>
 
 <!DOCTYPE html>
@@ -12,7 +18,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="CartStyle.css" rel="stylesheet" type="text/css">
-	<title>YourBackPack</title>
+	<title>YourBeckPeck</title>
+
 </head>
 <body>
 	<div id="cart">
@@ -27,15 +34,20 @@
       		</tr>
     	</thead>
     	<tbody>
-    		<% 	double price=0;
-    			if(cart != null) { %>
+    		<% 	if(cart != null) { %>
 				<% List<ProductBean> prodcart = cart.getProducts(); 	
-					for(ProductBean beancart: prodcart) {
-						price+=beancart.getPrice();
+					for(ProductBean beancart : prodcart) {
 				%>
 				<tr>
 					<td><%=beancart.getName()%></td>
-					<td><%=beancart.getQuantity()%></td>
+					<td>
+					<form action = "cart?action=aggiorna&id=<%=beancart.getCode()%>" method = "POST" >
+						<input type = "number" name = "quantita" value = "<%=beancart.getQuantity()%>" required min = "1" max = "<%=beancart.getQuantityStorage()%>" >
+						<button class = "checkout-btn" type = "submit">Aggiorna</button>
+		
+					</form>
+					</td>
+					
 					<td><%=beancart.getPrice()+"€"%></td>
 					<td><a href="cart?action=deleteC&id=<%=beancart.getCode()%>" class = "button buttonred">Elimina dal carrello</a></td>
 				</tr>
@@ -43,9 +55,9 @@
 			<% } %>
     	</tbody>
   		</table>
-  		<p>Totale: <span class="total-price"><%=price%></span></p>
+  		<p>Totale: <span class="total-price"><%= cart.getPrezzoTotale()%></span></p>
   		<button class="checkout-btn">Checkout</button>
-  		<p><a href="product" class = "button">Torna al catalogo</a></p>
+  		<p><a href="product?user=${user}" class = "button">Torna al catalogo</a></p>
 	</div>
 </body>
 </html>

@@ -10,19 +10,20 @@ public class ProductBean implements Serializable {
 	String name;
 	String description;
 	int price;
-	int quantity;
+	int quantity, quantityStorage;
 	String type;
 
+	
+	public ProductBean() {
+		this.setQuantity(1);
+	}
+	
 	public String getType() {
 		return type;
 	}
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	public ProductBean() {
-
 	}
 
 	public int getCode() {
@@ -64,10 +65,18 @@ public class ProductBean implements Serializable {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+	public int getQuantityStorage() {
+		return quantityStorage;
+	}
+
+	public void setQuantityStorage(int quantityS) {
+		this.quantityStorage = quantityS;
+	}
 
 	@Override
 	public String toString() {
-		return name + " (" + id + "), " + price + " " + quantity + ". " + description + type;
+		return name + " (" + id + "), " + price + " " + quantity + ". " + description + " " + quantityStorage + " " + type;
 	}
 	
 	public String toStringProduct() {

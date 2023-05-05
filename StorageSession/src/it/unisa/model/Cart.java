@@ -6,37 +6,47 @@ import java.util.List;
 public class Cart {
 
 	private ArrayList<ProductBean> products;
-	
+	private double prezzoTotale = 0;
+
 	public Cart() {
 		products = new ArrayList<ProductBean>();
 	}
 	
+	public double getPrezzoTotale() {
+		return prezzoTotale;
+	}
+
+	public void setPrezzoTotale(double prezzoTotale) {
+		this.prezzoTotale = prezzoTotale;
+	}
+	
+	public List<ProductBean> getProducts() {
+		return  products;
+	}
+	
 	public void addProduct(ProductBean product) {
 		if (!products.isEmpty() && containsProduct(product)) {
-			int index = 0;
-			for (index = 0; index < products.size(); index++) {
-				if (products.get(index).toStringProduct().compareTo(product.toStringProduct()) == 0) {
-					break;
-				}
-			}
-			products.get(index).setQuantity(products.get(index).getQuantity()+1);
 		} else {
 			products.add(product);
 		}
+		
+		setPrezzoTotale(prezzoTotale += product.getPrice());
+
 	}
 	
 	public void deleteProduct(ProductBean product) {
 		for(ProductBean prod : products) {
 			if(prod.getCode() == product.getCode()) {
-				products.remove(prod);
+//				if (prod.getQuantity() > 1)
+//					prod.setQuantity(prod.getQuantity()-1);
+//				else
+					setPrezzoTotale(prezzoTotale -= prod.getPrice()*prod.getQuantity());
+					products.remove(prod);
+					
 				break;
 			}
 		}
  	}
-	
-	public List<ProductBean> getProducts() {
-		return  products;
-	}
 	
 	public boolean containsProduct(ProductBean product) {
 			for (ProductBean pb : products) {
@@ -46,4 +56,24 @@ public class Cart {
 			}
 			return false;
 	}
+
+	public void aggiorna(ProductBean product, int quantita) {
+				
+		int index;
+		for (index = 0; index < products.size(); index++) {
+			if (products.get(index).toStringProduct().compareTo(product.toStringProduct()) == 0) {
+				
+				setPrezzoTotale(prezzoTotale -= products.get(index).getPrice() * (products.get(index).getQuantity()) );
+				
+				products.get(index).setQuantity(quantita);
+				setPrezzoTotale(prezzoTotale += products.get(index).getPrice() * (quantita) );
+				
+				break;
+			}
+		}
+
+
+	}
+
+
 }
