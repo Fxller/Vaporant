@@ -111,7 +111,7 @@ public class UserDaoImpl implements UserDAO {
             preparedStatement.setString(2, password);
 
             ResultSet rs = preparedStatement.executeQuery();
-            if(!rs.next()) return null;
+            if(!rs.isBeforeFirst()) return null;
             
             user = new UserBean();
            
