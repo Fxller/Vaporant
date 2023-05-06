@@ -56,7 +56,7 @@ public class ProductModelDM implements ProductModel {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, id);
-
+						
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {

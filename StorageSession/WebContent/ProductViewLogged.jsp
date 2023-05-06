@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	request.getSession().setAttribute("tipo", "guest");
+	request.getSession().setAttribute("tipo",session.getAttribute("tipo"));
 	
 	Collection<?> products = (Collection<?>) session.getAttribute("products");
 	if(products == null) {
@@ -11,11 +11,11 @@
 	}
 	ProductBean product = (ProductBean) session.getAttribute("product");
 	
-/* 	String user = null;
+ 	String user = null;
 	if(session.getAttribute("user") == null)
 		response.sendRedirect("loginForm.jsp");
 	else
-		user = (String)session.getAttribute("user");   */
+		user = (String)session.getAttribute("user"); 
 
 %>
 
@@ -30,7 +30,8 @@
 </head>
 
 <body>
-	<h2>Prodotti <a href="cart">🛒</a></h2><a href = "loginForm.jsp">login</a>
+	<h3>Si o nummr 1 ${user}</h3>
+	<h2>Prodotti <a href="cart">🛒</a></h2><a href = "loginForm.jsp">logout</a>
 	<table border = "1">
 		<tr>
             <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>
