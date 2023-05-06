@@ -30,7 +30,7 @@
 </head>
 
 <body>
-	<h2>Prodotti <a href="cart">🛒</a></h2><a href = "loginForm.jsp">login</a>
+	<h2>Prodotti <a href="cart">🛒</a></h2><a href = "loginForm.jsp">login</a><a href = "SignForm.jsp">   Sign in</a>
 	<table border = "1">
 		<tr>
             <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>

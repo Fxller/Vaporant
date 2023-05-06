@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.LinkedList;
+
 
 public class ProductModelDM implements ProductModel {
 
@@ -87,13 +89,19 @@ public class ProductModelDM implements ProductModel {
 		int result = 0;
 
 		String deleteSQL = "DELETE FROM " + ProductModelDM.TABLE_NAME + " WHERE ID = ?";
+		String autoIncrement = "alter table prodotto auto_increment = 1";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, id);
-
+			
 			result = preparedStatement.executeUpdate();
+			Statement stmt =  connection.createStatement();
+			
+			stmt.executeUpdate(autoIncrement); 
+			
+			connection.commit();
 
 		} finally {
 			try {

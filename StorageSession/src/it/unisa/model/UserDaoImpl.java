@@ -17,28 +17,26 @@ public class UserDaoImpl implements UserDAO {
         int result;
 
         String insertSQL = "INSERT INTO " + UserDaoImpl.TABLE
-                           + " (ID, nome, cognome, dataNascita, CF, numTelefono, email, psw, citta, provincia, cap, via, numCivico,"
-                           + "stato, tipo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                           + " (nome, cognome, dataNascita, CF, numTelefono, email, psw, citta, provincia, cap, via, numCivico,"
+                           + "stato) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(insertSQL);
 
-            preparedStatement.setInt(1, user.getId());
-            preparedStatement.setString(2, user.getNome());
-            preparedStatement.setString(3, user.getCognome());
-            preparedStatement.setString(4, user.getDataNascita().toString());
-            preparedStatement.setString(5, user.getCodF());
-            preparedStatement.setString(6, user.getNumTelefono());
-            preparedStatement.setString(7, user.getEmail());
-            preparedStatement.setString(8, user.getPassword());
-            preparedStatement.setString(9, user.getCitta());
-            preparedStatement.setString(10, user.getProvincia());
-            preparedStatement.setInt(11, user.getCap());
-            preparedStatement.setString(12, user.getVia());
-            preparedStatement.setInt(13, user.getNumCivico());
-            preparedStatement.setString(14, user.getStato());
-            preparedStatement.setString(15, user.getTipo());
+            preparedStatement.setString(1, user.getNome());
+            preparedStatement.setString(2, user.getCognome());
+            preparedStatement.setString(3, user.getDataNascita().toString());
+            preparedStatement.setString(4, user.getCodF());
+            preparedStatement.setString(5, user.getNumTelefono());
+            preparedStatement.setString(6, user.getEmail());
+            preparedStatement.setString(7, user.getPassword());
+            preparedStatement.setString(8, user.getCitta());
+            preparedStatement.setString(9, user.getProvincia());
+            preparedStatement.setString(10, Integer.toString(user.getCap()));
+            preparedStatement.setString(11, user.getVia());
+            preparedStatement.setInt(12, user.getNumCivico());
+            preparedStatement.setString(13, user.getStato());
 
             result = preparedStatement.executeUpdate();
             

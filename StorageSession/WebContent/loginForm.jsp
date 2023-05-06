@@ -3,18 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>loggen fratm</title>
+    <title>Il mio form di login</title>
+    <link rel="stylesheet" type="text/css" href="loginFormStyle.css">
 </head>
 <body>
-
-	<form action="loginControl" method="POST">
-
-		<input type="text" name="email" placeholder="email" /> <input
-			type="password" name="password" placeholder="password" /> <input
-			type="submit" value="login" />
-			
-	</form>
-
+    <h1>Benvenuto</h1>
+    <form action="loginControl" method="POST">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Inserisci la tua email" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Inserisci la tua password" required>
+        <input type="submit" value=Login>
+    </form>
 </body>
 </html>

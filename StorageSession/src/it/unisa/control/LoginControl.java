@@ -29,10 +29,7 @@ public class LoginControl extends HttpServlet {
 
 		
 		String email = (String) req.getParameter("email");
-		String password = (String) req.getParameter("password");
-
-		System.out.println(email);
-		System.out.println(password);		
+		String password = (String) req.getParameter("password");		
 		
 		UserBean user = null;
 		
