@@ -49,7 +49,7 @@
 					</td>
 					
 					<td><%=beancart.getPrice()+"€"%></td>
-					<td><a href="cart?action=deleteC&id=<%=beancart.getCode()%>" class = "button buttonred">Elimina dal carrello</a></td>
+					<td><a href="cart?action=deleteC&id=<%=beancart.getCode()%>" class = "button buttonred">Elimina</a></td>
 				</tr>
 				<% } %>
 			<% } %>
