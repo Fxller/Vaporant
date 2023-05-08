@@ -26,8 +26,13 @@ public class LoginControl extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+
+		
 		String email = (String) req.getParameter("email");
 		String password = (String) req.getParameter("password");
+
+		System.out.println(email);
+		System.out.println(password);		
 		
 		UserBean user = null;
 		
@@ -50,8 +55,15 @@ public class LoginControl extends HttpServlet {
 			HttpSession currentSession = req.getSession();
 			currentSession.setAttribute("user", email);
 			currentSession.setAttribute("psw", password);
+			currentSession.setAttribute("tipo", user.getTipo());
 			
-			resp.sendRedirect("ProductView.jsp");
+			if(user.getTipo().equalsIgnoreCase("admin"))
+				resp.sendRedirect("ProductViewAdmin.jsp");
+			else if(user.getTipo().equalsIgnoreCase("user"))
+				resp.sendRedirect("ProductViewLogged.jsp");
+			else
+				resp.sendRedirect("ProductView.jsp");
+	
 		}
 		
 		else

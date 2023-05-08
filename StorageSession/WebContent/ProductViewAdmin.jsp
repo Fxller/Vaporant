@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	request.getSession().setAttribute("tipo", "guest");
-	
+	request.getSession().setAttribute("tipo", session.getAttribute("tipo"));
+
 	Collection<?> products = (Collection<?>) session.getAttribute("products");
 	if(products == null) {
 		response.sendRedirect("./product");	
@@ -11,11 +11,11 @@
 	}
 	ProductBean product = (ProductBean) session.getAttribute("product");
 	
-/* 	String user = null;
+  	String user = null;
 	if(session.getAttribute("user") == null)
 		response.sendRedirect("loginForm.jsp");
 	else
-		user = (String)session.getAttribute("user");   */
+		user = (String)session.getAttribute("user");  
 
 %>
 
@@ -30,7 +30,7 @@
 </head>
 
 <body>
-	<h2>Prodotti <a href="cart">🛒</a></h2><a href = "loginForm.jsp">login</a>
+	<h2>Prodotti <a href="cart">🛒</a></h2><a href = "loginForm.jsp">logout</a>
 	<table border = "1">
 		<tr>
             <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>
@@ -69,6 +69,39 @@
 			}
 		%>
 	</table>
+
+	<form action="product" method="post">
 	
+	<br><br>
+	
+		<fieldset>
+		<legend> Inserimento di un prodotto </legend>
+		<input type="hidden" name="action" value="insert"> 
+		
+		<label for="name">Nome:</label> 
+		<input name="name" type="text" maxlength="20" required placeholder="Nome del prodotto.."><br> 
+		
+		<div class = "formfield">
+		<label for="description">Descrizione:</label>
+		<textarea name="description" maxlength="100" rows="3" required placeholder="Descrizione del prodoto.."></textarea><br>
+		</div>
+		
+		<label for="price">Prezzo:</label>
+		<input name="price" type="number" min="0" value="0" required><br>
+
+		<label for="quantity">Quantità:</label> 
+		<input name="quantity" type="number" min="1" value="1" required><br>
+		
+		<label for="type">Tipo:</label>
+        <input name="type" type="text" maxlength="40" required placeholder="enter type"><br>
+		
+		
+		<br>
+		
+		<input type="submit" value="Add" class = "buttonform button1">
+		<input type="reset" value="Reset" class = "buttonform button2">
+		</fieldset>
+	</form>	
+	<br><br>
 </body>
 </html>

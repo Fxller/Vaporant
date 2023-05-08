@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 public class UserDaoImpl implements UserDAO {
 	
-	private static final String TABLE = "Utente";
+	private static final String TABLE = "utente";
     
 	@Override
 	public int saveUser(UserBean user) throws SQLException {
