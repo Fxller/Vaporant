@@ -53,9 +53,8 @@
 			<td><%=bean.getDescription()%></td>
 			<td><%=bean.getQuantityStorage()%></td>
 			<td>
-				<a href="product?action=delete&id=<%=bean.getCode()%>" class = "button button3">Delete</a>
-				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Details</a>
-				<a href="cart?action=addC&id=<%=bean.getCode()%>&user=${user}" class = "button button1">Add to cart</a>
+				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Dettagli</a>
+				<a href="cart?action=addC&id=<%=bean.getCode()%>&user=${user}" class = "button button1">Aggiungi al carrello</a>
 			</td>
 		</tr>
 		<%
@@ -63,7 +62,7 @@
 			} else {
 		%>
 		<tr>
-			<td colspan="5">No products available</td>
+			<td colspan="5">Non ci sono prodotti disponibili</td>
 		</tr>
 		<%
 			}

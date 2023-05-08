@@ -11,21 +11,12 @@ public class ProductBean implements Serializable {
 	String description;
 	int price;
 	int quantity, quantityStorage;
-	String type;
 
 	
 	public ProductBean() {
 		this.setQuantity(1);
 	}
 	
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public int getCode() {
 		return id;
 	}
@@ -76,10 +67,10 @@ public class ProductBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return name + " (" + id + "), " + price + " " + quantity + ". " + description + " " + quantityStorage + " " + type;
+		return name + " (" + id + "), " + price + " " + quantity + ". " + description + " " + quantityStorage;
 	}
 	
 	public String toStringProduct() {
-		return name + " (" + id + "), " + price + "  " + description + type;
+		return name + " (" + id + "), " + price + "  " + description;
 	}
 }
