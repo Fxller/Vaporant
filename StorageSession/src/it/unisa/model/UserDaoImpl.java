@@ -102,46 +102,47 @@ public class UserDaoImpl implements UserDAO {
         UserBean user = null;
 
         try {
-        		connection = DriverManagerConnectionPool.getConnection();
-        		preparedStatement = connection.prepareStatement(selectSQL);
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
             
-        		preparedStatement.setString(1, email);
-        		preparedStatement.setString(2, password);
-           
-        		ResultSet rs = preparedStatement.executeQuery();
-            
-        		user = new UserBean();
-            
-        		if(!rs.isBeforeFirst()) return null;
-           
-        		while (rs.next()) {
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
 
-        			user.setEmail(rs.getString("email"));
-	                user.setCodF(rs.getString("CF"));
-	                user.setNome(rs.getString("nome"));
-	                user.setCognome(rs.getString("cognome"));
-	                user.setVia(rs.getString("via"));
-	                user.setCitta(rs.getString("citta"));
-	                user.setProvincia(rs.getString("provincia"));
-	                user.setCap(Integer.parseInt(rs.getString("cap")));
-	                user.setNumTelefono(rs.getString("numTelefono"));
-	                user.setStato(rs.getString("stato"));
-	                user.setId(Integer.parseInt(rs.getString("ID")));
-	                user.setPassword(rs.getString("psw"));
-	                user.setTipo(rs.getString("tipo"));
-	                user.setNumCivico(Integer.parseInt(rs.getString("numCivico")));
-	                user.setDataNascita(LocalDate.parse(rs.getDate("dataNascita").toString()));
-        		}
+            ResultSet rs = preparedStatement.executeQuery();
+            if(!rs.isBeforeFirst()) return null;
             
-        	} finally {
-	            try {
-	                if (preparedStatement != null)
-	                    preparedStatement.close();
-	            } finally {
-	                DriverManagerConnectionPool.releaseConnection(connection);
-	            }
-	        }
-	        
-	        return user;
-		}
+            user = new UserBean();
+           
+           while (rs.next()) {
+
+                user.setEmail(rs.getString("email"));
+                user.setCodF(rs.getString("CF"));
+                user.setNome(rs.getString("nome"));
+                user.setCognome(rs.getString("cognome"));
+                user.setVia(rs.getString("via"));
+                user.setCitta(rs.getString("citta"));
+                user.setProvincia(rs.getString("provincia"));
+                user.setCap(Integer.parseInt(rs.getString("cap")));
+                user.setNumTelefono(rs.getString("numTelefono"));
+                user.setStato(rs.getString("stato"));
+                user.setId(Integer.parseInt(rs.getString("ID")));
+                user.setPassword(rs.getString("psw"));
+                user.setTipo(rs.getString("tipo"));
+                user.setNumCivico(Integer.parseInt(rs.getString("numCivico")));
+                user.setDataNascita(LocalDate.parse(rs.getDate("dataNascita").toString()));
+               
+            }
+            
+        } finally {
+            try {
+                if (preparedStatement != null)
+                    preparedStatement.close();
+            } finally {
+                DriverManagerConnectionPool.releaseConnection(connection);
+            }
+        }
+        
+        return user;
+	}
+
 }

@@ -57,7 +57,7 @@ public class LoginControl extends HttpServlet {
 			if(user.getTipo().equalsIgnoreCase("admin"))
 				resp.sendRedirect("ProductViewAdmin.jsp");
 			else if(user.getTipo().equalsIgnoreCase("user"))
-				resp.sendRedirect("ProductViewLogged.jsp");
+				resp.sendRedirect("ProductView.jsp");
 			else
 				resp.sendRedirect("ProductView.jsp");
 	
