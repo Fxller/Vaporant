@@ -5,6 +5,7 @@
 	ProductBean product = (ProductBean) request.getAttribute("product");
 %>
 
+<%@ include file="Header.html" %> 
 <!DOCTYPE html>
 <html>
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.ProductBean"%>
@@ -41,3 +42,4 @@
 	</div>
 </body>
 </html>
+<%@ include file="Footer.html" %> 
