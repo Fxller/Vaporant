@@ -53,9 +53,9 @@
 			<td><%=bean.getDescription()%></td>
 			<td><%=bean.getQuantityStorage()%></td>
 			<td>
-				<a href="product?action=delete&id=<%=bean.getCode()%>" class = "button button3">Delete</a>
-				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Details</a>
-				<a href="cart?action=addC&id=<%=bean.getCode()%>&user=${user}" class = "button button1">Add to cart</a>
+				<a href="product?action=delete&id=<%=bean.getCode()%>" class = "button button3">Cancella</a>
+				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Dettagli</a>
+				<a href="cart?action=addC&id=<%=bean.getCode()%>&user=${user}" class = "button button1">Aggiungi al Carrello</a>
 			</td>
 		</tr>
 		<%
@@ -63,7 +63,7 @@
 			} else {
 		%>
 		<tr>
-			<td colspan="5">No products available</td>
+			<td colspan="5">Non ci sono prodotti disponibili</td>
 		</tr>
 		<%
 			}
@@ -91,15 +91,11 @@
 
 		<label for="quantity">Quantità:</label> 
 		<input name="quantity" type="number" min="1" value="1" required><br>
-		
-		<label for="type">Tipo:</label>
-        <input name="type" type="text" maxlength="40" required placeholder="enter type"><br>
-		
-		
+				
 		<br>
 		
-		<input type="submit" value="Add" class = "buttonform button1">
-		<input type="reset" value="Reset" class = "buttonform button2">
+		<input type="submit" value="Aggiungi" class = "buttonform button1">
+		<input type="reset" value="Cancella" class = "buttonform button2">
 		</fieldset>
 	</form>	
 	<br><br>

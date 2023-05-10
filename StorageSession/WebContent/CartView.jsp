@@ -18,7 +18,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="CartStyle.css" rel="stylesheet" type="text/css">
-	<title>YourBeckPeck</title>
+	<title>Vaporant Cart</title>
 
 </head>
 <body>
@@ -49,7 +49,7 @@
 					</td>
 					
 					<td><%=beancart.getPrice()+"€"%></td>
-					<td><a href="cart?action=deleteC&id=<%=beancart.getCode()%>" class = "button buttonred">Elimina dal carrello</a></td>
+					<td><a href="cart?action=deleteC&id=<%=beancart.getCode()%>" class = "button buttonred">Elimina</a></td>
 				</tr>
 				<% } %>
 			<% } %>

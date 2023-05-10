@@ -4,8 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collection;
 import java.util.LinkedList;
+
 
 public class ProductModelDM implements ProductModel {
 
@@ -18,7 +20,7 @@ public class ProductModelDM implements ProductModel {
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + ProductModelDM.TABLE_NAME
-				+ " (nome, descrizione, quantita, prezzoAttuale, tipologia) VALUES (?, ?, ?, ?, ?)";
+				+ " (nome, descrizione, quantita, prezzoAttuale) VALUES (?, ?, ?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -27,7 +29,6 @@ public class ProductModelDM implements ProductModel {
 			preparedStatement.setString(2, product.getDescription());
 			preparedStatement.setInt(3, product.getQuantityStorage());
 			preparedStatement.setInt(4, product.getPrice());
-			preparedStatement.setString(5, product.getType());
 
 			preparedStatement.executeUpdate();
 
@@ -65,7 +66,6 @@ public class ProductModelDM implements ProductModel {
 				bean.setDescription(rs.getString("descrizione"));
 				bean.setPrice(rs.getInt("prezzoAttuale"));
 				bean.setQuantityStorage(rs.getInt("quantita"));
-				bean.setType(rs.getString("tipologia"));
 			}
 
 		} finally {
@@ -87,13 +87,19 @@ public class ProductModelDM implements ProductModel {
 		int result = 0;
 
 		String deleteSQL = "DELETE FROM " + ProductModelDM.TABLE_NAME + " WHERE ID = ?";
+		String autoIncrement = "alter table prodotto auto_increment = 1";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, id);
-
+			
 			result = preparedStatement.executeUpdate();
+			Statement stmt =  connection.createStatement();
+			
+			stmt.executeUpdate(autoIncrement); 
+			
+			connection.commit();
 
 		} finally {
 			try {
@@ -133,7 +139,6 @@ public class ProductModelDM implements ProductModel {
 				bean.setDescription(rs.getString("descrizione"));
 				bean.setPrice(rs.getInt("prezzoAttuale"));
 				bean.setQuantityStorage(rs.getInt("quantita"));
-				bean.setType(rs.getString("tipologia"));
 				
 				products.add(bean);
 			}
