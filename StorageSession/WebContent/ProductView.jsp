@@ -11,13 +11,9 @@
 	}
 	ProductBean product = (ProductBean) session.getAttribute("product");
 	
-/* 	String user = null;
-	if(session.getAttribute("user") == null)
-		response.sendRedirect("loginForm.jsp");
-	else
-		user = (String)session.getAttribute("user");   */
 
 %>
+<%@ include file="Header.html" %> 
 
 <!DOCTYPE html>
 <html>
@@ -30,7 +26,7 @@
 </head>
 
 <body>
-	<h2>Prodotti <a href="cart">🛒</a></h2><a href = "loginForm.jsp">login</a><a href = "SignForm.jsp">   Sign in</a>
+	<h2>Prodotti <a href="cart">🛒</a></h2>
 	<table border = "1">
 		<tr>
             <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>
@@ -71,3 +67,4 @@
 	
 </body>
 </html>
+<%@ include file="Footer.html" %> 

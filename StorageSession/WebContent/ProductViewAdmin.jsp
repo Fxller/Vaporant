@@ -18,6 +18,7 @@
 		user = (String)session.getAttribute("user");  
 
 %>
+<%@ include file="Header.html" %> 
 
 <!DOCTYPE html>
 <html>
@@ -101,3 +102,5 @@
 	<br><br>
 </body>
 </html>
+
+<%@ include file="Footer.html" %> 
