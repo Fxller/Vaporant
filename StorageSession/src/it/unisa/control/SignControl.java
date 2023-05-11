@@ -35,12 +35,7 @@ public class SignControl extends HttpServlet {
 		user.setNumTelefono(request.getParameter("telefono"));
 		user.setEmail(request.getParameter("email"));
 		user.setPassword(request.getParameter("password"));
-		user.setCitta(request.getParameter("citta"));
-		user.setProvincia(request.getParameter("provincia"));
-		user.setCap(Integer.parseInt(request.getParameter("cap")));
-		user.setVia(request.getParameter("via"));
-		user.setNumCivico(Integer.parseInt(request.getParameter("numero_civico")));
-		user.setStato(request.getParameter("stato"));
+
 		
 		int result = 0;
 		

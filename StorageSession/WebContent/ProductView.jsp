@@ -11,8 +11,8 @@
 	}
 	ProductBean product = (ProductBean) session.getAttribute("product");
 	String user = (String) request.getSession().getAttribute("user");
-
 %>
+<%@ include file="Header.html" %> 
 
 <!DOCTYPE html>
 <html>
@@ -25,7 +25,7 @@
 </head>
 
 <body>
-	<h2>Prodotti <a href="cart">🛒</a></h2><a href = "loginForm.jsp">login</a><a href = "SignForm.jsp">   Sign in</a>
+	<h2>Prodotti <a href="cart">🛒</a></h2>
 	<table border = "1">
 		<tr>
             <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>
@@ -48,9 +48,8 @@
 			<td><%=bean.getDescription()%></td>
 			<td><%=bean.getQuantityStorage()%></td>
 			<td>
-				<a href="product?action=delete&id=<%=bean.getCode()%>" class = "button button3">Delete</a>
-				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Details</a>
-				<a href="cart?action=addC&id=<%=bean.getCode()%>&user=${user}" class = "button button1">Add to cart</a>
+				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Dettagli</a>
+				<a href="cart?action=addC&id=<%=bean.getCode()%>&user=${user}" class = "button button1">Aggiungi al carrello</a>
 			</td>
 		</tr>
 		<%
@@ -58,7 +57,7 @@
 			} else {
 		%>
 		<tr>
-			<td colspan="5">No products available</td>
+			<td colspan="5">Non ci sono prodotti disponibili</td>
 		</tr>
 		<%
 			}
@@ -67,3 +66,4 @@
 	
 </body>
 </html>
+<%@ include file="Footer.html" %> 

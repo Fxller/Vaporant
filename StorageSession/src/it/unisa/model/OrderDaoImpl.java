@@ -6,31 +6,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class UserDaoImpl implements UserDAO {
-	
-	private static final String TABLE = "utente";
-    
+public class OrderDaoImpl implements OrderDAO{
+	private static final String TABLE = "Ordine";
 	@Override
-	public int saveUser(UserBean user) throws SQLException {
-        Connection connection = null;
+	public int saveOrder(OrderBean ordine) throws SQLException {
+		Connection connection = null;
         PreparedStatement preparedStatement = null;
         int result;
 
-        String insertSQL = "INSERT INTO " + UserDaoImpl.TABLE
-                           + " (nome, cognome, dataNascita, CF, numTelefono, email, psw"
-                           + "stato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String insertSQL = "INSERT INTO " + OrderDaoImpl.TABLE
+                           + " (ID_Ordine, ID_Utente, ID_Indirizzo, prezzoTot, dataAcquisto, metodoPagamento)"
+                           + " VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(insertSQL);
 
-            preparedStatement.setString(1, user.getNome());
-            preparedStatement.setString(2, user.getCognome());
-            preparedStatement.setString(3, user.getDataNascita().toString());
-            preparedStatement.setString(4, user.getCodF());
-            preparedStatement.setString(5, user.getNumTelefono());
-            preparedStatement.setString(6, user.getEmail());
-            preparedStatement.setString(7, user.getPassword());
+            preparedStatement.setInt(1, ordine.getId_ordine());
+            preparedStatement.setInt(2, ordine.getId_utente());
+            preparedStatement.setInt(3, ordine.getId_indirizzo());
+            preparedStatement.setFloat(4, ordine.getPrezzoTot());
+            preparedStatement.setString(5, ordine.getDataAcquisto().toString());
+            preparedStatement.setString(6, ordine.getMetodoPagamento());
 
 
             result = preparedStatement.executeUpdate();
@@ -49,17 +46,15 @@ public class UserDaoImpl implements UserDAO {
         }
         
         return result;
+		
 	}
 
-
 	@Override
-	public int deleteUser(UserBean user) throws SQLException {
-		
-		
+	public int deleteOrder(OrderBean ordine) throws SQLException {
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
         
-        String selectSQL = "DELETE * FROM " + TABLE + " WHERE id = ?";
+        String selectSQL = "DELETE * FROM " + TABLE + " WHERE ID_Ordine= ?";
         
         int result;
         
@@ -68,7 +63,7 @@ public class UserDaoImpl implements UserDAO {
         	connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
             
-            preparedStatement.setInt(1, user.getId());
+            preparedStatement.setInt(1, ordine.getId_ordine());
   
             result = preparedStatement.executeUpdate();   
             
@@ -88,37 +83,32 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	@Override
-	public UserBean findByCred(String email, String password) throws SQLException {
-		
+	public OrderBean findByKey(int id) throws SQLException {
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        String selectSQL = "SELECT * FROM " + TABLE + " WHERE email = ? AND psw = ?";
-        UserBean user = null;
+        String selectSQL = "SELECT * FROM " + TABLE + " WHERE ID_Ordine = ?";
+        OrderBean ordine = null;
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
             
-            preparedStatement.setString(1, email);
-            preparedStatement.setString(2, password);
+            preparedStatement.setInt(1, id);
 
+            
             ResultSet rs = preparedStatement.executeQuery();
             if(!rs.isBeforeFirst()) return null;
             
-            user = new UserBean();
+            ordine = new OrderBean();
            
            while (rs.next()) {
-
-                user.setEmail(rs.getString("email"));
-                user.setCodF(rs.getString("CF"));
-                user.setNome(rs.getString("nome"));
-                user.setCognome(rs.getString("cognome"));
-                user.setNumTelefono(rs.getString("numTelefono"));
-                user.setId(rs.getInt("ID"));
-                user.setPassword(rs.getString("psw"));
-                user.setTipo(rs.getString("tipo"));
-                user.setDataNascita(LocalDate.parse(rs.getDate("dataNascita").toString()));
+        	   ordine.setId_ordine(rs.getInt("ID_Ordine"));
+        	   ordine.setId_utente(rs.getInt("ID_Utente"));
+        	   ordine.setId_indirizzo(rs.getInt("ID_Indirizzo"));
+        	   ordine.setPrezzoTot(rs.getFloat("prezzoTot"));
+        	   ordine.setDataAcquisto(LocalDate.parse(rs.getDate("dataAcquisto").toString()));
+        	   ordine.setMetodoPagamento(rs.getString("metodoPagamento"));
                
             }
             
@@ -131,7 +121,7 @@ public class UserDaoImpl implements UserDAO {
             }
         }
         
-        return user;
+        return ordine;
 	}
 
 }

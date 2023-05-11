@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public class UserBean {
 	
-	private String nome, cognome, numTelefono, email, codF, password, citta;
+	private String nome, cognome, numTelefono, email, codF, password;
 
-	private String provincia, via, stato, tipo;
+	private String tipo;
 	private LocalDate dataNascita;
-	private int id, cap, numCivico;
+	private int id;
 	
 	
 	public String getEmail() {
@@ -54,30 +54,7 @@ public class UserBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getCitta() {
-		return citta;
-	}
-	public void setCitta(String citta) {
-		this.citta = citta;
-	}
-	public String getProvincia() {
-		return provincia;
-	}
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
-	}
-	public String getVia() {
-		return via;
-	}
-	public void setVia(String via) {
-		this.via = via;
-	}
-	public String getStato() {
-		return stato;
-	}
-	public void setStato(String stato) {
-		this.stato = stato;
-	}
+
 	public String getTipo() {
 		return tipo;
 	}
@@ -90,18 +67,7 @@ public class UserBean {
 	public void setDataNascita(LocalDate dataNascita) {
 		this.dataNascita = dataNascita;
 	}
-	public int getCap() {
-		return cap;
-	}
-	public void setCap(int cap) {
-		this.cap = cap;
-	}
-	public int getNumCivico() {
-		return numCivico;
-	}
-	public void setNumCivico(int numCivico) {
-		this.numCivico = numCivico;
-	}
+
 	
 	public String toString() {
 		
@@ -131,23 +97,6 @@ public class UserBean {
 	    s += password;
 		s += " - "; 
 		
-		s += citta;
-		s += " - "; 
-		
-	    s += provincia;
-		s += " - "; 
-		
-	    s += cap;
-		s += " - "; 
-		
-		s += via;
-		s += " - "; 
-		
-	    s += numCivico;
-		s += " - "; 
-		
-		s += stato;
-		s += " - "; 
 		
 	    s += tipo;
 		s += "\n"; 

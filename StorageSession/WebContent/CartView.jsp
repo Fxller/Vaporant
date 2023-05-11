@@ -7,6 +7,7 @@
 
 	String user = (String)session.getAttribute("user");
 %>
+<%@ include file="Header.html" %> 
 
 <!DOCTYPE html>
 <html>
@@ -15,7 +16,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="CartStyle.css" rel="stylesheet" type="text/css">
-	<title>YourBeckPeck</title>
+	<title>Vaporant Cart</title>
 
 </head>
 <body>
@@ -62,3 +63,5 @@
 	</div>
 </body>
 </html>
+
+<%@ include file="Footer.html" %>
