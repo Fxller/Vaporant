@@ -5,11 +5,7 @@ body {
 
 html, body {
     height: 100%;
-}
-
-html {
-    display: table;
-    margin: auto;
+    width: 100%;
 }
 
 fieldset {
@@ -42,6 +38,7 @@ table {
 	text-shadow: 1px 1px 0px #fff;
 	background:#eaebec;	
 	border:#ccc 1px solid;
+	margin: auto;
 }
 
 table th {

@@ -25,7 +25,7 @@
 </head>
 
 <body>
-	<h2>Prodotti <a href="cart">🛒</a></h2>
+<br>
 	<table border = "1">
 		<tr>
             <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>
