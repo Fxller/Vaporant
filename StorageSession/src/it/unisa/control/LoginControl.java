@@ -24,12 +24,19 @@ public class LoginControl extends HttpServlet {
 	static UserDaoImpl userDao = new UserDaoImpl();
 	
 	@Override
+		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			doPost(req, resp);
+		}
+	
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 
 		
 		String email = (String) req.getParameter("email");
 		String password = (String) req.getParameter("password");		
+		String action = (String) req.getSession().getAttribute("action");
+		System.out.println(action);
 		
 		UserBean user = null;
 		
@@ -37,7 +44,7 @@ public class LoginControl extends HttpServlet {
 			user = userDao.findByCred(email,password);
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		
@@ -54,15 +61,17 @@ public class LoginControl extends HttpServlet {
 			currentSession.setAttribute("psw", password);
 			currentSession.setAttribute("tipo", user.getTipo());
 			
-			if(user.getTipo().equalsIgnoreCase("admin"))
-				resp.sendRedirect("ProductViewAdmin.jsp");
-			else if(user.getTipo().equalsIgnoreCase("user"))
-				resp.sendRedirect("ProductViewLogged.jsp");
-			else
-				resp.sendRedirect("ProductView.jsp");
+			
+			if(action.equalsIgnoreCase("checkout"))
+				resp.sendRedirect("Checkout");
+			else if(user.getTipo().equalsIgnoreCase("admin"))
+						resp.sendRedirect("ProductViewAdmin.jsp");
+				else if(user.getTipo().equalsIgnoreCase("user"))
+					resp.sendRedirect("ProductViewLogged.jsp");
+				else
+					resp.sendRedirect("ProductView.jsp");
 	
 		}
-		
 		else
 		{
 			resp.sendRedirect("loginForm.jsp");

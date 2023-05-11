@@ -11,16 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import it.unisa.model.Cart;
 import it.unisa.model.ProductModelDM;
 
-/**
- * Servlet implementation class CartControl
- */
+
 @WebServlet("/cart")
 public class CartControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Cart cart = (Cart)request.getSession().getAttribute("cart");
@@ -44,10 +40,8 @@ public class CartControl extends HttpServlet {
 						{
 						int id = Integer.parseInt(request.getParameter("id"));
 						int quantita = Integer.parseInt(request.getParameter("quantita"));
-						System.out.println(quantita);
 						cart.aggiorna(model.doRetrieveByKey(id),quantita);
 						}
-				
 			}		
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
@@ -57,10 +51,13 @@ public class CartControl extends HttpServlet {
 		request.getSession().setAttribute("user", user);
 		request.getSession().setAttribute("cart", cart);
 		
-		response.sendRedirect("CartView.jsp");
+		if(action.equalsIgnoreCase("checkout"))
+			response.sendRedirect("checkout.jsp");
+		else
+			response.sendRedirect("CartView.jsp");
 		}
-	 /* @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	 
+	
 		protected void doPost(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
 			doGet(request, response);

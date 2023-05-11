@@ -28,18 +28,14 @@ public class Cart {
 		if (!products.isEmpty() && containsProduct(product)) {
 		} else {
 			products.add(product);
+			setPrezzoTotale(prezzoTotale += product.getPrice());
 		}
-		
-		setPrezzoTotale(prezzoTotale += product.getPrice());
 
 	}
 	
 	public void deleteProduct(ProductBean product) {
 		for(ProductBean prod : products) {
 			if(prod.getCode() == product.getCode()) {
-//				if (prod.getQuantity() > 1)
-//					prod.setQuantity(prod.getQuantity()-1);
-//				else
 					setPrezzoTotale(prezzoTotale -= prod.getPrice()*prod.getQuantity());
 					products.remove(prod);
 					

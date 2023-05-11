@@ -10,12 +10,7 @@
 		return;
 	}
 	ProductBean product = (ProductBean) session.getAttribute("product");
-	
-/* 	String user = null;
-	if(session.getAttribute("user") == null)
-		response.sendRedirect("loginForm.jsp");
-	else
-		user = (String)session.getAttribute("user");   */
+	String user = (String) request.getSession().getAttribute("user");
 
 %>
 
