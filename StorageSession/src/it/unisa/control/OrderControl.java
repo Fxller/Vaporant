@@ -1,6 +1,7 @@
 package it.unisa.control;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import it.unisa.model.Cart;
 
 
-@WebServlet("/Checkout")
+@WebServlet("/Ordine")
 public class OrderControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,16 +32,11 @@ public class OrderControl extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String user = (String) session.getAttribute("user");
+
 		
-//		if(user == null)
-//			response.sendRedirect("loginForm.jsp");
-		
-		
-		Cart cart = (Cart)request.getSession().getAttribute("cart");
-		
-		System.out.println(cart.getProducts().get(0).toString());
-		System.out.println(cart.getProducts().get(1).toString());
-		System.out.println(request.getParameter("payment"));
+		System.out.println("ciao");
+		Cart cart = (Cart) session.getAttribute("cart");
+
 
 	}
 

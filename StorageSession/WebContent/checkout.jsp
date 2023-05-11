@@ -5,7 +5,7 @@
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
 	request.setAttribute("cart", cart);
 	
-	 	String user = null;
+	 String user = null;
 	if(session.getAttribute("user") == null)
 	{
 		request.getSession().setAttribute("action", "checkout");
@@ -60,9 +60,9 @@
 		
 		<form action = "ordine.jsp" method = "POST">
 			<label>Paga con:</label>
-				<input type="radio" id="paypal" name="payment" value="paypal">
+				<input type="radio" id="paypal" name="payment" required value="paypal">
 					<label for="paypal">PayPal</label>
-			<input type="radio" id="mastercard" name="payment" value="mastercard">
+			<input type="radio" id="mastercard" name="payment" required value="mastercard">
 					<label for="mastercard">Mastercard</label>
 			
   			<button class="checkout-btn" type = "submit">Acquista</button>

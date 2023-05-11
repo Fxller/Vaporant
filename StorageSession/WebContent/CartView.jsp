@@ -3,7 +3,7 @@
 	
 <%
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
-	request.setAttribute("cart", cart);
+	request.getSession().setAttribute("cart", cart);
 
 	String user = (String)session.getAttribute("user");
 %>
