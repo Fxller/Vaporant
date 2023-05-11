@@ -13,15 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import it.unisa.model.UserBean;
 import it.unisa.model.UserDaoImpl;
 
+/**
+ * Servlet implementation class SignControl
+ */
 @WebServlet("/SignControl")
 public class SignControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	static UserDaoImpl userDao = new UserDaoImpl();
        
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
     public SignControl() {
         super();
-        
+        // TODO Auto-generated constructor stub
     }
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
