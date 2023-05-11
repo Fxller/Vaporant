@@ -14,9 +14,7 @@ import it.unisa.model.UserBean;
 import it.unisa.model.UserDaoImpl;
 
 
-/**
- * Servlet implementation class LoginControl
- */
+
 @WebServlet("/loginControl")
 public class LoginControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -61,6 +59,7 @@ public class LoginControl extends HttpServlet {
 			currentSession.setAttribute("psw", password);
 			currentSession.setAttribute("tipo", user.getTipo());
 			
+
 			
 			if(action.equalsIgnoreCase("checkout"))
 				resp.sendRedirect("Checkout");
@@ -70,6 +69,14 @@ public class LoginControl extends HttpServlet {
 					resp.sendRedirect("ProductViewLogged.jsp");
 				else
 					resp.sendRedirect("ProductView.jsp");
+			
+			if(user.getTipo().equalsIgnoreCase("admin"))
+				resp.sendRedirect("ProductViewAdmin.jsp");
+			else if(user.getTipo().equalsIgnoreCase("user"))
+				resp.sendRedirect("ProductView.jsp");
+			else
+				resp.sendRedirect("ProductView.jsp");
+
 	
 		}
 		else

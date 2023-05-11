@@ -45,14 +45,12 @@ public class ProductControl extends HttpServlet {
                     String description = request.getParameter("description");
                     int price = Integer.parseInt(request.getParameter("price"));
                     int quantity = Integer.parseInt(request.getParameter("quantity"));
-                    String type = request.getParameter("type");
 
                     ProductBean bean = new ProductBean();
                     bean.setName(name);
                     bean.setDescription(description);
                     bean.setPrice(price);
                     bean.setQuantityStorage(quantity);
-                    bean.setType(type);
                     model.doSave(bean);
                 }
             }
@@ -75,7 +73,7 @@ public class ProductControl extends HttpServlet {
         if(request.getSession().getAttribute("tipo").equals("admin")) 
         	response.sendRedirect("ProductViewAdmin.jsp");
         else if (request.getSession().getAttribute("tipo").equals("user"))
-        	response.sendRedirect("ProductViewLogged.jsp");
+        	response.sendRedirect("ProductView.jsp");
         else
         	response.sendRedirect("ProductView.jsp");
 	}
