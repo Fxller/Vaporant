@@ -10,8 +10,7 @@
 		return;
 	}
 	ProductBean product = (ProductBean) session.getAttribute("product");
-	
-
+	String user = (String) request.getSession().getAttribute("user");
 %>
 <%@ include file="Header.html" %> 
 

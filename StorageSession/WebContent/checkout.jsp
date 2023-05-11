@@ -1,28 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
+    pageEncoding="UTF-8"%>
+
 <%
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
-	request.getSession().setAttribute("cart", cart);
-
-	String user = (String)session.getAttribute("user");
+	request.setAttribute("cart", cart);
+	
+	 String user = null;
+	if(session.getAttribute("user") == null)
+	{
+		request.getSession().setAttribute("action", "checkout");
+		response.sendRedirect("loginForm.jsp");
+	}
+	else
+		user = (String)session.getAttribute("user");  
 %>
-<%@ include file="Header.html" %> 
 
 <!DOCTYPE html>
 <html>
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.Cart,it.unisa.model.ProductBean"%>
+	<link href="CartStyle.css" rel="stylesheet" type="text/css">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="CartStyle.css" rel="stylesheet" type="text/css">
-	<title>Vaporant Cart</title>
-
+<meta charset="UTF-8">
+<title>Checkout</title>
 </head>
 <body>
-	<div id="cart">
-  		<h2>Carrello</h2>
-  		<table>
+
+	<table>
     	<thead>
       		<tr>
         		<th>Prodotto</th>
@@ -47,21 +51,24 @@
 					</td>
 					
 					<td><%=beancart.getPrice()+"€"%></td>
-					<td><a href="cart?action=deleteC&id=<%=beancart.getCode()%>" class = "button buttonred">Elimina</a></td>
 				</tr>
 				<% } %>
 			<% } %>
     	</tbody>
   		</table>
   		<p>Totale: <span class="total-price"><%= cart.getPrezzoTotale()%></span></p>
-  		
-  		<form action = "cart?action=checkout" method = "POST">
-  			<button class="checkout-btn" type = "submit">Checkout</button>
+		
+		<form action = "ordine.jsp" method = "POST">
+			<label>Paga con:</label>
+				<input type="radio" id="paypal" name="payment" required value="paypal">
+					<label for="paypal">PayPal</label>
+			<input type="radio" id="mastercard" name="payment" required value="mastercard">
+					<label for="mastercard">Mastercard</label>
+			
+  			<button class="checkout-btn" type = "submit">Acquista</button>
   		</form>
-  	
-  		<p><a href="product?user=${user}" class = "button">Torna al catalogo</a></p>
-	</div>
+  		
+	
+
 </body>
 </html>
-
-<%@ include file="Footer.html" %>

@@ -5,30 +5,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AddressDaoImpl implements AddressDAO {
-	private static final String TABLE = "Indirizzo";
-    
+public class ContenutoDaoImpl implements ContenutoDAO{
+	private static final String TABLE = "Contenuto";
 	@Override
-	public int saveAddress(AddressBean address) throws SQLException {
-        Connection connection = null;
+	public int saveContenuto(ContenutoBean contenutoOrdine) throws SQLException {
+		Connection connection = null;
         PreparedStatement preparedStatement = null;
         int result;
 
-        String insertSQL = "INSERT INTO " + AddressDaoImpl.TABLE
-                           + " (ID_Utente, stato, citta, via, numCivico, cap, provincia"
-                           + "stato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String insertSQL = "INSERT INTO " + ContenutoDaoImpl.TABLE
+                           + " (ID_Ordine, ID_Prodotto, quantita, prezzoAcquisto, ivaAcquisto)"
+                           + " VALUES (?, ?, ?, ?, ?)";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(insertSQL);
 
-            preparedStatement.setInt(1, address.getId_utente());
-            preparedStatement.setString(2, address.getStato());
-            preparedStatement.setString(3, address.getCitta());
-            preparedStatement.setString(4, address.getVia());
-            preparedStatement.setString(5, address.getNumCivico());
-            preparedStatement.setString(6, address.getCap());
-            preparedStatement.setString(7, address.getProvincia());
+            preparedStatement.setInt(1, contenutoOrdine.getId_ordine());
+            preparedStatement.setInt(2, contenutoOrdine.getId_prodotto());
+            preparedStatement.setInt(3, contenutoOrdine.getQuantita());
+            preparedStatement.setFloat(4, contenutoOrdine.getPrezzoAcquisto());
+            preparedStatement.setInt(5, contenutoOrdine.getIvaAcquisto());
+
 
 
             result = preparedStatement.executeUpdate();
@@ -49,15 +47,12 @@ public class AddressDaoImpl implements AddressDAO {
         return result;
 	}
 
-
 	@Override
-	public int deleteAddress(AddressBean address) throws SQLException {
-		
-		
+	public int deleteContenuto(ContenutoBean contenutoOrdine) throws SQLException {
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
         
-        String selectSQL = "DELETE * FROM " + TABLE + " WHERE id = ?";
+        String selectSQL = "DELETE * FROM " + TABLE + " WHERE ID_Ordine = ? AND ID_Prodotto = ?";
         
         int result;
         
@@ -66,8 +61,8 @@ public class AddressDaoImpl implements AddressDAO {
         	connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
             
-            preparedStatement.setInt(1, address.getId());
-  
+            preparedStatement.setInt(1, contenutoOrdine.getId_ordine());
+            preparedStatement.setInt(2, contenutoOrdine.getId_prodotto());
             result = preparedStatement.executeUpdate();   
             
             connection.commit();
@@ -86,38 +81,32 @@ public class AddressDaoImpl implements AddressDAO {
 	}
 
 	@Override
-	public AddressBean findByCred(String cap, String via, String numCivico) throws SQLException {
-		
+	public ContenutoBean findByKey(int id_ordine, int id_prodotto) throws SQLException {
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        String selectSQL = "SELECT * FROM " + TABLE + " WHERE cap = ? AND via = ? AND numCivico = ?";
-        AddressBean address = null;
+        String selectSQL = "SELECT * FROM " + TABLE + " WHERE ID_Ordine = ? AND ID_Prodotto = ?";
+        ContenutoBean contenutoOrdine = null;
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
             
-            preparedStatement.setString(1, cap);
-            preparedStatement.setString(2, via);
-            preparedStatement.setString(3, numCivico);
+            preparedStatement.setInt(1, id_ordine);
+            preparedStatement.setInt(2, id_prodotto);
+
             
             ResultSet rs = preparedStatement.executeQuery();
             if(!rs.isBeforeFirst()) return null;
             
-            address = new AddressBean();
+            contenutoOrdine = new ContenutoBean();
            
            while (rs.next()) {
-        	   address.setId(rs.getInt("ID"));
-                address.setCap(rs.getString("cap"));
-                address.setCitta(rs.getString("citta"));
-                address.setId(rs.getInt("ID"));
-                address.setId_utente(rs.getInt("ID_Utente"));
-                address.setNumCivico(rs.getString("numCivico"));
-                address.setProvincia(rs.getString("provincia"));
-                address.setStato(rs.getString("stato"));
-                address.setVia(rs.getString("via"));
-               
+        	   contenutoOrdine.setId_ordine(rs.getInt("ID_Ordine"));
+        	   contenutoOrdine.setId_prodotto(rs.getInt("ID_Prodotto"));
+        	   contenutoOrdine.setIvaAcquisto(rs.getInt("ivaAcquisto"));
+        	   contenutoOrdine.setPrezzoAcquisto(rs.getFloat("prezzoAcquisto"));
+        	   contenutoOrdine.setQuantita(rs.getInt("quantita"));
             }
             
         } finally {
@@ -129,6 +118,7 @@ public class AddressDaoImpl implements AddressDAO {
             }
         }
         
-        return address;
+        return contenutoOrdine;
 	}
+	
 }
