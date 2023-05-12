@@ -17,8 +17,8 @@ public class UserDaoImpl implements UserDAO {
         int result;
 
         String insertSQL = "INSERT INTO " + UserDaoImpl.TABLE
-                           + " (nome, cognome, dataNascita, CF, numTelefono, email, psw"
-                           + "stato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                           + " (nome, cognome, dataNascita, CF, numTelefono, email, psw)"
+                           + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
@@ -30,11 +30,8 @@ public class UserDaoImpl implements UserDAO {
             preparedStatement.setString(4, user.getCodF());
             preparedStatement.setString(5, user.getNumTelefono());
             preparedStatement.setString(6, user.getEmail());
-            preparedStatement.setString(7, user.getPassword());
-
-
+ 
             result = preparedStatement.executeUpdate();
-            
             connection.commit();
 
         } finally {
@@ -86,9 +83,8 @@ public class UserDaoImpl implements UserDAO {
         
         return result;
 	}
-
-	@Override
-	public UserBean findByCred(String email, String password) throws SQLException {
+	
+public UserBean findByCred(String email, String password) throws SQLException {
 		
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -133,5 +129,4 @@ public class UserDaoImpl implements UserDAO {
         
         return user;
 	}
-
 }

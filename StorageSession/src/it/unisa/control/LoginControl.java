@@ -31,9 +31,6 @@ public class LoginControl extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-
-		
 		String email = (String) req.getParameter("email");
 		String password = (String) req.getParameter("password");		
 		String action = (String) req.getSession().getAttribute("action");
@@ -42,18 +39,17 @@ public class LoginControl extends HttpServlet {
 		UserBean user = null;
 		
 		try {
+			System.out.println("la psw e: "+ password);
 			user = userDao.findByCred(email,password);
 			
 		} catch (SQLException e) {
-			
+			System.out.println("primo try");
 			e.printStackTrace();
 		}
 		
-		if(user != null)
-		{
+		if(user != null){
 			HttpSession session = req.getSession(false);
-			if(session != null)
-			{
+			if(session != null){
 				session.invalidate();
 			}
 		
@@ -62,22 +58,35 @@ public class LoginControl extends HttpServlet {
 			currentSession.setAttribute("psw", password);
 			currentSession.setAttribute("tipo", user.getTipo());
 			currentSession.setAttribute("cart", cart);
-			
-			
+
 			//if(action.equalsIgnoreCase("checkout"))
 				//resp.sendRedirect("checkout.jsp");
 			if(user.getTipo().equalsIgnoreCase("admin"))
 						resp.sendRedirect("ProductViewAdmin.jsp");
 				else if(user.getTipo().equalsIgnoreCase("user"))
 					resp.sendRedirect("ProductView.jsp");	
+
+			System.out.println("ciaoo");
+			System.out.println(user);
+			System.out.println(currentSession.getAttribute("user")+ " - " + currentSession.getAttribute("psw")+ " - " + currentSession.getAttribute("tipo")+ " \n " );
+			System.out.println("action: "+action);
+			
+//			if(action.equalsIgnoreCase("checkout"))
+//				resp.sendRedirect("checkout.jsp");
+//			
+			
+			if(user.getTipo().equalsIgnoreCase("admin")) {
+				System.out.println("if admin");
+				resp.sendRedirect("ProductViewAdmin.jsp");
+			}
+			else if(user.getTipo().equalsIgnoreCase("user")) {
+				System.out.println("if user");
+				resp.sendRedirect("ProductView.jsp");	
+			}
+
 		}
-		else
-		{
+		else{
 			resp.sendRedirect("loginForm.jsp");
 		}
-			
-		
 	}
-	
-
 }

@@ -31,7 +31,7 @@ public class CartControl extends HttpServlet {
 		try {
 			if (action != null) {
 				if (action.equalsIgnoreCase("addC")) {
-					int id = Integer.parseInt(request.getParameter("id"));
+					 int id = Integer.parseInt(request.getParameter("id"));
 					cart.addProduct(model.doRetrieveByKey(id));
 				} else if (action.equalsIgnoreCase("deleteC")) {
 					int id = Integer.parseInt(request.getParameter("id"));

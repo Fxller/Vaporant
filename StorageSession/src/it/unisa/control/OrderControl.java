@@ -36,6 +36,7 @@ public class OrderControl extends HttpServlet {
 		
 		System.out.println("ciao");
 		Cart cart = (Cart) session.getAttribute("cart");
+		System.out.println(request.getSession().getAttribute("user"));
 
 
 	}

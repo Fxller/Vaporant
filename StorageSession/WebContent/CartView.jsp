@@ -7,7 +7,6 @@
 
 	String user = (String)session.getAttribute("user");
 %>
-<%@ include file="Header.html" %> 
 
 <!DOCTYPE html>
 <html>
@@ -20,6 +19,8 @@
 
 </head>
 <body>
+	<jsp:include page="Header.jsp" />
+
 	<div id="cart">
   		<h2>Carrello</h2>
   		<table>
@@ -53,15 +54,20 @@
 			<% } %>
     	</tbody>
   		</table>
-  		<p>Totale: <span class="total-price"><%= cart.getPrezzoTotale()%></span></p>
+  		<p>Totale: <span class="total-price"> 
+  		<% if(cart != null){ %> <%= cart.getPrezzoTotale() %>
+  		<% } else{ %> 
+  			<%= 0 %> 
+  		<%} %></span></p>
   		
+  		<% if(cart != null){ %>
   		<form action = "cart?action=checkout" method = "POST">
   			<button class="checkout-btn" type = "submit">Checkout</button>
   		</form>
+  		<% } %>
   	
   		<p><a href="product?user=${user}" class = "button">Torna al catalogo</a></p>
 	</div>
+	<jsp:include page="Footer.jsp" />
 </body>
 </html>
-
-<%@ include file="Footer.html" %>

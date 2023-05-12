@@ -12,7 +12,6 @@
 	ProductBean product = (ProductBean) session.getAttribute("product");
 	String user = (String) request.getSession().getAttribute("user");
 %>
-<%@ include file="Header.html" %> 
 
 <!DOCTYPE html>
 <html>
@@ -25,6 +24,7 @@
 </head>
 
 <body>
+	<jsp:include page="Header.jsp" />
 <br>
 <a href = "loginForm.jsp"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i></a>
 	<table border = "1">
@@ -64,7 +64,6 @@
 			}
 		%>
 	</table>
-	
+	<jsp:include page="Footer.jsp" />
 </body>
 </html>
-<%@ include file="Footer.html" %> 
