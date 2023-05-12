@@ -26,6 +26,7 @@
 
 <body>
 <br>
+<a href = "loginForm.jsp"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i></a>
 	<table border = "1">
 		<tr>
             <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>

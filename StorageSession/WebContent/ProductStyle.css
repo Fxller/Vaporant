@@ -10,7 +10,6 @@ html, body {
 
 fieldset {
   width: 400px;
-  margin: auto;
 }
 
 a {
@@ -28,7 +27,7 @@ h2 {
 
 html {
     display: table;
-    margin: auto;
+    margin: 0;
 }
 
 table {
