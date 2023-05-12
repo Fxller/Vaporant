@@ -59,13 +59,6 @@ public class LoginControl extends HttpServlet {
 			currentSession.setAttribute("tipo", user.getTipo());
 			currentSession.setAttribute("cart", cart);
 
-			//if(action.equalsIgnoreCase("checkout"))
-				//resp.sendRedirect("checkout.jsp");
-			if(user.getTipo().equalsIgnoreCase("admin"))
-						resp.sendRedirect("ProductViewAdmin.jsp");
-				else if(user.getTipo().equalsIgnoreCase("user"))
-					resp.sendRedirect("ProductView.jsp");	
-
 			System.out.println("ciaoo");
 			System.out.println(user);
 			System.out.println(currentSession.getAttribute("user")+ " - " + currentSession.getAttribute("psw")+ " - " + currentSession.getAttribute("tipo")+ " \n " );
