@@ -24,6 +24,7 @@
 <title>Ordine</title>
 </head>
 <body>
-
+Acquisto effettuato<br>
+Torna alla <a href="ProductView.jsp">HOME</a>
 </body>
 </html>

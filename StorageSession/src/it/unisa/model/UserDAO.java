@@ -8,8 +8,5 @@ public interface UserDAO {
 	
 	public int deleteUser(UserBean user) throws SQLException; // delete utente
 	
-	public UserBean findByCred(String email, String password) throws SQLException; // utente con le credenziali
-
-	boolean isEmailPresente(String email) throws SQLException;
-	
+	public UserBean findByCred(String email, String password) throws SQLException; // utente con le credenziali	
 }

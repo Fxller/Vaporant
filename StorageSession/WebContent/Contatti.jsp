@@ -1,23 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-<%@ include file="Header.html" %> 
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
+    
 <!DOCTYPE html>
 <html lang="it">
 <head>
 	<meta charset="UTF-8">
-	<title>Contatti</title>
+	<title>Contatti Vaporant</title>
 	<link rel="stylesheet" href="ContattiStyle.css">
 </head>
 <body>
+	<jsp:include page="Header.jsp" />
 	<main>
 		<section>
 			<h2>Informazioni di contatto</h2>
 			<p>Per contattarci, puoi utilizzare i seguenti canali:</p>
 			<ul>
-				<li>Email: <a href="mailto:info@sigaretteelettroniche.it">info@sigaretteelettroniche.it</a></li>
-				<li>Telefono: <a href="tel:+390123456789">0123 456789</a></li>
-				<li>Indirizzo: Via Roma 1, 00100 Roma</li>
+				<li>Email: <a href="mailto:info@francescocorcione.it">info@francescocorcione.it</a></li>
+				<li>Telefono: <a href="tel:+393280000000">3280 000000</a></li>
+				<li>Indirizzo: Via Fratelli Napoli 1, 00100 Lancusi</li>
 			</ul>
 		</section>
 		<section>
@@ -33,8 +34,6 @@
 			</form>
 		</section>
 	</main>
-	<footer>
-		<p>&copy; 2023 Sigarette Elettroniche Srl - Tutti i diritti riservati</p>
-	</footer>
+	<jsp:include page="Footer.jsp" />
 </body>
 </html>

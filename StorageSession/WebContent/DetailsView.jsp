@@ -5,7 +5,6 @@
 	ProductBean product = (ProductBean) request.getAttribute("product");
 %>
 
-<%@ include file="Header.html" %> 
 <!DOCTYPE html>
 <html>
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.ProductBean"%>
@@ -16,6 +15,7 @@
 	<title><%= product.getName() %></title>
 </head>
 <body>
+	<jsp:include page="Header.jsp" />
 	<div id="details">
   		<h2>Dettagli</h2>
   		<table>
@@ -40,6 +40,6 @@
   		<img src="img<%=product.getCode()%>.jpg" class="img">
   		<p><a href="product" class = "button">Torna al catalogo</a></p>
 	</div>
+	<jsp:include page="Footer.jsp" />
 </body>
 </html>
-<%@ include file="Footer.html" %> 

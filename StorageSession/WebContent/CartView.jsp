@@ -7,7 +7,6 @@
 
 	String user = (String)session.getAttribute("user");
 %>
-<%@ include file="Header.html" %> 
 
 <!DOCTYPE html>
 <html>
@@ -20,6 +19,8 @@
 
 </head>
 <body>
+	<jsp:include page="Header.jsp" />
+
 	<div id="cart">
   		<h2>Carrello</h2>
   		<table>
@@ -67,7 +68,6 @@
   	
   		<p><a href="product?user=${user}" class = "button">Torna al catalogo</a></p>
 	</div>
+	<jsp:include page="Footer.jsp" />
 </body>
 </html>
-
-<%@ include file="Footer.html" %>

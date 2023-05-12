@@ -39,10 +39,11 @@ public class LoginControl extends HttpServlet {
 		UserBean user = null;
 		
 		try {
+			System.out.println("la psw e: "+ password);
 			user = userDao.findByCred(email,password);
 			
 		} catch (SQLException e) {
-			
+			System.out.println("primo try");
 			e.printStackTrace();
 		}
 		
@@ -57,13 +58,25 @@ public class LoginControl extends HttpServlet {
 			currentSession.setAttribute("psw", password);
 			currentSession.setAttribute("tipo", user.getTipo());
 			currentSession.setAttribute("cart", cart);
-						
-			if(action.equalsIgnoreCase("checkout"))
-				resp.sendRedirect("checkout.jsp");
-			else if(user.getTipo().equalsIgnoreCase("admin"))
+					
+			
+			System.out.println("ciaoo");
+			System.out.println(user);
+			System.out.println(currentSession.getAttribute("user")+ " - " + currentSession.getAttribute("psw")+ " - " + currentSession.getAttribute("tipo")+ " \n " );
+			System.out.println("action: "+action);
+			
+//			if(action.equalsIgnoreCase("checkout"))
+//				resp.sendRedirect("checkout.jsp");
+//			
+			
+			if(user.getTipo().equalsIgnoreCase("admin")) {
+				System.out.println("if admin");
 				resp.sendRedirect("ProductViewAdmin.jsp");
-			else if(user.getTipo().equalsIgnoreCase("user"))
+			}
+			else if(user.getTipo().equalsIgnoreCase("user")) {
+				System.out.println("if user");
 				resp.sendRedirect("ProductView.jsp");	
+			}
 		}
 		else{
 			resp.sendRedirect("loginForm.jsp");
