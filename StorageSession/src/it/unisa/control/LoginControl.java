@@ -49,11 +49,9 @@ public class LoginControl extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		if(user != null)
-		{
+		if(user != null){
 			HttpSession session = req.getSession(false);
-			if(session != null)
-			{
+			if(session != null){
 				session.invalidate();
 			}
 		
@@ -62,34 +60,16 @@ public class LoginControl extends HttpServlet {
 			currentSession.setAttribute("psw", password);
 			currentSession.setAttribute("tipo", user.getTipo());
 			currentSession.setAttribute("cart", cart);
-			
-
-			if(user.getTipo().equalsIgnoreCase("admin"))
+						
+			if(action.equalsIgnoreCase("checkout"))
+				resp.sendRedirect("checkout.jsp");
+			else if(user.getTipo().equalsIgnoreCase("admin"))
 				resp.sendRedirect("ProductViewAdmin.jsp");
 			else if(user.getTipo().equalsIgnoreCase("user"))
-				resp.sendRedirect("ProductView.jsp");
-			else
-				resp.sendRedirect("ProductView.jsp");
-
-			
-			if(action.equalsIgnoreCase("checkout"))
-				resp.sendRedirect("ordine.jsp");
-			else if(user.getTipo().equalsIgnoreCase("admin"))
-						resp.sendRedirect("ProductViewAdmin.jsp");
-				else if(user.getTipo().equalsIgnoreCase("user"))
-					resp.sendRedirect("ProductViewLogged.jsp");
-				else
-					resp.sendRedirect("ProductView.jsp");
-
-	
+				resp.sendRedirect("ProductView.jsp");	
 		}
-		else
-		{
+		else{
 			resp.sendRedirect("loginForm.jsp");
 		}
-			
-		
 	}
-	
-
 }

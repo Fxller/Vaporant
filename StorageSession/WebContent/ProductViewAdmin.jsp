@@ -31,7 +31,7 @@
 </head>
 
 <body>
-	<h2>Prodotti <a href="cart">🛒</a></h2><a href = "loginForm.jsp">logout</a>
+	<h2>Prodotti</h2><a href = "loginForm.jsp">logout</a>
 	<table border = "1">
 		<tr>
             <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>
