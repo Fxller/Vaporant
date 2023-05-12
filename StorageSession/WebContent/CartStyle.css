@@ -1,7 +1,7 @@
 body {
 	font-family: Verdana, Geneva, sans-serif;
 	display: table-cell;
-    vertical-align: middle;
+	margin: auto;
 }
 
 html, body {
@@ -10,7 +10,7 @@ html, body {
 
 html {
     display: table;
-    margin: auto;
+    margin: 0;
 }
 
 .cart {
@@ -62,13 +62,11 @@ th:last-child, td:last-child {
   padding: 4px 8px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 12px;
   margin: 4px 2px;
   transition-duration: 0.5s;
   cursor: pointer;
   margin: auto;
-  display: block;
   font-size: 16px;
   font-weight: bold;
   border-radius: 8px;

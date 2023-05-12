@@ -31,9 +31,6 @@ public class LoginControl extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-
-		
 		String email = (String) req.getParameter("email");
 		String password = (String) req.getParameter("password");		
 		String action = (String) req.getSession().getAttribute("action");

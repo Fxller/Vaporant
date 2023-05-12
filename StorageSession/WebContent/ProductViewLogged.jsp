@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	request.getSession().setAttribute("tipo", "guest");
+	request.getSession().setAttribute("tipo",session.getAttribute("tipo"));
 	
 	Collection<?> products = (Collection<?>) session.getAttribute("products");
 	if(products == null) {
@@ -10,9 +10,14 @@
 		return;
 	}
 	ProductBean product = (ProductBean) session.getAttribute("product");
-	String user = (String) request.getSession().getAttribute("user");
+	
+ 	String user = null;
+	if(session.getAttribute("user") == null)
+		response.sendRedirect("loginForm.jsp");
+	else
+		user = (String)session.getAttribute("user"); 
+
 %>
-<%@ include file="Header.html" %> 
 
 <!DOCTYPE html>
 <html>
@@ -25,7 +30,8 @@
 </head>
 
 <body>
-<br>
+	<h3>Si o nummr 1 ${user}</h3>
+	<h2>Prodotti <a href="cart">🛒</a></h2><a href = "loginForm.jsp">logout</a>
 	<table border = "1">
 		<tr>
             <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>
@@ -48,8 +54,8 @@
 			<td><%=bean.getDescription()%></td>
 			<td><%=bean.getQuantityStorage()%></td>
 			<td>
-				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Dettagli</a>
-				<a href="cart?action=addC&id=<%=bean.getCode()%>&user=${user}" class = "button button1">Aggiungi al carrello</a>
+				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Details</a>
+				<a href="cart?action=addC&id=<%=bean.getCode()%>&user=${user}" class = "button button1">Add to cart</a>
 			</td>
 		</tr>
 		<%
@@ -57,7 +63,7 @@
 			} else {
 		%>
 		<tr>
-			<td colspan="5">Non ci sono prodotti disponibili</td>
+			<td colspan="5">Non ci sono prodotti disponibili!</td>
 		</tr>
 		<%
 			}
@@ -66,4 +72,3 @@
 	
 </body>
 </html>
-<%@ include file="Footer.html" %> 

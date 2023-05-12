@@ -1,5 +1,8 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <%@ include file="Header.html" %> 
+<!DOCTYPE html>
 <html lang="it">
 <head>
 	<meta charset="UTF-8">
@@ -7,17 +10,6 @@
 	<link rel="stylesheet" href="ContattiStyle.css">
 </head>
 <body>
-	<header>
-		<h1>Contatti</h1>
-		<nav>
-			<ul>
-				<li><a href="ProductView.jsp">Home</a></li>
-				<li><a href="prodotti.html">Prodotti</a></li>
-				<li><a href="servizi.html">Servizi</a></li>
-				<li><a href="contatti.html">Contatti</a></li>
-			</ul>
-		</nav>
-	</header>
 	<main>
 		<section>
 			<h2>Informazioni di contatto</h2>
