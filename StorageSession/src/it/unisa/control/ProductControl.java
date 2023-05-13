@@ -77,6 +77,7 @@ public class ProductControl extends HttpServlet {
         else
         	response.sendRedirect("ProductView.jsp");
 	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);

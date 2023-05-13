@@ -9,5 +9,7 @@ public interface OrderDAO {
 	public int deleteOrder(OrderBean ordine) throws SQLException; // delete ordine
 	
 	public OrderBean findByKey(int id) throws SQLException; // ricerca ordine per id
+
+	int getIdfromDB() throws SQLException;
 	
 }

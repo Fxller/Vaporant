@@ -1,6 +1,7 @@
 package it.unisa.model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface AddressDAO {
 	
@@ -9,5 +10,7 @@ public interface AddressDAO {
 	public int deleteAddress(AddressBean address) throws SQLException; // delete indirizzo
 	
 	public AddressBean findByCred(String cap, String via, String numCivico) throws SQLException; // ricerca utente per indirizzo (no id)
+
+	ArrayList<AddressBean> findByID(int id) throws SQLException;
 	
 }

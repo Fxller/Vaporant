@@ -1,4 +1,26 @@
 <%@ include file="Header.html" %> 
+
+
+<%
+	 String user = null;
+	 String psw = null;
+	 
+	if(session.getAttribute("user") == null)
+	{
+		request.getSession().setAttribute("action", "address");
+		response.sendRedirect("loginForm.jsp");
+	}
+	else
+	{
+		user = (String)session.getAttribute("user");  
+		psw = (String) session.getAttribute("psw");
+		
+		request.getSession().setAttribute("user", user);
+		request.getSession().setAttribute("psw", psw);
+		
+	}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,8 +61,10 @@
         <div class="cut"></div>
         <label for="stato" class="placeholder">Stato</label>
       </div>
-		<input type="submit" value="Registrati" class="submit">
+		<input type="submit" value="Aggiungi" class="submit">
 	</form>
+
+	
 </div>
 </body>
 </html>

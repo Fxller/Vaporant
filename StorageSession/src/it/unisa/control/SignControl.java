@@ -24,9 +24,10 @@ public class SignControl extends HttpServlet {
         
     }
     
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		UserBean user = new UserBean();
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+    	UserBean user = new UserBean();
 		
 		user.setNome(request.getParameter("nome"));
 		user.setCognome(request.getParameter("cognome"));
@@ -42,7 +43,6 @@ public class SignControl extends HttpServlet {
 		try {
 			result = userDao.saveUser(user);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -50,6 +50,11 @@ public class SignControl extends HttpServlet {
 			response.sendRedirect("loginForm.jsp");
 		else 
 			response.sendRedirect("SignForm.jsp");
+    }
+    
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
 	}
-
+	
 }

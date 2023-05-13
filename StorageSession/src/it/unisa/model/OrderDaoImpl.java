@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 
-public class OrderDaoImpl implements OrderDAO{
+public class OrderDaoImpl implements OrderDAO {
+	
 	private static final String TABLE = "Ordine";
+	
 	@Override
 	public int saveOrder(OrderBean ordine) throws SQLException {
 		Connection connection = null;
@@ -15,19 +18,18 @@ public class OrderDaoImpl implements OrderDAO{
         int result;
 
         String insertSQL = "INSERT INTO " + OrderDaoImpl.TABLE
-                           + " (ID_Ordine, ID_Utente, ID_Indirizzo, prezzoTot, dataAcquisto, metodoPagamento)"
-                           + " VALUES (?, ?, ?, ?, ?, ?)";
+                           + " (ID_Utente, ID_Indirizzo, prezzoTot, dataAcquisto, metodoPagamento)"
+                           + " VALUES (?, ?, ?, ?, ?)";
 
         try {
             connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(insertSQL);
 
-            preparedStatement.setInt(1, ordine.getId_ordine());
-            preparedStatement.setInt(2, ordine.getId_utente());
-            preparedStatement.setInt(3, ordine.getId_indirizzo());
-            preparedStatement.setFloat(4, ordine.getPrezzoTot());
-            preparedStatement.setString(5, ordine.getDataAcquisto().toString());
-            preparedStatement.setString(6, ordine.getMetodoPagamento());
+            preparedStatement.setInt(1, ordine.getId_utente());
+            preparedStatement.setInt(2, ordine.getId_indirizzo());
+            preparedStatement.setDouble(3, ordine.getPrezzoTot());
+            preparedStatement.setString(4, ordine.getDataAcquisto().toString());
+            preparedStatement.setString(5, ordine.getMetodoPagamento());
 
 
             result = preparedStatement.executeUpdate();
@@ -106,7 +108,7 @@ public class OrderDaoImpl implements OrderDAO{
         	   ordine.setId_ordine(rs.getInt("ID_Ordine"));
         	   ordine.setId_utente(rs.getInt("ID_Utente"));
         	   ordine.setId_indirizzo(rs.getInt("ID_Indirizzo"));
-        	   ordine.setPrezzoTot(rs.getFloat("prezzoTot"));
+        	   ordine.setPrezzoTot(rs.getDouble("prezzoTot"));
         	   ordine.setDataAcquisto(LocalDate.parse(rs.getDate("dataAcquisto").toString()));
         	   ordine.setMetodoPagamento(rs.getString("metodoPagamento"));
                
@@ -123,5 +125,34 @@ public class OrderDaoImpl implements OrderDAO{
         
         return ordine;
 	}
-
+	
+	@Override
+	public int getIdfromDB() throws SQLException {
+		
+		Connection connection = null;
+        Statement statement = null;
+		int id = -1;
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			statement = connection.createStatement();
+	
+	        ResultSet rs = statement.executeQuery("SELECT * FROM " + OrderDaoImpl.TABLE);
+	        
+	        if (rs.last()) {
+	            id = rs.getInt("ID_Ordine");
+	        }
+	        
+	        return id;
+	        
+		} finally {
+			try {
+				if(statement != null)
+					statement.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
+	
 }

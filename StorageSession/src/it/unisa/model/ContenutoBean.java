@@ -3,6 +3,20 @@ package it.unisa.model;
 public class ContenutoBean {
 	private int id_ordine, id_prodotto, quantita, ivaAcquisto;
 	private float prezzoAcquisto;
+	
+	public ContenutoBean() {
+		
+	}
+	
+	public ContenutoBean(int ord, int prod, int quant, int iva, float prezzo)
+	{
+		id_ordine = ord;
+		id_prodotto = prod;
+		quantita = quant;
+		ivaAcquisto = iva;
+		prezzoAcquisto = prezzo;
+	}
+	
 	public int getId_ordine() {
 		return id_ordine;
 	}

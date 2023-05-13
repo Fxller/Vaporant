@@ -28,7 +28,7 @@ public class ProductModelDM implements ProductModel {
 			preparedStatement.setString(1, product.getName());
 			preparedStatement.setString(2, product.getDescription());
 			preparedStatement.setInt(3, product.getQuantityStorage());
-			preparedStatement.setInt(4, product.getPrice());
+			preparedStatement.setFloat(4, product.getPrice());
 
 			preparedStatement.executeUpdate();
 
@@ -64,7 +64,7 @@ public class ProductModelDM implements ProductModel {
 				bean.setCode(rs.getInt("ID"));
 				bean.setName(rs.getString("nome"));
 				bean.setDescription(rs.getString("descrizione"));
-				bean.setPrice(rs.getInt("prezzoAttuale"));
+				bean.setPrice(rs.getFloat("prezzoAttuale"));
 				bean.setQuantityStorage(rs.getInt("quantita"));
 			}
 
@@ -137,7 +137,7 @@ public class ProductModelDM implements ProductModel {
 				bean.setCode(rs.getInt("ID"));
 				bean.setName(rs.getString("nome"));
 				bean.setDescription(rs.getString("descrizione"));
-				bean.setPrice(rs.getInt("prezzoAttuale"));
+				bean.setPrice(rs.getFloat("prezzoAttuale"));
 				bean.setQuantityStorage(rs.getInt("quantita"));
 				
 				products.add(bean);

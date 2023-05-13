@@ -10,48 +10,59 @@ import javax.servlet.http.HttpServletResponse;
 
 import it.unisa.model.AddressBean;
 import it.unisa.model.AddressDaoImpl;
+import it.unisa.model.UserBean;
+import it.unisa.model.UserDaoImpl;
 
 @WebServlet("/AddressControl")
 public class AddressControl extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	static AddressDaoImpl addressDao = new AddressDaoImpl();
+	static UserDaoImpl userDao = new UserDaoImpl();
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public AddressControl() {
         super();
-        // TODO Auto-generated constructor stub
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		AddressBean address = new AddressBean();
+		
+		UserBean user = null;
+		
+		try {
+			user = userDao.findByCred((String) request.getSession().getAttribute("user"), (String) request.getSession().getAttribute("psw"));
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
+		}
+		if(user != null)
+		{
+			address.setCap(request.getParameter("cap"));
+			address.setCitta(request.getParameter("citta"));
+			address.setId_utente(user.getId());
+			address.setNumCivico(request.getParameter("numCivico"));
+			address.setProvincia(request.getParameter("provincia"));
+			address.setStato(request.getParameter("stato"));
+			address.setVia(request.getParameter("via"));
+		
+			try {
+				addressDao.saveAddress(address);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		else
+			System.out.println("NOOO TELECAMERA");
+		
+		response.sendRedirect("AddressForm.jsp");
+    	
     }
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		AddressBean address = new AddressBean();
-		
-		address.setCap(request.getParameter("cap"));
-		address.setCitta(request.getParameter("citta"));
-		address.setId(Integer.parseInt(request.getParameter("ID")));
-		address.setId_utente(Integer.parseInt(request.getParameter("ID_Utente")));
-		address.setNumCivico(request.getParameter("numCivico"));
-		address.setProvincia(request.getParameter("provincia"));
-		address.setStato(request.getParameter("stato"));
-		address.setVia(request.getParameter("via"));
-
-//		int result = 0;
-//		
-//		try {
-//			result = addressDao.saveAddress(address);
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-//		if(result > 0)
-//			response.sendRedirect("AddressForm.jsp");
-//		else 
-//			response.sendRedirect("AddressForm.jsp");
-		response.sendRedirect("AddressForm.jsp");
+		doGet(request, response);
 	}
 
 }

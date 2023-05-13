@@ -6,6 +6,7 @@
 	request.getSession().setAttribute("cart", cart);
 
 	String user = (String)session.getAttribute("user");
+	request.getSession().setAttribute("user", user);
 %>
 <%@ include file="Header.html" %> 
 
@@ -39,7 +40,7 @@
 				<tr>
 					<td><%=beancart.getName()%></td>
 					<td>
-					<form action = "cart?action=aggiorna&id=<%=beancart.getCode()%>" method = "POST" >
+					<form action = "cart?action=aggiornaCheck&id=<%=beancart.getCode()%>" method = "POST" >
 						<input type = "number" name = "quantita" value = "<%=beancart.getQuantity()%>" required min = "1" max = "<%=beancart.getQuantityStorage()%>" >
 						<button class = "checkout-btn" type = "submit">Aggiorna</button>
 		
@@ -53,7 +54,7 @@
 			<% } %>
     	</tbody>
   		</table>
-  		<p>Totale: <span class="total-price"><%= cart.getPrezzoTotale()%></span></p>
+  		<p>Totale: <span class="total-price"><%= cart.getPrezzoTotale( )%> </span></p>
   		
   		<form action = "cart?action=checkout" method = "POST">
   			<button class="checkout-btn" type = "submit">Checkout</button>

@@ -22,18 +22,10 @@ import it.unisa.model.UserDaoImpl;
 public class LoginControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	static UserDaoImpl userDao = new UserDaoImpl();
+	private static UserDaoImpl userDao = new UserDaoImpl();
 	
 	@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			doPost(req, resp);
-		}
-	
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-
-		
 		String email = (String) req.getParameter("email");
 		String password = (String) req.getParameter("password");		
 		String action = (String) req.getSession().getAttribute("action");
@@ -62,32 +54,25 @@ public class LoginControl extends HttpServlet {
 			currentSession.setAttribute("psw", password);
 			currentSession.setAttribute("tipo", user.getTipo());
 			currentSession.setAttribute("cart", cart);
-			
-
-			if(user.getTipo().equalsIgnoreCase("admin"))
-				resp.sendRedirect("ProductViewAdmin.jsp");
-			else if(user.getTipo().equalsIgnoreCase("user"))
-				resp.sendRedirect("ProductView.jsp");
-			else
-				resp.sendRedirect("ProductView.jsp");
 
 			
 			if(action.equalsIgnoreCase("checkout"))
-				resp.sendRedirect("ordine.jsp");
+				resp.sendRedirect("checkout.jsp");
 			else if(user.getTipo().equalsIgnoreCase("admin"))
 						resp.sendRedirect("ProductViewAdmin.jsp");
 				else if(user.getTipo().equalsIgnoreCase("user"))
-					resp.sendRedirect("ProductViewLogged.jsp");
-				else
 					resp.sendRedirect("ProductView.jsp");
-
-	
 		}
 		else
 		{
 			resp.sendRedirect("loginForm.jsp");
 		}
-			
+		}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		doGet(req, resp);
 		
 	}
 	

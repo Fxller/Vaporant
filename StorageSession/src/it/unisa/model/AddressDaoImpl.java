@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AddressDaoImpl implements AddressDAO {
 	private static final String TABLE = "Indirizzo";
@@ -108,7 +109,7 @@ public class AddressDaoImpl implements AddressDAO {
             address = new AddressBean();
            
            while (rs.next()) {
-        	   address.setId(rs.getInt("ID"));
+        	   	address.setId(rs.getInt("ID"));
                 address.setCap(rs.getString("cap"));
                 address.setCitta(rs.getString("citta"));
                 address.setId(rs.getInt("ID"));
@@ -131,4 +132,54 @@ public class AddressDaoImpl implements AddressDAO {
         
         return address;
 	}
+
+
+	@Override
+    public ArrayList<AddressBean> findByID(int id) throws SQLException {
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ArrayList<AddressBean> ListaIndirizzi = new ArrayList<AddressBean>();
+
+        String selectSQL = "SELECT * FROM "+ TABLE + " WHERE ID_Utente = ?";
+
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+
+            preparedStatement.setInt(1, id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if(!rs.isBeforeFirst()) return null;
+
+
+
+            while (rs.next()) {
+                AddressBean address = null;
+                address = new AddressBean();
+                address.setId(rs.getInt("ID"));
+                address.setCap(rs.getString("cap"));
+                address.setCitta(rs.getString("citta"));
+                address.setId(rs.getInt("ID"));
+                address.setId_utente(rs.getInt("ID_Utente"));
+                address.setNumCivico(rs.getString("numCivico"));
+                address.setProvincia(rs.getString("provincia"));
+                address.setStato(rs.getString("stato"));
+                address.setVia(rs.getString("via"));
+                ListaIndirizzi.add(address);
+                }
+
+      } finally {
+          try {
+              if (preparedStatement != null)
+                  preparedStatement.close();
+          } finally {
+              DriverManagerConnectionPool.releaseConnection(connection);
+          }
+      }
+
+      return ListaIndirizzi;
+    }
 }

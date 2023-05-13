@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 public class ContenutoDaoImpl implements ContenutoDAO{
 	private static final String TABLE = "Contenuto";
+	
 	@Override
 	public int saveContenuto(ContenutoBean contenutoOrdine) throws SQLException {
 		Connection connection = null;
@@ -30,8 +31,9 @@ public class ContenutoDaoImpl implements ContenutoDAO{
 
 
             result = preparedStatement.executeUpdate();
-            
             connection.commit();
+            
+            updateStorage(contenutoOrdine.getId_prodotto(), contenutoOrdine.getQuantita());
 
         } finally {
             try {
@@ -39,7 +41,6 @@ public class ContenutoDaoImpl implements ContenutoDAO{
                     preparedStatement.close();
                 
             } finally {
-                
             	DriverManagerConnectionPool.releaseConnection(connection);
             }
         }
@@ -120,5 +121,37 @@ public class ContenutoDaoImpl implements ContenutoDAO{
         
         return contenutoOrdine;
 	}
+	
+	private int updateStorage(int id, int quant) throws SQLException {
+		Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        
+        String selectSQL = "UPDATE prodotto SET quantita = quantita - ? WHERE ID = ?";
+        
+        int result;
+        
+        try
+        {
+        	connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+            
+            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, quant);
+            result = preparedStatement.executeUpdate();   
+            
+            connection.commit();
+        	
+        } finally {
+            try {
+                if (preparedStatement != null)
+                    preparedStatement.close();
+            } finally {
+            	
+               DriverManagerConnectionPool.releaseConnection(connection);
+            }
+        }
+		return result;
+	}
+	
 	
 }
