@@ -5,8 +5,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class AddressDaoImpl implements AddressDAO {
 	private static final String TABLE = "Indirizzo";
+	private static DataSource ds;
+
+    
+	//connessione al database
+	static {
+	    try {
+	        Context initCtx = new InitialContext();
+	        Context envCtx = (Context) initCtx.lookup("java:comp/env");
+	
+	        ds = (DataSource) envCtx.lookup("jdbc/storage");
+	
+	    } catch (NamingException e) {
+	        System.out.println("Error:" + e.getMessage());
+	    }
+	}
     
 	@Override
 	public int saveAddress(AddressBean address) throws SQLException {
@@ -19,8 +39,9 @@ public class AddressDaoImpl implements AddressDAO {
                            + "stato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
-            preparedStatement = connection.prepareStatement(insertSQL);
+//            connection = DriverManagerConnectionPool.getConnection();
+        	connection = ds.getConnection();
+        	preparedStatement = connection.prepareStatement(insertSQL);
 
             preparedStatement.setInt(1, address.getId_utente());
             preparedStatement.setString(2, address.getStato());
@@ -41,8 +62,10 @@ public class AddressDaoImpl implements AddressDAO {
                     preparedStatement.close();
                 
             } finally {
-                
-            	DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
+//            	DriverManagerConnectionPool.releaseConnection(connection);
             }
         }
         
@@ -63,8 +86,9 @@ public class AddressDaoImpl implements AddressDAO {
         
         try
         {
-        	connection = DriverManagerConnectionPool.getConnection();
-            preparedStatement = connection.prepareStatement(selectSQL);
+//        	connection = DriverManagerConnectionPool.getConnection();
+        	connection = ds.getConnection();
+        	preparedStatement = connection.prepareStatement(selectSQL);
             
             preparedStatement.setInt(1, address.getId());
   
@@ -77,8 +101,10 @@ public class AddressDaoImpl implements AddressDAO {
                 if (preparedStatement != null)
                     preparedStatement.close();
             } finally {
-            	
-               DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
+//               DriverManagerConnectionPool.releaseConnection(connection);
             }
         }
         
@@ -95,8 +121,9 @@ public class AddressDaoImpl implements AddressDAO {
         AddressBean address = null;
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
-            preparedStatement = connection.prepareStatement(selectSQL);
+//            connection = DriverManagerConnectionPool.getConnection();
+        	connection = ds.getConnection();
+        	preparedStatement = connection.prepareStatement(selectSQL);
             
             preparedStatement.setString(1, cap);
             preparedStatement.setString(2, via);
@@ -125,7 +152,10 @@ public class AddressDaoImpl implements AddressDAO {
                 if (preparedStatement != null)
                     preparedStatement.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
+//                DriverManagerConnectionPool.releaseConnection(connection);
             }
         }
         

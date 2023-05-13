@@ -11,6 +11,10 @@
 	}
 	ProductBean product = (ProductBean) session.getAttribute("product");
 	String user = (String) request.getSession().getAttribute("user");
+	
+	if(user != null){ 
+			request.getSession().setAttribute("action", "logout");
+		}
 %>
 
 <!DOCTYPE html>
@@ -26,7 +30,11 @@
 <body>
 	<jsp:include page="Header.jsp" />
 <br>
-<a href = "loginForm.jsp"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i></a>
+	<%if(user!=null){%>
+	    <form action="logoutControl" method="POST" class="form">
+			<button type="submit"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i></button>
+		</form>
+	<% } %>
 	<table border = "1">
 		<tr>
             <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>

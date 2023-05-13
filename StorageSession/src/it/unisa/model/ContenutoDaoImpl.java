@@ -5,8 +5,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class ContenutoDaoImpl implements ContenutoDAO{
 	private static final String TABLE = "Contenuto";
+	
+    private static DataSource ds;
+
+    
+	//connessione al database
+	static {
+	    try {
+	        Context initCtx = new InitialContext();
+	        Context envCtx = (Context) initCtx.lookup("java:comp/env");
+	
+	        ds = (DataSource) envCtx.lookup("jdbc/storage");
+	
+	    } catch (NamingException e) {
+	        System.out.println("Error:" + e.getMessage());
+	    }
+	}
+	
 	@Override
 	public int saveContenuto(ContenutoBean contenutoOrdine) throws SQLException {
 		Connection connection = null;
@@ -18,8 +40,9 @@ public class ContenutoDaoImpl implements ContenutoDAO{
                            + " VALUES (?, ?, ?, ?, ?)";
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
-            preparedStatement = connection.prepareStatement(insertSQL);
+//            connection = DriverManagerConnectionPool.getConnection();
+        	connection = ds.getConnection();
+        	preparedStatement = connection.prepareStatement(insertSQL);
 
             preparedStatement.setInt(1, contenutoOrdine.getId_ordine());
             preparedStatement.setInt(2, contenutoOrdine.getId_prodotto());
@@ -39,8 +62,10 @@ public class ContenutoDaoImpl implements ContenutoDAO{
                     preparedStatement.close();
                 
             } finally {
-                
-            	DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
+//            	DriverManagerConnectionPool.releaseConnection(connection);
             }
         }
         
@@ -58,8 +83,9 @@ public class ContenutoDaoImpl implements ContenutoDAO{
         
         try
         {
-        	connection = DriverManagerConnectionPool.getConnection();
-            preparedStatement = connection.prepareStatement(selectSQL);
+//        	connection = DriverManagerConnectionPool.getConnection();
+        	connection = ds.getConnection();
+        	preparedStatement = connection.prepareStatement(selectSQL);
             
             preparedStatement.setInt(1, contenutoOrdine.getId_ordine());
             preparedStatement.setInt(2, contenutoOrdine.getId_prodotto());
@@ -72,8 +98,10 @@ public class ContenutoDaoImpl implements ContenutoDAO{
                 if (preparedStatement != null)
                     preparedStatement.close();
             } finally {
-            	
-               DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
+//               DriverManagerConnectionPool.releaseConnection(connection);
             }
         }
         
@@ -89,8 +117,9 @@ public class ContenutoDaoImpl implements ContenutoDAO{
         ContenutoBean contenutoOrdine = null;
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
-            preparedStatement = connection.prepareStatement(selectSQL);
+//            connection = DriverManagerConnectionPool.getConnection();
+        	connection = ds.getConnection();
+        	preparedStatement = connection.prepareStatement(selectSQL);
             
             preparedStatement.setInt(1, id_ordine);
             preparedStatement.setInt(2, id_prodotto);
@@ -114,7 +143,11 @@ public class ContenutoDaoImpl implements ContenutoDAO{
                 if (preparedStatement != null)
                     preparedStatement.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(connection);
+            
+            	if(connection != null) {
+            		connection.close();
+            	}
+//                DriverManagerConnectionPool.releaseConnection(connection);
             }
         }
         

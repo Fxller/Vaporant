@@ -6,8 +6,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class OrderDaoImpl implements OrderDAO{
 	private static final String TABLE = "Ordine";
+	
+    private static DataSource ds;
+
+    
+	//connessione al database
+	static {
+	    try {
+	        Context initCtx = new InitialContext();
+	        Context envCtx = (Context) initCtx.lookup("java:comp/env");
+	
+	        ds = (DataSource) envCtx.lookup("jdbc/storage");
+	
+	    } catch (NamingException e) {
+	        System.out.println("Error:" + e.getMessage());
+	    }
+	}
 	@Override
 	public int saveOrder(OrderBean ordine) throws SQLException {
 		Connection connection = null;
@@ -19,8 +40,9 @@ public class OrderDaoImpl implements OrderDAO{
                            + " VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
-            preparedStatement = connection.prepareStatement(insertSQL);
+//            connection = DriverManagerConnectionPool.getConnection();
+        	connection = ds.getConnection();
+        	preparedStatement = connection.prepareStatement(insertSQL);
 
             preparedStatement.setInt(1, ordine.getId_ordine());
             preparedStatement.setInt(2, ordine.getId_utente());
@@ -40,8 +62,10 @@ public class OrderDaoImpl implements OrderDAO{
                     preparedStatement.close();
                 
             } finally {
-                
-            	DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
+//            	DriverManagerConnectionPool.releaseConnection(connection); DISCONNESSIONE CON IL DRIVER MANAGER
             }
         }
         
@@ -60,8 +84,9 @@ public class OrderDaoImpl implements OrderDAO{
         
         try
         {
-        	connection = DriverManagerConnectionPool.getConnection();
-            preparedStatement = connection.prepareStatement(selectSQL);
+//        	connection = DriverManagerConnectionPool.getConnection();
+        	connection = ds.getConnection();
+        	preparedStatement = connection.prepareStatement(selectSQL);
             
             preparedStatement.setInt(1, ordine.getId_ordine());
   
@@ -74,8 +99,9 @@ public class OrderDaoImpl implements OrderDAO{
                 if (preparedStatement != null)
                     preparedStatement.close();
             } finally {
-            	
-               DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
             }
         }
         
@@ -91,7 +117,8 @@ public class OrderDaoImpl implements OrderDAO{
         OrderBean ordine = null;
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+        	connection = ds.getConnection();
+//            connection = DriverManagerConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
             
             preparedStatement.setInt(1, id);
@@ -117,7 +144,10 @@ public class OrderDaoImpl implements OrderDAO{
                 if (preparedStatement != null)
                     preparedStatement.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
+//                DriverManagerConnectionPool.releaseConnection(connection);
             }
         }
         

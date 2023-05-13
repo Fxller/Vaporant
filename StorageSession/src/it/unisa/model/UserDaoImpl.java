@@ -6,13 +6,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class UserDaoImpl implements UserDAO {
 	
 	private static final String TABLE = "utente";
+	
+    private static DataSource ds;
+
+    
+    	//connessione al database
+    static {
+        try {
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+
+            ds = (DataSource) envCtx.lookup("jdbc/storage");
+
+        } catch (NamingException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+    }
     
 	@Override
 	public int saveUser(UserBean user) throws SQLException {
-        Connection connection = null;
+        Connection connection = null;  		
         PreparedStatement preparedStatement = null;
         int result;
 
@@ -21,7 +42,8 @@ public class UserDaoImpl implements UserDAO {
                            + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+//            connection = DriverManagerConnectionPool.getConnection(); ROBA VECCHIA DEL DRIVER MANAGER
+        	connection = ds.getConnection();
             preparedStatement = connection.prepareStatement(insertSQL);
 
             preparedStatement.setString(1, user.getNome());
@@ -40,8 +62,9 @@ public class UserDaoImpl implements UserDAO {
                     preparedStatement.close();
                 
             } finally {
-                
-            	DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
             }
         }
         
@@ -93,7 +116,8 @@ public UserBean findByCred(String email, String password) throws SQLException {
         UserBean user = null;
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+//            connection = DriverManagerConnectionPool.getConnection(); ROBA VECCHIA DEL DRIVER MANAGER
+        	connection = ds.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
             
             preparedStatement.setString(1, email);
@@ -123,7 +147,9 @@ public UserBean findByCred(String email, String password) throws SQLException {
                 if (preparedStatement != null)
                     preparedStatement.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
             }
         }
         
