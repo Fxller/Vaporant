@@ -10,7 +10,8 @@ html, body {
 
 html {
     display: table;
-    margin: auto;
+    margin: 0;
+    align-items: center;
 }
 
 .details {

@@ -1,4 +1,4 @@
-<%@ include file="Header.html" %> 
+<%@ include file="Header.jsp" %> 
 
 
 <%
@@ -20,7 +20,6 @@
 		
 	}
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +28,7 @@
 	
 </head>
 <body>
+	<jsp:include page="Header.jsp" />
 <div class="formDiv">
 	<form action="AddressControl" method="POST" class="form">
          <div class="input-container ic1">

@@ -18,7 +18,6 @@
 		user = (String)session.getAttribute("user");  
 
 %>
-<%@ include file="Header.html" %> 
 
 <!DOCTYPE html>
 <html>
@@ -26,12 +25,15 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="https://kit.fontawesome.com/9e8b7791f2.js" crossorigin="anonymous"></script>
 	<link href="ProductStyle.css" rel="stylesheet" type="text/css">
 	<title>Vaporant Manager</title>
 </head>
 
 <body>
-	<h2>Prodotti <a href="cart">🛒</a></h2><a href = "loginForm.jsp">logout</a>
+<br><br><a href = "loginForm.jsp" style = "float:right"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i></a><br><br>
+	<jsp:include page="Header.jsp" />
+	<h2>Prodotti</h2><a href = "loginForm.jsp">logout</a>
 	<table border = "1">
 		<tr>
             <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>
@@ -100,8 +102,6 @@
 		</fieldset>
 	</form>	
 	<br><br>
+	<jsp:include page="Footer.jsp"/>
 </body>
 </html>
-
-<%@ include file="Footer.html" %> 
-
