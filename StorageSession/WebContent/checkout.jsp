@@ -3,7 +3,9 @@
    
 <%@ page import="com.google.gson.Gson" %>
 
+
 <%
+	
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
 	request.setAttribute("cart", cart);
 	

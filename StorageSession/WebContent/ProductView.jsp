@@ -3,7 +3,8 @@
 
 <%
 	request.getSession().setAttribute("tipo", "guest");
-	
+/* 	request.getSession().setAttribute("action", "capocchia"); */
+
 	Collection<?> products = (Collection<?>) session.getAttribute("products");
 	if(products == null) {
 		response.sendRedirect("./product");	
@@ -12,9 +13,6 @@
 	ProductBean product = (ProductBean) session.getAttribute("product");
 	String user = (String) request.getSession().getAttribute("user");
 	
-	if(user != null){ 
-			request.getSession().setAttribute("action", "logout");
-		}
 %>
 
 <!DOCTYPE html>

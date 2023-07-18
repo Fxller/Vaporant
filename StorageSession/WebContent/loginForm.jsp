@@ -3,6 +3,7 @@
 
 <%
 	String action = (String)request.getSession().getAttribute("action");
+	System.out.println(action + " loginform");
 	request.getSession().setAttribute("cart", request.getSession().getAttribute("cart")); 
 	
 %>

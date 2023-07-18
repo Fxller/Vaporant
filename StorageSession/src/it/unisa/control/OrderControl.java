@@ -80,7 +80,11 @@ public class OrderControl extends HttpServlet {
 			}
 		}
 		
-		System.out.println("tutt appost");
+		session.setAttribute("order", order);
+		session.setAttribute("user", user);
+		session.setAttribute("cart", cart);
+		
+		res.sendRedirect("ordine.jsp");
 		
 	}
 

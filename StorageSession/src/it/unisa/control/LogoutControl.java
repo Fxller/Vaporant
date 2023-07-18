@@ -18,18 +18,15 @@ public class LogoutControl extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String action = (String) req.getSession().getAttribute("action");
 		
-		if(action.equalsIgnoreCase("logout")) {
 			req.getSession().invalidate();
 			HttpSession currentSession = req.getSession();
 			currentSession.setAttribute("user", null);
 			currentSession.setAttribute("psw", null);
 			currentSession.setAttribute("tipo", null);
 			currentSession.setAttribute("cart", null);
-		}
 		
-		resp.sendRedirect("loginForm.jsp");
+			resp.sendRedirect("loginForm.jsp");
 	}
 
 

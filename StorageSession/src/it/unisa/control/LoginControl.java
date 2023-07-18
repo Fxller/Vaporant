@@ -28,7 +28,6 @@ public class LoginControl extends HttpServlet {
 	String action = (String) req.getSession().getAttribute("action");
 	Cart cart = (Cart) req.getSession().getAttribute("cart"); 
 	
-	
 	UserBean user = null;
 	
 	try {
@@ -51,11 +50,11 @@ public class LoginControl extends HttpServlet {
 		currentSession.setAttribute("tipo", user.getTipo());
 		currentSession.setAttribute("cart", cart);
 
-		if(action.equalsIgnoreCase("checkout"))
+		if(action != null && action.equalsIgnoreCase("checkout"))
 			resp.sendRedirect("checkout.jsp");
 		else if(user.getTipo().equalsIgnoreCase("admin"))
 					resp.sendRedirect("ProductViewAdmin.jsp");
-			else if(user.getTipo().equalsIgnoreCase("user"))
+			else 
 				resp.sendRedirect("ProductView.jsp");
 
 		}

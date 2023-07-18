@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "it.unisa.model.OrderBean,it.unisa.model.UserBean" %>
+    
     
 <%	request.getSession();
 
-	String user = (String) request.getSession().getAttribute("user");
+	UserBean user = (UserBean) request.getSession().getAttribute("user");
 
-	if(user == null)
+	if(user.getEmail() == null)
 		response.sendRedirect("loginForm.jsp");
 
-	System.out.println("ciao");
-	Cart cart = (Cart) request.getSession().getAttribute("cart");
-
-	System.out.println(cart.getProducts().get(0).toString());
-	System.out.println(request.getParameter("payment")); %>    
+	OrderBean order = (OrderBean) request.getSession().getAttribute("order"); 
+	
+	
+	
+%>    
 
 
 <!DOCTYPE html>
@@ -24,7 +25,13 @@
 <title>Ordine</title>
 </head>
 <body>
-Acquisto effettuato<br>
-Torna alla <a href="ProductView.jsp">HOME</a>
+	Acquisto effettuato<br>
+	Torna alla <a href="ProductView.jsp">HOME</a>
+
+	<form action = "fattura" method = "Post">
+		<button type = submit >fattura</button>
+	</form>
+
 </body>
+
 </html>
