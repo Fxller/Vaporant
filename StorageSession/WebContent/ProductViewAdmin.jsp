@@ -31,12 +31,9 @@
 </head>
 
 <body>
-<<<<<<< HEAD
 <br><br><a href = "loginForm.jsp" style = "float:right"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i></a><br><br>
-=======
 	<jsp:include page="Header.jsp" />
 	<h2>Prodotti</h2><a href = "loginForm.jsp">logout</a>
->>>>>>> branch 'master' of https://github.com/Fxller/roba.git
 	<table border = "1">
 		<tr>
             <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>

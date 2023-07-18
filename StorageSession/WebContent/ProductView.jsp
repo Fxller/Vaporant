@@ -19,51 +19,130 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="ProductStyle.css" rel="stylesheet" type="text/css">
-	<title>Vaporant Manager</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<link href = "ProductStyle.css" rel = "stylesheet" type = "text/css">
+	<script src = "https://cdnjs.cloudflare.com/ajax/libs/splidejs/4.1.4/js/splide.min.js" integrity="sha512-4TcjHXQMLM7Y6eqfiasrsnRCc8D/unDeY1UGKGgfwyLUCTsHYMxF7/UHayjItKQKIoP6TTQ6AMamb9w2GMAvNg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/splidejs/4.1.4/css/splide.min.css" integrity="sha512-KhFXpe+VJEu5HYbJyKQs9VvwGB+jQepqb4ZnlhUF/jQGxYJcjdxOTf6cr445hOc791FFLs18DKVpfrQnONOB1g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<style>
+	.splide__slide img {
+  		width: 100%;
+  		height: 96%;
+  		object-fit: cover;	
+  		border-radius: 5%;
+  		padding-right: 5px;
+	}
+	.splide__slide > div {
+		text-align: center;
+	}
+	.splide__pagination {
+	display: none;
+	}
+	
+#heroSection {
+  height: 50vh;
+  width: 100%;
+  background-color: black;
+  display: flex;
+  align-items: center;
+}
+
+.heroVideoContainer {
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  overflow: hidden;
+}
+
+.heroVideoContainer video {
+  width: 100%;
+  height: 200%;
+  object-fit: cover;
+  transform: translateY(-5%);
+}
+
+.heroText {
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroText > h1 {
+  color: white;
+  font-size: 48px;
+}
+	
+	</style>
+	<title>Vaporant</title>
 </head>
 
 <body>
 	<jsp:include page="Header.jsp" />
-<br>
-<a href = "loginForm.jsp"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i></a>
-	<table border = "1">
-		<tr>
-            <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>
-            <th>Nome <a href="product?action=sort&sort=nome" class = "button">Sort</a></th>
-            <th>Immagine </th>
-            <th>Descrizione <a href="product?action=sort&sort=descrizione" class = "button">Sort</a></th>
-            <th>Quantita'</th>
-            <th>Azione</th>
-        </tr>
-		<%
-			if (products != null && products.size() != 0) {
-				Iterator<?> it = products.iterator();
-				while (it.hasNext()) {
-					ProductBean bean = (ProductBean) it.next();
-		%>
-		<tr>
-			<td><%=bean.getCode()%></td>
-			<td><%=bean.getName()%></td>
-			<td><img src = "img<%=bean.getCode()%>.jpg" width = 20%></td>
-			<td><%=bean.getDescription()%></td>
-			<td><%=bean.getQuantityStorage()%></td>
-			<td>
-				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Dettagli</a>
-				<a href="cart?action=addC&id=<%=bean.getCode()%>&user=${user}" class = "button button1">Aggiungi al carrello</a>
-			</td>
-		</tr>
-		<%
-				}
-			} else {
-		%>
-		<tr>
-			<td colspan="5">Non ci sono prodotti disponibili</td>
-		</tr>
-		<%
-			}
-		%>
-	</table>
+		<div id="heroSection">
+  			<div class="heroVideoContainer">
+    			<video src="herovideo.mp4" autoplay loop playsinline muted></video>
+  			</div>
+  			<div class="heroText">
+    			<h1>IL PIACERE DELLO SVAPO</h1>
+  			</div>
+		</div>
+		<br>
+		<div class = "slider">
+		<section id="image-carousel" class="splide" aria-label="Beautiful Images">
+  			<div class="splide__track">
+				<ul class="splide__list">
+					<li class="splide__slide">
+						<img src="img1.jpg" alt="">
+						<div>
+							Description 01
+						</div>
+					</li>
+
+					<li class="splide__slide">
+						<img src="img2.jpg" alt="">
+						<div>
+							Description 02
+						</div>
+					</li>
+					<li class="splide__slide">
+						<img src="img3.jpg" alt="">
+						<div>
+							Description 03
+						</div>
+					</li>
+
+					<li class="splide__slide">
+						<img src="img4.jpg" alt="">
+						<div>
+							Description 04
+						</div>
+					</li>
+					<li class="splide__slide">
+						<img src="img4.jpg" alt="">
+						<div>
+							Description 05
+						</div>
+					</li>
+				</ul>
+  			</div>
+		</section>
+		</div>
+		<br>
+		<script>
+		document.addEventListener( 'DOMContentLoaded', function () {
+			  new Splide( '#image-carousel', {
+					perPage    : 4,
+					type: "loop",
+					breakpoints: {
+						640: {
+							perPage: 1,
+						},
+					},
+			  } ).mount();
+			} );
+		</script>
 	<jsp:include page="Footer.jsp" />
 </body>
 </html>

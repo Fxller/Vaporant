@@ -17,7 +17,6 @@
 <body>
 	<jsp:include page="Header.jsp" />
 	<div id="details">
-  		<h2>Dettagli</h2>
   		<table>
     	<thead>
       		<tr>

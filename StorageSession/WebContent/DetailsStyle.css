@@ -1,21 +1,10 @@
 body {
 	font-family: Verdana, Geneva, sans-serif;
-	display: table-cell;
-    vertical-align: middle;
-}
-
-html, body {
-    height: 100%;
-}
-
-html {
-    display: table;
-    margin: 0;
-    align-items: center;
 }
 
 .details {
-  margin-top: 50px;
+  margin: auto;
+  text-align: center;
 }
 
 table {
