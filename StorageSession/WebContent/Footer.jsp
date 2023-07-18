@@ -9,6 +9,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="footerStyle.css" type = "">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <style>
+  	body{
+	line-height: 1.5;
+	font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+	.footer {
+	margin-top: auto;
+	}
+  </style>
 </head>
 <body>
 
@@ -26,10 +39,10 @@
   	 		<div class="footer-col">
   	 			<h4>follow us</h4>
   	 			<div class="social-links">
-  	 				<a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
-  	 				<a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
-  	 				<a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
-  	 				<a href="https://www.linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+  	 				<a href="https://www.facebook.com" target = "_blank"><i class="fab fa-facebook-f"></i></a>
+  	 				<a href="https://www.twitter.com" target = "_blank"><i class="fab fa-twitter"></i></a>
+  	 				<a href="https://www.instagram.com" target = "_blank"><i class="fab fa-instagram"></i></a>
+  	 				<a href="https://www.linkedin.com" target = "_blank"><i class="fab fa-linkedin-in"></i></a>
   	 			</div>
   	 		</div>
   	 	</div>

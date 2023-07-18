@@ -13,6 +13,9 @@
 		<div class = "links">
 			<a href = "loginForm.jsp">Login</a>
 		</div>
+		<div class = "links">
+			<a href = "CartView.jsp">Carrello</a>
+		</div>
 		<div class = "search">
 			<div class = "kek">
 				<form method = "POST" action = "search">

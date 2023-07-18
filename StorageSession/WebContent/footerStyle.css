@@ -2,11 +2,16 @@
 body{
 	line-height: 1.5;
 	font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
+
 *{
 	margin:0;
 	padding:0;
 	box-sizing: border-box;
+	bottom: 0px;
 }
 .container{
 	max-width: 1170px;
@@ -22,6 +27,7 @@ ul{
 .footer{
 	background-color: #444545;
     padding: 2%;
+    margin-top: auto;
 }
 .footer-col{
    width: 25%;
