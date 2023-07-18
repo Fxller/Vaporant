@@ -9,7 +9,6 @@ public class AddressList {
 	
 	private static UserDaoImpl userDao = new UserDaoImpl();
 	private static AddressDaoImpl addressDao = new AddressDaoImpl();
-	private UserBean user;
 	private ArrayList<AddressBean> addressList;
 	private ArrayList<AddressScript> addressListScript;
 	
@@ -35,6 +34,7 @@ public class AddressList {
 		{
 			addressListScript.add(new AddressScript(addressList.get(i)));
 		}		
+		
 	}
 	
 	public void removeAddress(AddressBean address) {
