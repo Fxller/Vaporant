@@ -13,4 +13,6 @@ public interface AddressDAO {
 
 	ArrayList<AddressBean> findByID(int id) throws SQLException;
 	
+	public AddressBean findAddressByID(int id) throws SQLException;
+	
 }

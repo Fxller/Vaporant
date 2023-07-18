@@ -212,4 +212,51 @@ public class AddressDaoImpl implements AddressDAO {
 
       return ListaIndirizzi;
     }
+    public AddressBean findAddressByID(int id) throws SQLException {
+
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        AddressBean address = new AddressBean();
+
+        String selectSQL = "SELECT * FROM "+ TABLE + " WHERE ID = ?";
+
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+
+            preparedStatement.setInt(1, id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if(!rs.isBeforeFirst()) return null;
+
+
+
+            while (rs.next()) {
+              
+                address = new AddressBean();
+                address.setId(rs.getInt("ID"));
+                address.setCap(rs.getString("cap"));
+                address.setCitta(rs.getString("citta"));
+                address.setId(rs.getInt("ID"));
+                address.setId_utente(rs.getInt("ID_Utente"));
+                address.setNumCivico(rs.getString("numCivico"));
+                address.setProvincia(rs.getString("provincia"));
+                address.setStato(rs.getString("stato"));
+                address.setVia(rs.getString("via"));
+                }
+
+      } finally {
+          try {
+              if (preparedStatement != null)
+                  preparedStatement.close();
+          } finally {
+              DriverManagerConnectionPool.releaseConnection(connection);
+          }
+      }
+
+      return address;
+    }
+	
 }
