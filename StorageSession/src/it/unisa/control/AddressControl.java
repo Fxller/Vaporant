@@ -30,14 +30,8 @@ public class AddressControl extends HttpServlet{
 
 		AddressBean address = new AddressBean();
 		
-		UserBean user = null;
+		UserBean user = (UserBean) request.getSession().getAttribute("user");
 		
-		try {
-			user = userDao.findByCred((String) request.getSession().getAttribute("user"), (String) request.getSession().getAttribute("psw"));
-		} catch (SQLException e1) {
-			
-			e1.printStackTrace();
-		}
 		if(user != null)
 		{
 			address.setCap(request.getParameter("cap"));

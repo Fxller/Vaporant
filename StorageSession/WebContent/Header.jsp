@@ -3,7 +3,6 @@
     
 <% 
 	String action = (String) request.getSession().getAttribute("action");
-	System.out.println(action + " header");
    	request.getSession().setAttribute("action", action); 
 %>
 <!DOCTYPE html>

@@ -25,7 +25,6 @@ import it.unisa.model.UserDaoImpl;
 public class OrderControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private static UserDaoImpl userDao = new UserDaoImpl();
 	private static OrderDaoImpl orderDao = new OrderDaoImpl();
 	private static ContenutoDaoImpl contDao = new ContenutoDaoImpl();
 	
@@ -39,15 +38,7 @@ public class OrderControl extends HttpServlet {
 		HttpSession session = req.getSession();
 		
 		Cart cart = (Cart) session.getAttribute("cart");
-		String email = (String) session.getAttribute("user");
-		String password = (String) session.getAttribute("psw");
-		
-		UserBean user = null;
-		try {
-			user = userDao.findByCred(email, password);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		UserBean user = (UserBean) session.getAttribute("user");
 		
 		int idUtente = user.getId();
 		
@@ -94,3 +85,4 @@ public class OrderControl extends HttpServlet {
 	}
 
 }
+;

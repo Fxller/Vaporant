@@ -5,13 +5,17 @@
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
 	request.getSession().setAttribute("cart", cart);
 
-	String user = (String)session.getAttribute("user");
-	request.getSession().setAttribute("user", user);
+	UserBean user = (UserBean) session.getAttribute("user");
+	if(user != null)
+	{
+		request.getSession().setAttribute("user", user);
+		String email = user.getEmail();
+	}
 %>
 
 <!DOCTYPE html>
 <html>
-<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.Cart,it.unisa.model.ProductBean"%>
+<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.Cart,it.unisa.model.ProductBean,it.unisa.model.UserBean"%>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
