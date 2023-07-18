@@ -41,6 +41,9 @@ public class AddressControl extends HttpServlet{
 			address.setProvincia(request.getParameter("provincia"));
 			address.setStato(request.getParameter("stato"));
 			address.setVia(request.getParameter("via"));
+			
+			System.out.println(address.toString());
+
 		
 			try {
 				addressDao.saveAddress(address);

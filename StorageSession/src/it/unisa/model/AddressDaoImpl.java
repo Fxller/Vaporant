@@ -37,7 +37,7 @@ public class AddressDaoImpl implements AddressDAO {
 
         String insertSQL = "INSERT INTO " + AddressDaoImpl.TABLE
                            + " (ID_Utente, stato, citta, via, numCivico, cap, provincia"
-                           + "stato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                           + ") VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
 //            connection = DriverManagerConnectionPool.getConnection();
@@ -156,7 +156,6 @@ public class AddressDaoImpl implements AddressDAO {
             	if(connection != null) {
             		connection.close();
             	}
-//                DriverManagerConnectionPool.releaseConnection(connection);
             }
         }
         
