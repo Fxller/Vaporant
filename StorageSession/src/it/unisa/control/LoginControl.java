@@ -45,8 +45,7 @@ public class LoginControl extends HttpServlet {
 		}
 	
 		HttpSession currentSession = req.getSession();
-		currentSession.setAttribute("user", email);
-		currentSession.setAttribute("psw", password);
+		currentSession.setAttribute("user", user);
 		currentSession.setAttribute("tipo", user.getTipo());
 		currentSession.setAttribute("cart", cart);
 
@@ -66,6 +65,6 @@ public class LoginControl extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		doGet(req, resp);
+		doGet(req,resp);
 	}
 }

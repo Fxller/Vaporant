@@ -11,17 +11,17 @@
 	}
 	ProductBean product = (ProductBean) session.getAttribute("product");
 	
-  	String user = null;
+  	UserBean user = null;
 	if(session.getAttribute("user") == null)
 		response.sendRedirect("loginForm.jsp");
 	else
-		user = (String)session.getAttribute("user");  
+		user = (UserBean) session.getAttribute("user");  
 
 %>
 
 <!DOCTYPE html>
 <html>
-<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.ProductBean,it.unisa.model.Cart"%>
+<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.ProductBean,it.unisa.model.Cart,it.unisa.model.UserBean"%>
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

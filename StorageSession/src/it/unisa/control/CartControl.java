@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.unisa.model.Cart;
 import it.unisa.model.ProductModelDM;
+import it.unisa.model.UserBean;
 
 
 @WebServlet("/cart")
@@ -28,7 +29,7 @@ public class CartControl extends HttpServlet {
 		
 		ProductModelDM model=new ProductModelDM();
 		String action = request.getParameter("action");
-		String user = (String) request.getSession().getAttribute("user");
+		UserBean user = (UserBean) request.getSession().getAttribute("user");
 		Boolean checkout = false;
 		
 		try {

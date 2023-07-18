@@ -2,9 +2,9 @@
 
 
 <%
-	 String user = null;
-	 String psw = null;
-	 
+
+	UserBean user = null;
+
 	if(session.getAttribute("user") == null)
 	{
 		request.getSession().setAttribute("action", "address");
@@ -12,16 +12,14 @@
 	}
 	else
 	{
-		user = (String)session.getAttribute("user");  
-		psw = (String) session.getAttribute("psw");
-		
+		user = (UserBean) session.getAttribute("user");  		
 		request.getSession().setAttribute("user", user);
-		request.getSession().setAttribute("psw", psw);
 		
 	}
 %>
 <!DOCTYPE html>
 <html>
+<%@ page contentType="text/html; charset=UTF-8" import="it.unisa.model.UserBean"%>
 <head>
 	<title>Registrazione Indirizzo</title>
 	 <link rel="stylesheet" type="text/css" href="SignFormStyle.css">

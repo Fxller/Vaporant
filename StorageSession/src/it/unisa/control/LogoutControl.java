@@ -22,7 +22,6 @@ public class LogoutControl extends HttpServlet {
 			req.getSession().invalidate();
 			HttpSession currentSession = req.getSession();
 			currentSession.setAttribute("user", null);
-			currentSession.setAttribute("psw", null);
 			currentSession.setAttribute("tipo", null);
 			currentSession.setAttribute("cart", null);
 		

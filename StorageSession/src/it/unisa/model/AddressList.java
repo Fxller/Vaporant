@@ -13,10 +13,10 @@ public class AddressList {
 	private ArrayList<AddressBean> addressList;
 	private ArrayList<AddressScript> addressListScript;
 	
-	public AddressList(String email, String psw) {
+	public AddressList(UserBean user) {
 		
 		try {
-			user = userDao.findByCred(email, psw);
+			user = userDao.findByCred(user.getEmail(),user.getPassword());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

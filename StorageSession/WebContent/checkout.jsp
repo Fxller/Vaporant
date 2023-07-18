@@ -9,11 +9,10 @@
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
 	request.setAttribute("cart", cart);
 	
-	 String user = null;
-	 String psw = null;
-	 String json = null;
+	UserBean user = null;
+	String json = null;
 	 
-	 AddressList list = null;
+	AddressList list = null;
 	 
 	if(session.getAttribute("user") == null)
 	{
@@ -22,10 +21,9 @@
 	}
 	else
 	{
-		user = (String)session.getAttribute("user");  
-		psw = (String) session.getAttribute("psw");
+		user = (UserBean) session.getAttribute("user");  
 		
-	    list = new AddressList(user,psw);
+	    list = new AddressList(user);
 	    json = list.getJson();
 	}
 	
@@ -33,7 +31,7 @@
 
 <!DOCTYPE html>
 <html>
-<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.Cart,it.unisa.model.ProductBean, it.unisa.model.AddressList"%>
+<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.Cart,it.unisa.model.ProductBean, it.unisa.model.AddressList,it.unisa.model.UserBean"%>
 
 	<link href="checkoutStyle.css" rel="stylesheet" type="text/css">
 
