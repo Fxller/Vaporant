@@ -64,7 +64,7 @@ public class FatturaControl extends HttpServlet {
         // Importa modello fattura
             PDDocument document = null;
             try {
-                document = PDDocument.load(new File("C:\\Users\\kandr\\Documents\\struttura_fattura.pdf"));
+                document = PDDocument.load(new File("C:\\Users\\tulli\\Desktop\\TSW\\struttura_fattura.pdf"));
             } catch (IOException e) {
                 // Gestione dell'eccezione: log, reindirizzamento, messaggio di errore, ecc.
                 e.printStackTrace();

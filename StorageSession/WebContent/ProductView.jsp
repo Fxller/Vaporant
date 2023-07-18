@@ -3,7 +3,6 @@
 
 <%
 	request.getSession().setAttribute("tipo", "guest");
-/* 	request.getSession().setAttribute("action", "capocchia"); */
 
 	Collection<?> products = (Collection<?>) session.getAttribute("products");
 	if(products == null) {
