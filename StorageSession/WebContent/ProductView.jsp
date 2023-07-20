@@ -31,6 +31,7 @@
 	    <form action="logoutControl" method="POST" class="form">
 			<button type="submit"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i></button>
 		</form>
+		<a href = "Utente.jsp">Utente</a>
 	<% } %>
 	<table border = "1">
 		<tr>

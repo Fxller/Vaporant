@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -165,4 +167,43 @@ public class OrderDaoImpl implements OrderDAO {
       }
     }
   }
+
+@Override
+public ArrayList<OrderBean> findByIdUtente(int id) throws SQLException{
+  Connection connection = null;
+  PreparedStatement preparedStatement = null;
+  ArrayList<OrderBean> ordini = new ArrayList<OrderBean>();
+
+  String selectSQL = "SELECT * FROM " + TABLE + " WHERE ID_Utente = ?";
+
+  try {
+    connection = ds.getConnection();
+    preparedStatement = connection.prepareStatement(selectSQL);
+    preparedStatement.setInt(1, id);
+
+    ResultSet rs = preparedStatement.executeQuery();
+    if (!rs.isBeforeFirst()) return null;
+    
+    while (rs.next()) {
+    	OrderBean ordine = new OrderBean();
+        ordine.setId_ordine(rs.getInt("ID_Ordine"));
+        ordine.setId_utente(rs.getInt("ID_Utente"));
+        ordine.setId_indirizzo(rs.getInt("ID_Indirizzo"));
+        ordine.setPrezzoTot(rs.getDouble("prezzoTot"));
+        ordine.setDataAcquisto(
+        LocalDate.parse(rs.getDate("dataAcquisto").toString()));
+        ordine.setMetodoPagamento(rs.getString("metodoPagamento"));
+        ordini.add(ordine);
+    }
+  } finally {
+    try {
+      if (preparedStatement != null) preparedStatement.close();
+    } finally {
+      if (connection != null) {
+        connection.close();
+      }
+    }
+  }
+  return ordini;
+}
 }

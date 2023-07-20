@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8"
-    pageEncoding="UTF-8"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
     
 <% 
 	String action = (String) request.getSession().getAttribute("action");
@@ -12,6 +12,11 @@
 <script src="https://kit.fontawesome.com/9e8b7791f2.js" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="HeaderStyle.css">
+<style>
+	      .search-item {
+			  cursor: pointer;
+			}
+</style>   
 </head>
 <body>
 	<header>
@@ -21,14 +26,10 @@
 		<li><a href = "loginForm.jsp">Login</a></li>
 		<li><a href = "CartView.jsp"><i class="fa-solid fa-cart-shopping"></i></a></li>
 		<li style = "li {float:right;}">  
-			<div class = "search">
-			  	<form method = "POST" action = "search">
-              		<div class="input-group mb-3">
-  						<input type="text" class="form-control" placeholder="Cerca.." aria-describedby="button-addon2">
-  						<button class="btn btn-outline-secondary" type="button" id="button-addon2" value = "search"><i class="fa-solid fa-magnifying-glass"></i></button>
-					</div>
-				</form>
-			</div>
+			<form id="searchForm">
+			  <input type="text" id="searchInput" placeholder="Cerca prodotti">
+			  <div id="searchResults" class="search-results"></div>
+			</form>
         </li>
 		</ul>
 		</nav>
@@ -42,7 +43,52 @@
     			x.className = "responsive";
   			}
 		}
-</script>
+		</script>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		 <script>
+				$(document).ready(function() {
+				  let searchInput = $("#searchInput");
+				  let searchResults = $("#searchResults");
+				
+				  searchInput.on("input", function() {
+				    let searchQuery = searchInput.val().trim();
+				    if (searchQuery !== "") {
+				      $.ajax({
+				        url: "SearchBar", // Inserisci il percorso della tua servlet
+				        type: "POST",
+				        data: { nome: searchQuery, descrizione: searchQuery },
+				        success: function(data) {
+				          let results = data;
+				          let html = "";
+				          if (results.length > 0) {
+				            for (let i = 0; i < results.length; i++) {
+				              let obj = results[i];
+				              html += '<div class="search-item" onclick="redirectToProduct(' + obj + ')">';
+				              html += '<p>' + obj.nome + '</p>';
+				              html += '</div>';
+				            }
+				          } else {
+				            html = '<div class="search-item">Nessun risultato trovato</div>';
+				          }
+				          searchResults.html(html);
+				          searchResults.show();
+				        },
+				        error: function() {
+				          console.log("errore");
+				        }
+				      });
+				    } else {
+				      searchResults.html("");
+				      searchResults.hide();
+				    }
+				  });
+				});
+				
+				function redirectToProduct(productId) {
+				  window.location.href = "prodotto?" + prodotto; // Inserisci l'URL della pagina di descrizione del prodotto
+				}
+	</script>
+		 
 	</header>
 </body>
 </html>

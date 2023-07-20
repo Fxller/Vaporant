@@ -44,12 +44,16 @@ public class AddressControl extends HttpServlet{
 		
 			try {
 				addressDao.saveAddress(address);
+				if(request.getSession().getAttribute("action").equals("User")) {
+					response.sendRedirect("Utente.jsp");
+				}else {
+					response.sendRedirect("checkout.jsp");
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 		else
-			System.out.println("NOOO TELECAMERA");
 		
 		response.sendRedirect("AddressForm.jsp");
     	

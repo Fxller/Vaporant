@@ -1,6 +1,7 @@
 package it.unisa.model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface OrderDAO {
 	
@@ -10,6 +11,8 @@ public interface OrderDAO {
 	
 	public OrderBean findByKey(int id) throws SQLException; // ricerca ordine per id
 
-	int getIdfromDB() throws SQLException;
+	int getIdfromDB() throws SQLException; 
+	
+	public ArrayList<OrderBean> findByIdUtente(int id) throws SQLException;
 	
 }

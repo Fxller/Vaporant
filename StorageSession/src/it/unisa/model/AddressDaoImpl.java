@@ -12,7 +12,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class AddressDaoImpl implements AddressDAO {
-	private static final String TABLE = "Indirizzo";
+	private static final String TABLE = "indirizzo";
 	private static DataSource ds;
 
     
@@ -36,11 +36,10 @@ public class AddressDaoImpl implements AddressDAO {
         int result;
 
         String insertSQL = "INSERT INTO " + AddressDaoImpl.TABLE
-                           + " (ID_Utente, stato, citta, via, numCivico, cap, provincia"
-                           + "stato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                           + " (ID_Utente, stato, citta, via, numCivico, cap, provincia)"
+                           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-//            connection = DriverManagerConnectionPool.getConnection();
         	connection = ds.getConnection();
         	preparedStatement = connection.prepareStatement(insertSQL);
 
@@ -66,7 +65,6 @@ public class AddressDaoImpl implements AddressDAO {
             	if(connection != null) {
             		connection.close();
             	}
-//            	DriverManagerConnectionPool.releaseConnection(connection);
             }
         }
         
@@ -81,18 +79,19 @@ public class AddressDaoImpl implements AddressDAO {
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
         
-        String selectSQL = "DELETE * FROM " + TABLE + " WHERE id = ?";
+        String selectSQL = "DELETE FROM " + TABLE + " WHERE ID = ?";
         
         int result;
         
         try
         {
-//        	connection = DriverManagerConnectionPool.getConnection();
         	connection = ds.getConnection();
         	preparedStatement = connection.prepareStatement(selectSQL);
             
             preparedStatement.setInt(1, address.getId());
-  
+            
+            System.out.println(preparedStatement);
+            
             result = preparedStatement.executeUpdate();   
             
             connection.commit();
@@ -105,7 +104,6 @@ public class AddressDaoImpl implements AddressDAO {
             	if(connection != null) {
             		connection.close();
             	}
-//               DriverManagerConnectionPool.releaseConnection(connection);
             }
         }
         
@@ -187,8 +185,7 @@ public class AddressDaoImpl implements AddressDAO {
 
 
             while (rs.next()) {
-                AddressBean address = null;
-                address = new AddressBean();
+                AddressBean address = new AddressBean();
                 address.setId(rs.getInt("ID"));
                 address.setCap(rs.getString("cap"));
                 address.setCitta(rs.getString("citta"));

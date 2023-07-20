@@ -9,4 +9,10 @@ public interface UserDAO {
 	public int deleteUser(UserBean user) throws SQLException; // delete utente
 	
 	public UserBean findByCred(String email, String password) throws SQLException; // utente con le credenziali	
+	
+	public UserBean findById(int ID) throws SQLException;
+
+	public void modifyMail(UserBean user, String email) throws SQLException;
+	
+	public void modifyTelefono(UserBean user, String cell) throws SQLException;
 }

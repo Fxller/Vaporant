@@ -45,14 +45,14 @@
         <label for="cap" class="placeholder">CAP</label>
       </div>
       <div class="input-container ic1">
-        <input id="voa" class="input" type="text" name="via" placeholder=" " required>
+        <input id="via" class="input" type="text" name="via" placeholder=" " required>
         <div class="cut"></div>
         <label for="via" class="placeholder">Via</label>
       </div>
       <div class="input-container ic1">
-        <input id="numero_civico" class="input" type="text" name="numero_civico" placeholder=" " required>
+        <input id="numCivico" class="input" type="text" name="numCivico" placeholder=" " required>
         <div class="cut"></div>
-        <label for="numero_civico" class="placeholder">Numero Civico</label>
+        <label for="numCivico" class="placeholder">Numero Civico</label>
       </div>
       <div class="input-container ic1">
         <input id="stato" class="input" type="text" name="stato" placeholder=" " required>

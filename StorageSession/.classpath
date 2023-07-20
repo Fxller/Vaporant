@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-8.0.12.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.8.9.jar"/>
 	<classpathentry kind="lib" path="C:/Users/tulli/Downloads/pdfbox-app-2.0.29.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tulli/Downloads/json-20230618.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
