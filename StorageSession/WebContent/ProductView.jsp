@@ -17,55 +17,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="ProductStyle.css" rel="stylesheet" type="text/css">
-	<title>Vaporant Manager</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<link href = "ProductStyle.css" rel = "stylesheet" type = "text/css">
+	<script src = "https://cdnjs.cloudflare.com/ajax/libs/splidejs/4.1.4/js/splide.min.js" integrity="sha512-4TcjHXQMLM7Y6eqfiasrsnRCc8D/unDeY1UGKGgfwyLUCTsHYMxF7/UHayjItKQKIoP6TTQ6AMamb9w2GMAvNg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<link rel="stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/splidejs/4.1.4/css/splide.min.css" integrity="sha512-KhFXpe+VJEu5HYbJyKQs9VvwGB+jQepqb4ZnlhUF/jQGxYJcjdxOTf6cr445hOc791FFLs18DKVpfrQnONOB1g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<title>Vaporant</title>
+
 </head>
 
 <body>
 	<jsp:include page="Header.jsp" />
-<br>
 	<%if(user!=null){%>
 	    <form action="logoutControl" method="POST" class="form">
 			<button type="submit"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i></button>
 		</form>
 	<% } %>
-	<table border = "1">
-		<tr>
-            <th>Codice <a href="product?action=sort&sort=id" class = "button">Sort</a></th>
-            <th>Nome <a href="product?action=sort&sort=nome" class = "button">Sort</a></th>
-            <th>Immagine </th>
-            <th>Descrizione <a href="product?action=sort&sort=descrizione" class = "button">Sort</a></th>
-            <th>Quantita'</th>
-            <th>Azione</th>
-        </tr>
+	
+		<div id="heroSection">
+  			<div class="heroVideoContainer">
+    			<video src="herovideo.mp4" autoplay loop playsinline muted></video>
+  			</div>
+  			<div class="heroText">
+    			<h1>IL PIACERE DELLO SVAPO</h1>
+  			</div>
+		</div>
+		<h1>SCOPRI I NOSTRI PRODOTTI</h1>
+		<div class = "slider">
+			<section id="image-carousel" class="splide" aria-label="Beautiful Images">
+  				<div class="splide__track">
+					<ul class="splide__list">
 		<%
 			if (products != null && products.size() != 0) {
 				Iterator<?> it = products.iterator();
 				while (it.hasNext()) {
 					ProductBean bean = (ProductBean) it.next();
 		%>
-		<tr>
-			<td><%=bean.getCode()%></td>
-			<td><%=bean.getName()%></td>
-			<td><img src = "img<%=bean.getCode()%>.jpg" width = 20%></td>
-			<td><%=bean.getDescription()%></td>
-			<td><%=bean.getQuantityStorage()%></td>
-			<td>
-				<a href="details?action=read&id=<%=bean.getCode()%>" class = "button button2">Dettagli</a>
-				<a href="cart?action=addC&id=<%=bean.getCode()%>&user=${user}" class = "button button1">Aggiungi al carrello</a>
-			</td>
-		</tr>
-		<%
-				}
+
+					<li class="splide__slide">
+						<a href = "details?action=read&id=<%=bean.getCode()%>">
+						<img src="img<%=bean.getCode()%>.jpg" alt="">
+						</a>
+						<div class = "name">
+							<%=bean.getName()%>
+						</div>
+					</li>
+		<% } 
 			} else {
 		%>
-		<tr>
-			<td colspan="5">Non ci sono prodotti disponibili</td>
-		</tr>
-		<%
-			}
-		%>
-	</table>
+		<h1>Non ci sono prodotti disponibili!</h1>
+		<% } %>
+					</ul>
+  				</div>
+			</section>
+		</div>
+		<br>
+		<script>
+		document.addEventListener( 'DOMContentLoaded', function () {
+			  new Splide( '#image-carousel', {
+					perPage    : 4,
+					type: "loop",
+					breakpoints: {
+						640: {
+							perPage: 1,
+						},
+					},
+			  } ).mount();
+			} );
+		</script>
 	<jsp:include page="Footer.jsp" />
 </body>
 </html>

@@ -51,7 +51,8 @@ public class UserDaoImpl implements UserDAO {
             preparedStatement.setString(4, user.getCodF());
             preparedStatement.setString(5, user.getNumTelefono());
             preparedStatement.setString(6, user.getEmail());
-            preparedStatement.setString(7, user.getIndirizzoFatt());
+            preparedStatement.setString(7, user.getPassword());
+            preparedStatement.setString(8, user.getIndirizzoFatt());
 
  
             result = preparedStatement.executeUpdate();

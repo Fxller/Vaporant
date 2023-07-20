@@ -20,60 +20,55 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link href="CartStyle.css" rel="stylesheet" type="text/css">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<title>Vaporant Cart</title>
-
 </head>
 <body>
 	<jsp:include page="Header.jsp" />
-
-	<div id="cart">
-  		<h2>Carrello</h2>
-  		<table>
-    	<thead>
-      		<tr>
-        		<th>Prodotto</th>
-        		<th>Quantità</th>
-        		<th>Prezzo</th>
-        		<th></th>
-      		</tr>
-    	</thead>
-    	<tbody>
-    		<% 	if(cart != null) { %>
+    <div class="wrapper">
+		<h1>CARRELLO</h1>
+		<div class="project">
+			<div class="shop">
+			 <% if(cart != null) { %>
 				<% List<ProductBean> prodcart = cart.getProducts(); 	
 					for(ProductBean beancart : prodcart) {
 				%>
-				<tr>
-					<td><%=beancart.getName()%></td>
-					<td>
-					<form action = "cart?action=aggiorna&id=<%=beancart.getCode()%>" method = "POST" >
-						<input type = "number" name = "quantita" value = "<%= beancart.getQuantity() %>" required min = "1" max = "<%=beancart.getQuantityStorage() %>" >
-						<button class = "checkout-btn" type = "submit">Aggiorna</button>
-		
-					</form>
-					</td>
-					
-					<td><%=beancart.getPrice()+"€"%></td>
-					<td><a href="cart?action=deleteC&id=<%=beancart.getCode()%>" class = "button buttonred">Elimina</a></td>
-				</tr>
-				<% } %>
-			<% } %>
-    	</tbody>
-  		</table>
 
-  		<p>Totale: <span class="total-price"> 
-  		<% if(cart != null){ %> <%= cart.getPrezzoTotale() %>
-  		<% } else{ %> 
-  			<%= 0 %> 
-  		<%} %></span></p>
-  		
-  		<% if(cart != null){ %>
-  		<form action = "cart?action=checkout" method = "POST">
-  			<button class="checkout-btn" type = "submit">Checkout</button>
-  		</form>
-  		<% } %>
-  	
-  		<p><a href="product?user=${user}" class = "button">Torna al catalogo</a></p>
-	</div>
+				<div class="box">
+					<img src="img<%=beancart.getCode()%>.jpg">
+					<div class="content">
+						<h3><%=beancart.getName()%></h3>
+						<h4>Prezzo: <%=beancart.getPrice()%>€</h4>
+						<form action="cart?action=aggiorna&id=<%=beancart.getCode()%>" method="POST" class = "none">
+							Quantità: <input type = "number" name = "quantita" value = "<%=beancart.getQuantity()%>"required min = "1" max = "<%=beancart.getQuantityStorage() %>">
+							<button type = "submit" class = "btn">Aggiorna</button>
+						</form>
+						<p class="btn-area">
+						<a href = "cart?action=deleteC&id=<%=beancart.getCode()%>">
+						<i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Rimuovi</span>
+						</a>
+						</p>
+					</div>
+				</div>
+				<% 	}
+				  }
+				%>
+				</div>
+				<div class = "right-bar">
+				<p><span>Spedizione</span> <span>Gratuita</span></p>
+				<hr>
+				<p><span>Totale</span>
+				<% if(cart != null){ %>
+				<span><%=cart.getPrezzoTotale()%> €</span>
+				<% } else {%>  <span>0.00 €</span> <%} 
+				if(cart != null) {%>
+  				<form action = "cart?action=checkout" method = "POST">	
+				<button type = "submit"><i class="fa fa-shopping-cart"></i><span>Ordina e paga</span></button>
+				</form>
+  				<% } %>
+  				</div>
+			</div>
+		</div>
 	<jsp:include page="Footer.jsp" />
 </body>
-</html>
+</html>	

@@ -11,12 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.unisa.model.AddressBean;
+import it.unisa.model.AddressDaoImpl;
 import it.unisa.model.Cart;
 import it.unisa.model.ContenutoBean;
 import it.unisa.model.ContenutoDaoImpl;
 import it.unisa.model.OrderBean;
 import it.unisa.model.OrderDaoImpl;
 import it.unisa.model.ProductBean;
+import it.unisa.model.ProductModelDM;
 import it.unisa.model.UserBean;
 import it.unisa.model.UserDaoImpl;
 
@@ -28,6 +31,8 @@ public class OrderControl extends HttpServlet {
 	private static OrderDaoImpl orderDao = new OrderDaoImpl();
 	private static ContenutoDaoImpl contDao = new ContenutoDaoImpl();
 	private static UserDaoImpl userDao = new UserDaoImpl();
+	private static AddressDaoImpl addressDao = new AddressDaoImpl();
+	private static ProductModelDM productDao = new ProductModelDM();
 	
     public OrderControl() {
         super();
@@ -42,10 +47,21 @@ public class OrderControl extends HttpServlet {
 		UserBean user = (UserBean) session.getAttribute("user");
 		
 		int idUtente = user.getId();
+		System.out.println("order " + user.getId());
 		
 		String payment = req.getParameter("payment");
 		int idIndirizzo = Integer.parseInt(req.getParameter("addressDropdown"));
-		String indirizzoFatt = req.getParameter("addressDropdown2");
+		int idIndirizzoFatt = Integer.parseInt(req.getParameter("addressDropdown2"));
+		
+		
+		
+		String indirizzoFatt = null;
+		try {
+			indirizzoFatt = addressDao.findAddressByID(idIndirizzoFatt).toStringScript();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
 		try {
 			userDao.updateAddress(indirizzoFatt, user);
@@ -70,10 +86,15 @@ public class OrderControl extends HttpServlet {
 			e.printStackTrace();
 		} 
 		
+		
+		int i = 0;
 		for(ProductBean prod : cart.getProducts())
 		{
 			try {
 				contDao.saveContenuto(new ContenutoBean(idOrdine,prod.getCode(),prod.getQuantity(),22,prod.getPrice()));
+				System.out.println("prodotto " +  i++ + prod.toString());
+				productDao.updateQuantityStorage(prod, prod.getQuantityStorage() - prod.getQuantity());
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

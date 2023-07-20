@@ -11,9 +11,10 @@
 </head>
 <body>
 	<jsp:include page="Header.jsp" />
-	<main>
+	<div class = "center">
 		<section>
 			<h2>Informazioni di contatto</h2>
+			<hr>
 			<p>Per contattarci, puoi utilizzare i seguenti canali:</p>
 			<ul>
 				<li>Email: <a href="mailto:info@francescocorcione.it">info@francescocorcione.it</a></li>
@@ -21,19 +22,7 @@
 				<li>Indirizzo: Via Fratelli Napoli 1, 00100 Lancusi</li>
 			</ul>
 		</section>
-		<section>
-			<h2>Modulo di contatto</h2>
-			<form>
-				<label for="nome">Nome:</label>
-				<input type="text" id="nome" name="nome" required>
-				<label for="email">Email:</label>
-				<input type="email" id="email" name="email" required>
-				<label for="messaggio">Messaggio:</label>
-				<textarea id="messaggio" name="messaggio" rows="5" required></textarea>
-				<button type="submit">Invia</button>
-			</form>
-		</section>
-	</main>
+	</div>
 	<jsp:include page="Footer.jsp" />
 </body>
 </html>
