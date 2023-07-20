@@ -42,7 +42,6 @@ public class SearchBarControl extends HttpServlet {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE nome LIKE ?";
         try (Connection connection = ds.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, "%" + nome + "%");
-
             ResultSet resultSet = preparedStatement.executeQuery();
 
             // Lista da far passare in json

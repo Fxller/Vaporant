@@ -63,7 +63,7 @@
 				          if (results.length > 0) {
 				            for (let i = 0; i < results.length; i++) {
 				              let obj = results[i];
-				              html += '<div class="search-item" onclick="redirectToProduct(' + obj + ')">';
+				              html += '<div class="search-item" onclick="redirectToProduct(' + obj.ID + ')">';
 				              html += '<p>' + obj.nome + '</p>';
 				              html += '</div>';
 				            }
@@ -85,7 +85,8 @@
 				});
 				
 				function redirectToProduct(productId) {
-				  window.location.href = "prodotto?" + prodotto; // Inserisci l'URL della pagina di descrizione del prodotto
+				  window.location.href = "details?action=read&id=" + productId; // Inserisci l'URL della pagina di descrizione del prodotto
+					
 				}
 	</script>
 		 
