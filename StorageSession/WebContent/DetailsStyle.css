@@ -1,3 +1,7 @@
+body {
+  background-color: white !important;
+}
+
 .product-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -17,8 +21,8 @@
 }
 
 .left-column img {
-  width: 50%;
-  margin-left: 10%;
+  width: 60%;
+  margin-left: 8%;
 }
 
 .product-description {
@@ -27,19 +31,23 @@
 }
 
 .product-description h1 {
-  font-weight: 500;
-  font-size: 52px;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 .product-description p {
   font-size: 16px;
   font-weight: 300;
   line-height: 24px;
+  text-align: center;
 }
 
 .product-price {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .product-price span {
@@ -55,7 +63,7 @@
   font-size: 16px;
   color: #FFFFFF;
   text-decoration: none;
-  padding: 12px 30px;
+  padding: 5%;
   transition: all .5s;
 }
 

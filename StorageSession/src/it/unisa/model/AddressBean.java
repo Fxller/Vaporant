@@ -97,4 +97,9 @@ public class AddressBean {
 			
 			return s;
 		}
+	
+	public String toStringScript() {
+		
+		return via + ", " + numCivico + " " + citta + ", " + provincia + " " + cap + " " + stato; 
+	}
 }

@@ -13,7 +13,8 @@ public class Cart {
 	}
 	
 	public double getPrezzoTotale() {
-		return prezzoTotale;
+		
+		return  Math.round(prezzoTotale*100.0)/100.0;
 	}
 
 	public void setPrezzoTotale(double prezzoTotale) {

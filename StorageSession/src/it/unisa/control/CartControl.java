@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.unisa.model.Cart;
 import it.unisa.model.ProductModelDM;
+import it.unisa.model.UserBean;
 
 
 @WebServlet("/cart")
@@ -20,29 +21,43 @@ public class CartControl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Cart cart = (Cart)request.getSession().getAttribute("cart");
-		if(cart == null) {
+		if(cart == null) 
+		{
 			cart = new Cart();
 			request.getSession().setAttribute("cart", cart);
 		}
+		
 		ProductModelDM model=new ProductModelDM();
 		String action = request.getParameter("action");
-		String user = (String) request.getSession().getAttribute("user");
-
+		UserBean user = (UserBean) request.getSession().getAttribute("user");
+		Boolean checkout = false;
+		
 		try {
 			if (action != null) {
-				if (action.equalsIgnoreCase("addC")) {
-					 int id = Integer.parseInt(request.getParameter("id"));
-					cart.addProduct(model.doRetrieveByKey(id));
-				} else if (action.equalsIgnoreCase("deleteC")) {
+				if (action.equalsIgnoreCase("addC")) 
+				{
 					int id = Integer.parseInt(request.getParameter("id"));
-					cart.deleteProduct(model.doRetrieveByKey(id));
-					} else if(action.equalsIgnoreCase("aggiorna"))
-						{
+					cart.addProduct(model.doRetrieveByKey(id));
+				} else if (action.equalsIgnoreCase("deleteC")) 
+					{
 						int id = Integer.parseInt(request.getParameter("id"));
-						int quantita = Integer.parseInt(request.getParameter("quantita"));
-						cart.aggiorna(model.doRetrieveByKey(id),quantita);
+						cart.deleteProduct(model.doRetrieveByKey(id));
+					}
+					else if(action.equalsIgnoreCase("aggiorna"))
+						{
+							int id = Integer.parseInt(request.getParameter("id"));
+							int quantita = Integer.parseInt(request.getParameter("quantita"));
+							cart.aggiorna(model.doRetrieveByKey(id),quantita);
 						}
-			}		
+						else if(action.equalsIgnoreCase("aggiornaCheck"))
+							{
+								int id = Integer.parseInt(request.getParameter("id"));
+								int quantita = Integer.parseInt(request.getParameter("quantita"));
+								cart.aggiorna(model.doRetrieveByKey(id),quantita);
+								checkout = true;
+								
+							}
+			}
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
@@ -51,10 +66,16 @@ public class CartControl extends HttpServlet {
 		request.getSession().setAttribute("user", user);
 		request.getSession().setAttribute("cart", cart);
 		
-		if(action.equalsIgnoreCase("checkout"))
+		if(checkout) 
+		{
 			response.sendRedirect("checkout.jsp");
+			
+		}
 		else
-			response.sendRedirect("CartView.jsp");
+			if(action.equalsIgnoreCase("checkout"))
+				response.sendRedirect("checkout.jsp");
+			else
+				response.sendRedirect("CartView.jsp");
 		}
 	 
 	

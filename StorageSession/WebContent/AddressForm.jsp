@@ -1,5 +1,25 @@
+<%@ include file="Header.jsp" %> 
+
+
+<%
+
+	UserBean user = null;
+
+	if(session.getAttribute("user") == null)
+	{
+		request.getSession().setAttribute("action", "address");
+		response.sendRedirect("loginForm.jsp");
+	}
+	else
+	{
+		user = (UserBean) session.getAttribute("user");  		
+		request.getSession().setAttribute("user", user);
+		
+	}
+%>
 <!DOCTYPE html>
 <html>
+<%@ page contentType="text/html; charset=UTF-8" import="it.unisa.model.UserBean"%>
 <head>
 	<title>Registrazione Indirizzo</title>
 	 <link rel="stylesheet" type="text/css" href="SignFormStyle.css">
@@ -39,8 +59,10 @@
         <div class="cut"></div>
         <label for="stato" class="placeholder">Stato</label>
       </div>
-		<input type="submit" value="Registrati" class="submit">
+		<input type="submit" value="Aggiungi" class="submit">
 	</form>
+
+	
 </div>
 </body>
 </html>

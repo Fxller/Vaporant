@@ -8,4 +8,5 @@ public interface ContenutoDAO {
 	public int deleteContenuto(ContenutoBean contenutoOrdine) throws SQLException; // delete contenuto ordine
 	
 	public ContenutoBean findByKey(int id_ordine, int id_prodotto) throws SQLException; // ricerca contenuto ordine per id ordine e prodotto
+
 }

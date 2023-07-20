@@ -1,3 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    
+<% 
+	String action = (String) request.getSession().getAttribute("action");
+   	request.getSession().setAttribute("action", action); 
+%>
 <!DOCTYPE html>
 <html>
 <head>

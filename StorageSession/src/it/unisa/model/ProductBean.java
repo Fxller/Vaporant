@@ -9,7 +9,7 @@ public class ProductBean implements Serializable {
 	int id;
 	String name;
 	String description;
-	int price;
+	float price;
 	int quantity, quantityStorage;
 
 	
@@ -41,11 +41,11 @@ public class ProductBean implements Serializable {
 		this.description = description;
 	}
 
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 
@@ -67,10 +67,10 @@ public class ProductBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return name + " (" + id + "), " + price + " " + quantity + ". " + description + " " + quantityStorage;
+		return "N - " + name + " - I. " + id + " - P. " + price + " - Q." + quantity + " - D. " + description + " - QS. " + quantityStorage;
 	}
 	
 	public String toStringProduct() {
-		return name + " (" + id + "), " + price + "  " + description;
+		return name + " " + id + " " + price + " " + description;
 	}
 }

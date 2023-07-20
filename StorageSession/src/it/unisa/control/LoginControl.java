@@ -14,79 +14,57 @@ import it.unisa.model.Cart;
 import it.unisa.model.UserBean;
 import it.unisa.model.UserDaoImpl;
 
-
-/**
- * Servlet implementation class LoginControl
- */
 @WebServlet("/loginControl")
 public class LoginControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	static UserDaoImpl userDao = new UserDaoImpl();
+	private static UserDaoImpl userDao = new UserDaoImpl();
 	
 	@Override
-		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			doPost(req, resp);
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+	String email = (String) req.getParameter("email");
+	String password = (String) req.getParameter("password");		
+	String action = (String) req.getSession().getAttribute("action");
+	Cart cart = (Cart) req.getSession().getAttribute("cart"); 
+	
+	UserBean user = null;
+	
+	try {
+		user = userDao.findByCred(email,password);
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+	
+	if(user != null){
+		
+		HttpSession session = req.getSession(false);
+		if(session != null){
+			session.invalidate();
+		}
+	
+		HttpSession currentSession = req.getSession();
+		currentSession.setAttribute("user", user);
+		currentSession.setAttribute("tipo", user.getTipo());
+		currentSession.setAttribute("cart", cart);
+
+		if(action != null && action.equalsIgnoreCase("checkout"))
+			resp.sendRedirect("checkout.jsp");
+		else if(user.getTipo().equalsIgnoreCase("admin"))
+					resp.sendRedirect("ProductViewAdmin.jsp");
+			else 
+				resp.sendRedirect("ProductView.jsp");
+
+		}
+		else {
+		resp.sendRedirect("loginForm.jsp");	
+		}
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String email = (String) req.getParameter("email");
-		String password = (String) req.getParameter("password");		
-		String action = (String) req.getSession().getAttribute("action");
-		Cart cart = (Cart) req.getSession().getAttribute("cart"); 
 		
-		UserBean user = null;
-		
-		try {
-			System.out.println("la psw e: "+ password);
-			user = userDao.findByCred(email,password);
-			
-		} catch (SQLException e) {
-			System.out.println("primo try");
-			e.printStackTrace();
-		}
-		
-		if(user != null){
-			HttpSession session = req.getSession(false);
-			if(session != null){
-				session.invalidate();
-			}
-		
-			HttpSession currentSession = req.getSession();
-			currentSession.setAttribute("user", email);
-			currentSession.setAttribute("psw", password);
-			currentSession.setAttribute("tipo", user.getTipo());
-			currentSession.setAttribute("cart", cart);
-
-			//if(action.equalsIgnoreCase("checkout"))
-				//resp.sendRedirect("checkout.jsp");
-			if(user.getTipo().equalsIgnoreCase("admin"))
-						resp.sendRedirect("ProductViewAdmin.jsp");
-				else if(user.getTipo().equalsIgnoreCase("user"))
-					resp.sendRedirect("ProductView.jsp");	
-
-			System.out.println("ciaoo");
-			System.out.println(user);
-			System.out.println(currentSession.getAttribute("user")+ " - " + currentSession.getAttribute("psw")+ " - " + currentSession.getAttribute("tipo")+ " \n " );
-			System.out.println("action: "+action);
-			
-//			if(action.equalsIgnoreCase("checkout"))
-//				resp.sendRedirect("checkout.jsp");
-//			
-			
-			if(user.getTipo().equalsIgnoreCase("admin")) {
-				System.out.println("if admin");
-				resp.sendRedirect("ProductViewAdmin.jsp");
-			}
-			else if(user.getTipo().equalsIgnoreCase("user")) {
-				System.out.println("if user");
-				resp.sendRedirect("ProductView.jsp");	
-			}
-
-		}
-		else{
-			resp.sendRedirect("loginForm.jsp");
-		}
+		doGet(req,resp);
 	}
 }

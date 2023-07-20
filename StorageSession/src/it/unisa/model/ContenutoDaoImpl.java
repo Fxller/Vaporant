@@ -5,8 +5,30 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class ContenutoDaoImpl implements ContenutoDAO{
 	private static final String TABLE = "Contenuto";
+    private static DataSource ds;
+
+    
+	//connessione al database
+	static {
+	    try {
+	        Context initCtx = new InitialContext();
+	        Context envCtx = (Context) initCtx.lookup("java:comp/env");
+	
+	        ds = (DataSource) envCtx.lookup("jdbc/storage");
+	
+	    } catch (NamingException e) {
+	        System.out.println("Error:" + e.getMessage());
+	    }
+	}
+	
+
 	@Override
 	public int saveContenuto(ContenutoBean contenutoOrdine) throws SQLException {
 		Connection connection = null;
@@ -18,8 +40,8 @@ public class ContenutoDaoImpl implements ContenutoDAO{
                            + " VALUES (?, ?, ?, ?, ?)";
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
-            preparedStatement = connection.prepareStatement(insertSQL);
+        	connection = ds.getConnection();
+        	preparedStatement = connection.prepareStatement(insertSQL);
 
             preparedStatement.setInt(1, contenutoOrdine.getId_ordine());
             preparedStatement.setInt(2, contenutoOrdine.getId_prodotto());
@@ -30,8 +52,9 @@ public class ContenutoDaoImpl implements ContenutoDAO{
 
 
             result = preparedStatement.executeUpdate();
-            
             connection.commit();
+            
+            updateStorage(contenutoOrdine.getId_prodotto(), contenutoOrdine.getQuantita());
 
         } finally {
             try {
@@ -39,8 +62,9 @@ public class ContenutoDaoImpl implements ContenutoDAO{
                     preparedStatement.close();
                 
             } finally {
-                
-            	DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
             }
         }
         
@@ -58,8 +82,8 @@ public class ContenutoDaoImpl implements ContenutoDAO{
         
         try
         {
-        	connection = DriverManagerConnectionPool.getConnection();
-            preparedStatement = connection.prepareStatement(selectSQL);
+        	connection = ds.getConnection();
+        	preparedStatement = connection.prepareStatement(selectSQL);
             
             preparedStatement.setInt(1, contenutoOrdine.getId_ordine());
             preparedStatement.setInt(2, contenutoOrdine.getId_prodotto());
@@ -72,8 +96,9 @@ public class ContenutoDaoImpl implements ContenutoDAO{
                 if (preparedStatement != null)
                     preparedStatement.close();
             } finally {
-            	
-               DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
             }
         }
         
@@ -89,8 +114,9 @@ public class ContenutoDaoImpl implements ContenutoDAO{
         ContenutoBean contenutoOrdine = null;
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
-            preparedStatement = connection.prepareStatement(selectSQL);
+
+        	connection = ds.getConnection();
+        	preparedStatement = connection.prepareStatement(selectSQL);
             
             preparedStatement.setInt(1, id_ordine);
             preparedStatement.setInt(2, id_prodotto);
@@ -114,11 +140,48 @@ public class ContenutoDaoImpl implements ContenutoDAO{
                 if (preparedStatement != null)
                     preparedStatement.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(connection);
+            
+            	if(connection != null) {
+            		connection.close();
+            	}
             }
         }
         
         return contenutoOrdine;
 	}
+	
+	private int updateStorage(int id, int quant) throws SQLException {
+		Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        
+        String selectSQL = "UPDATE prodotto SET quantita = quantita - ? WHERE ID = ?";
+        
+        int result;
+        
+        try
+        {
+        	connection = ds.getConnection();
+            preparedStatement = connection.prepareStatement(selectSQL);
+            
+            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, quant);
+            result = preparedStatement.executeUpdate();   
+            
+            connection.commit();
+        	
+        } finally {
+            try {
+                if (preparedStatement != null)
+                    preparedStatement.close();
+            } finally {
+            	if(connection != null) {
+            		connection.close();
+            	}
+            	
+            }
+        }
+		return result;
+	}
+	
 	
 }
