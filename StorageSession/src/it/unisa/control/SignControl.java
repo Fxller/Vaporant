@@ -13,26 +13,21 @@ import javax.servlet.http.HttpServletResponse;
 import it.unisa.model.UserBean;
 import it.unisa.model.UserDaoImpl;
 
-/**
- * Servlet implementation class SignControl
- */
 @WebServlet("/SignControl")
 public class SignControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	static UserDaoImpl userDao = new UserDaoImpl();
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public SignControl() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
     
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		UserBean user = new UserBean();
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+    	UserBean user = new UserBean();
 		
 		user.setNome(request.getParameter("nome"));
 		user.setCognome(request.getParameter("cognome"));
@@ -41,6 +36,9 @@ public class SignControl extends HttpServlet {
 		user.setNumTelefono(request.getParameter("telefono"));
 		user.setEmail(request.getParameter("email"));
 		user.setPassword(request.getParameter("password"));
+		user.setPassword(request.getParameter("indirizzoFatt"));
+
+		
 
 		
 		int result = 0;
@@ -48,7 +46,6 @@ public class SignControl extends HttpServlet {
 		try {
 			result = userDao.saveUser(user);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -56,6 +53,11 @@ public class SignControl extends HttpServlet {
 			response.sendRedirect("loginForm.jsp");
 		else 
 			response.sendRedirect("SignForm.jsp");
+    }
+    
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
 	}
-
+	
 }

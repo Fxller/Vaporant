@@ -21,6 +21,7 @@ body {
   font-size: 36px;
   font-weight: 600;
   margin-top: 30px;
+  text-align: center;
 }
 
 .subtitle {
@@ -29,6 +30,7 @@ body {
   font-size: 16px;
   font-weight: 600;
   margin-top: 10px;
+  text-align: center;
 }
 
 .input-container {
@@ -113,8 +115,6 @@ body {
   cursor: pointer;
   font-size: 18px;
   height: 50px;
-  margin-top: 38px;
-  // outline: 0;
   text-align: center;
   width: 100%;
 }

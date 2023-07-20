@@ -6,22 +6,43 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class UserDaoImpl implements UserDAO {
 	
 	private static final String TABLE = "utente";
+	
+    private static DataSource ds;
+
+    
+//	connessione al database
+    static {
+        try {
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+
+            ds = (DataSource) envCtx.lookup("jdbc/storage");
+
+        } catch (NamingException e) {
+            System.out.println("Error:" + e.getMessage());
+        }
+    }
     
 	@Override
 	public int saveUser(UserBean user) throws SQLException {
-        Connection connection = null;
+        Connection connection = null;  		
         PreparedStatement preparedStatement = null;
         int result;
 
         String insertSQL = "INSERT INTO " + UserDaoImpl.TABLE
-                           + " (nome, cognome, dataNascita, CF, numTelefono, email, psw"
-                           + "stato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                           + " (nome, cognome, dataNascita, CF, numTelefono, email, psw, indirizzoFatt)"
+                           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+        	connection = ds.getConnection();
             preparedStatement = connection.prepareStatement(insertSQL);
 
             preparedStatement.setString(1, user.getNome());
@@ -30,12 +51,10 @@ public class UserDaoImpl implements UserDAO {
             preparedStatement.setString(4, user.getCodF());
             preparedStatement.setString(5, user.getNumTelefono());
             preparedStatement.setString(6, user.getEmail());
-            preparedStatement.setString(7, user.getPassword());
+            preparedStatement.setString(7, user.getIndirizzoFatt());
 
-
+ 
             result = preparedStatement.executeUpdate();
-            
-            connection.commit();
 
         } finally {
             try {
@@ -43,8 +62,9 @@ public class UserDaoImpl implements UserDAO {
                     preparedStatement.close();
                 
             } finally {
-                
-            	DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
             }
         }
         
@@ -71,9 +91,7 @@ public class UserDaoImpl implements UserDAO {
             preparedStatement.setInt(1, user.getId());
   
             result = preparedStatement.executeUpdate();   
-            
-            connection.commit();
-        	
+                    	
         } finally {
             try {
                 if (preparedStatement != null)
@@ -86,8 +104,7 @@ public class UserDaoImpl implements UserDAO {
         
         return result;
 	}
-
-	@Override
+	
 	public UserBean findByCred(String email, String password) throws SQLException {
 		
 		Connection connection = null;
@@ -97,7 +114,7 @@ public class UserDaoImpl implements UserDAO {
         UserBean user = null;
 
         try {
-            connection = DriverManagerConnectionPool.getConnection();
+        	connection = ds.getConnection();
             preparedStatement = connection.prepareStatement(selectSQL);
             
             preparedStatement.setString(1, email);
@@ -119,6 +136,9 @@ public class UserDaoImpl implements UserDAO {
                 user.setPassword(rs.getString("psw"));
                 user.setTipo(rs.getString("tipo"));
                 user.setDataNascita(LocalDate.parse(rs.getDate("dataNascita").toString()));
+                user.setIndirizzoFatt(rs.getString("indirizzoFatt"));
+
+                
                
             }
             
@@ -127,11 +147,39 @@ public class UserDaoImpl implements UserDAO {
                 if (preparedStatement != null)
                     preparedStatement.close();
             } finally {
-                DriverManagerConnectionPool.releaseConnection(connection);
+            	if(connection != null) {
+            		connection.close();
+            	}
             }
         }
         
         return user;
 	}
+	@Override
+	public void updateAddress(String address, UserBean user) throws SQLException {
+	    user.setIndirizzoFatt(address);
 
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+
+	    String updateSQL = "UPDATE " + TABLE + " SET indirizzoFatt = ? WHERE ID = ?";
+
+	    try {
+	        connection = ds.getConnection();
+	        preparedStatement = connection.prepareStatement(updateSQL);
+	        preparedStatement.setString(1, address);
+	        preparedStatement.setInt(2, user.getId());
+	        preparedStatement.executeUpdate();
+
+	    } finally {
+	        try {
+	            if (preparedStatement != null)
+	                preparedStatement.close();
+	        } finally {
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        }
+	    }
+	}
 }

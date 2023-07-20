@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-	
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <%
 	String action = (String)request.getSession().getAttribute("action");
+	request.getSession().setAttribute("cart", request.getSession().getAttribute("cart")); 
 	
 %>
-<%@ include file="Header.html" %> 
-
 <!DOCTYPE html>
 <html>
 <head>

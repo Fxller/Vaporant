@@ -72,11 +72,10 @@ public class ProductControl extends HttpServlet {
         
         if(request.getSession().getAttribute("tipo").equals("admin")) 
         	response.sendRedirect("ProductViewAdmin.jsp");
-        else if (request.getSession().getAttribute("tipo").equals("user"))
-        	response.sendRedirect("ProductView.jsp");
         else
         	response.sendRedirect("ProductView.jsp");
 	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);

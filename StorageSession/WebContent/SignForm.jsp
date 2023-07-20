@@ -1,4 +1,3 @@
-<%@ include file="Header.html" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +45,12 @@
         <div class="cut"></div>
         <label for="nome" class="placeholder">Password</label>
       </div>
+      <div class="input-container ic1">
+        <input id="indirizzoFatt" class="input" type="text" name="indirizzoFatt" placeholder=" " required>
+        <div class="cut"></div>
+        <label for="nome" class="placeholder">Indirizzo Fatturazione</label>
 		<input type="submit" value="Registrati" class="submit">
+	</div>
 	</form>
 </div>
 </body>

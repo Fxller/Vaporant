@@ -4,13 +4,19 @@ import java.time.LocalDate;
 
 public class UserBean {
 	
-	private String nome, cognome, numTelefono, email, codF, password;
+	private String nome, cognome, numTelefono, email, codF, password, indirizzoFatt;
 
 	private String tipo;
 	private LocalDate dataNascita;
 	private int id;
 	
 	
+	public String getIndirizzoFatt() {
+		return indirizzoFatt;
+	}
+	public void setIndirizzoFatt(String indirizzoFatt) {
+		this.indirizzoFatt = indirizzoFatt;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -67,6 +73,7 @@ public class UserBean {
 	public void setDataNascita(LocalDate dataNascita) {
 		this.dataNascita = dataNascita;
 	}
+	
 
 	
 	public String toString() {
@@ -97,9 +104,11 @@ public class UserBean {
 	    s += password;
 		s += " - "; 
 		
-		
 	    s += tipo;
 		s += "\n"; 
+		
+		s += indirizzoFatt;
+		s += "\n";
 		
 		return s;
 	}
