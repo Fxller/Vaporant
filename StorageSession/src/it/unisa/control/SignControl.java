@@ -21,7 +21,6 @@ public class SignControl extends HttpServlet {
        
     public SignControl() {
         super();
-        
     }
     
     @Override
@@ -36,6 +35,7 @@ public class SignControl extends HttpServlet {
 		user.setNumTelefono(request.getParameter("telefono"));
 		user.setEmail(request.getParameter("email"));
 		user.setPassword(request.getParameter("password"));
+		user.setIndirizzoFatt(request.getParameter("indirizzoFatt"));
 
 		
 		int result = 0;

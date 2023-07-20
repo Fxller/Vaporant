@@ -1,257 +1,116 @@
-@charset "ISO-8859-1";
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
 
-/* Stili per la tabella */
+body {
+
+    font-family: 'Poppins', sans-serif;
+}
+
 table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-bottom: 20px;
+    border-collapse: collapse;
+    width: 100%;
+    color: #333;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 80%;
 }
 
-th,
-td {
-  text-align: left;
-  padding: 8px;
-}
-
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-/* Stili per i bottoni */
-.checkout-btn {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 10px 18px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.checkout-btn:hover {
-  background-color: #3e8e41;
-}
-
-/* Stili per il totale */
-.total-price {
-  font-weight: bold;
-  font-size: 18px;
-}
-
-/* Stili per il dropdown */
-select {
-  font-size: 16px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: white;
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 10px;
-}
-
-/* Stili per il link Aggiungi indirizzo */
-a {
-  color: #4CAF50;
-  text-decoration: none;
-  border-bottom: 1px solid #4CAF50;
-  transition: border-bottom 0.3s ease;
-}
-
-a:hover {
-  border-bottom: 2px solid #4CAF50;
-}
-
-/* Stile per la tabella */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-thead {
-  background-color: #eee;
-  font-weight: bold;
-}
-
-th {
-  padding: 10px;
-  text-align: left;
-}
-
-td {
-  padding: 10px;
-  border: 1px solid #ddd;
-}
-
-/* Stile per il totale */
-.total-price {
-  font-weight: bold;
-  font-size: 1.2em;
-  color: #2ecc71;
-}
-
-/* Stile per la dropdown degli indirizzi */
-#addressDropdown {
-  width: 100%;
-  padding: 10px;
-  font-size: 1.2em;
-  border: 2px solid #2ecc71;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  background-color: #fff;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-
-#addressDropdown:focus {
-  border: 2px solid #3498db;
-  outline: none;
-}
-
-/* Stile per il bottone "Aggiungi indirizzo" */
-a {
-  color: #2ecc71;
-  text-decoration: none;
-  font-size: 1.2em;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-/* Stile per i radio button di pagamento */
-input[type="radio"] {
-  margin-right: 10px;
-}
-
-label[for="paypal"], label[for="mastercard"] {
-  font-size: 1.2em;
-  color: #2ecc71;
-}
-
-/* Stile per i bottoni */
-.checkout-btn {
-  background-color: #2ecc71;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.2em;
-  border-radius: 5px;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.checkout-btn:hover {
-  background-color: #27ae60;
-}
-
-.checkout-btn:active {
-  transform: scale(0.95);
-}
-
-/* Animazione per il numero di prodotti nel form */
-input[type="number"] {
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}
-
-input[type="number"]:hover, input[type="number"]:focus {
-  box-shadow: 0 0 5px #2ecc71;
-}
-
-input[type="number"]:invalid {
-  border-color: red;
-  
- /* Animazione pulsante checkout */
-.checkout-btn:hover {
-  transform: scale(1.05);
-  transition-duration: 0.3s;
-  background-color: #ffb347;
-}
-
-/* Decorazione intestazione tabella */
 table th {
-  background-color: #ffb347;
-  color: white;
-  font-size: 20px;
+  background-color: #7A0000;
+  color: #fff;
   font-weight: bold;
-  text-align: center;
   padding: 10px;
-  border: 1px solid black;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #ccc;
 }
 
-/* Decorazione righe tabella */
-table td {
-  padding: 10px;
-  border: 1px solid black;
-}
-
-/* Decorazione righe alternate */
-table tbody tr:nth-child(odd) {
+table tr:nth-child(even) td {
   background-color: #f2f2f2;
 }
 
-/* Decorazione prezzo totale */
-.total-price {
+table tr:hover td {
+  background-color: #ffedcc;
+}
+
+table td {
+  background-color: #fff;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
   font-weight: bold;
-  font-size: 24px;
-  color: #008CBA;
 }
 
-/* Decorazione select indirizzo */
-#addressDropdown {
-  padding: 8px;
-  border-radius: 4px;
-  border: none;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+span {
+    margin-left: 10%;
+    font-weight: bold;
 }
 
-/* Decorazione link aggiungi indirizzo */
-a {
-  text-decoration: none;
-  color: #008CBA;
-  margin-left: 10px;
+.dropdown {
+    margin-left: 10%;
+    margin-top: 1%;
 }
 
-a:hover {
-  text-decoration: underline;
+.dropdown > label {
+    font-weight: bold;
 }
 
-/* Decorazione label pagamento */
-label {
-  display: block;
-  margin-top: 10px;
-  margin-bottom: 5px;
-  font-size: 18px;
+.add {
+    margin-left: 10%;
+    transition: all .3s ease;
+    margin-bottom: 1%;
 }
 
-/* Decorazione input radio pagamento */
-input[type="radio"] {
-  margin-right: 10px;
+.add a {
+    text-decoration: none;
+    color: red;
+    font-weight: bold;
 }
 
-input[type="radio"]:last-child {
-  margin-right: 0;
+.add:hover {
+    transform: scale(1.01);
+}
+
+.radio {
+    margin-left: 10%;
+}
+
+.checkout {
+    display: flex;
+    justify-content: center;
+}
+
+.checkout-btn {
+    display: inline-block;
+    background-color: #7DC855;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 12px 30px;
+    transition: all .5s;
+}
+
+.checkout-btn:hover {
+    transform: scale(1.02);
+    background-color: lightgreen;
+}
+
+.update {
+	display: flex;
+	justify-content: center;
+}
+
+.none {
+	display: flex;
+	flex-direction: column;
 }

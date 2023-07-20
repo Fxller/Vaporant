@@ -52,8 +52,6 @@ public class ContenutoDaoImpl implements ContenutoDAO{
 
 
             result = preparedStatement.executeUpdate();
-            connection.commit();
-            
             updateStorage(contenutoOrdine.getId_prodotto(), contenutoOrdine.getQuantita());
 
         } finally {
@@ -89,8 +87,6 @@ public class ContenutoDaoImpl implements ContenutoDAO{
             preparedStatement.setInt(2, contenutoOrdine.getId_prodotto());
             result = preparedStatement.executeUpdate();   
             
-            connection.commit();
-        	
         } finally {
             try {
                 if (preparedStatement != null)
@@ -167,8 +163,6 @@ public class ContenutoDaoImpl implements ContenutoDAO{
             preparedStatement.setInt(2, quant);
             result = preparedStatement.executeUpdate();   
             
-            connection.commit();
-        	
         } finally {
             try {
                 if (preparedStatement != null)
@@ -177,11 +171,8 @@ public class ContenutoDaoImpl implements ContenutoDAO{
             	if(connection != null) {
             		connection.close();
             	}
-            	
             }
         }
 		return result;
 	}
-	
-	
 }

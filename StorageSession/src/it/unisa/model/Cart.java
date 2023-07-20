@@ -26,7 +26,13 @@ public class Cart {
 	}
 	
 	public void addProduct(ProductBean product) {
-		if (!products.isEmpty() && containsProduct(product)) {
+		
+		ProductBean prod = containsProduct(product);
+		
+		if (!products.isEmpty() && prod != null) 
+		{
+			if(prod.getQuantity() < prod.getQuantityStorage())
+				aggiorna(product,prod.getQuantity() + 1);	
 		} else {
 			products.add(product);
 			setPrezzoTotale(prezzoTotale += product.getPrice());
@@ -45,14 +51,14 @@ public class Cart {
 		}
  	}
 	
-	public boolean containsProduct(ProductBean product) {
-			for (ProductBean pb : products) {
-				if (pb.toStringProduct().compareTo(product.toStringProduct()) == 0) {
-					return true;
-				}
+	public ProductBean containsProduct(ProductBean product) {
+		for (ProductBean pb : products) {
+			if (pb.toStringProduct().compareTo(product.toStringProduct()) == 0) {
+				return pb;
 			}
-			return false;
-	}
+		}
+		return null;
+}
 
 	public void aggiorna(ProductBean product, int quantita) {
 				
@@ -68,9 +74,5 @@ public class Cart {
 				break;
 			}
 		}
-
-
 	}
-
-
 }

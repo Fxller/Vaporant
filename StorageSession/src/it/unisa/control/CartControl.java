@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import it.unisa.model.Cart;
+import it.unisa.model.ProductBean;
 import it.unisa.model.ProductModelDM;
 import it.unisa.model.UserBean;
-
 
 @WebServlet("/cart")
 public class CartControl extends HttpServlet {
@@ -37,7 +37,9 @@ public class CartControl extends HttpServlet {
 				if (action.equalsIgnoreCase("addC")) 
 				{
 					int id = Integer.parseInt(request.getParameter("id"));
-					cart.addProduct(model.doRetrieveByKey(id));
+					ProductBean prod = model.doRetrieveByKey(id);
+					cart.addProduct(prod);
+										
 				} else if (action.equalsIgnoreCase("deleteC")) 
 					{
 						int id = Integer.parseInt(request.getParameter("id"));
