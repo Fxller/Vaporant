@@ -18,7 +18,7 @@ public class UserDaoImpl implements UserDAO {
     private static DataSource ds;
 
     
-    	//connessione al database
+//	connessione al database
     static {
         try {
             Context initCtx = new InitialContext();
@@ -38,8 +38,8 @@ public class UserDaoImpl implements UserDAO {
         int result;
 
         String insertSQL = "INSERT INTO " + UserDaoImpl.TABLE
-                           + " (nome, cognome, dataNascita, CF, numTelefono, email, psw)"
-                           + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                           + " (nome, cognome, dataNascita, CF, numTelefono, email, psw, indirizzoFatt)"
+                           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
         	connection = ds.getConnection();
@@ -51,9 +51,10 @@ public class UserDaoImpl implements UserDAO {
             preparedStatement.setString(4, user.getCodF());
             preparedStatement.setString(5, user.getNumTelefono());
             preparedStatement.setString(6, user.getEmail());
+            preparedStatement.setString(7, user.getIndirizzoFatt());
+
  
             result = preparedStatement.executeUpdate();
-            connection.commit();
 
         } finally {
             try {
@@ -90,9 +91,7 @@ public class UserDaoImpl implements UserDAO {
             preparedStatement.setInt(1, user.getId());
   
             result = preparedStatement.executeUpdate();   
-            
-            connection.commit();
-        	
+                    	
         } finally {
             try {
                 if (preparedStatement != null)
@@ -106,7 +105,7 @@ public class UserDaoImpl implements UserDAO {
         return result;
 	}
 	
-public UserBean findByCred(String email, String password) throws SQLException {
+	public UserBean findByCred(String email, String password) throws SQLException {
 		
 		Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -137,6 +136,9 @@ public UserBean findByCred(String email, String password) throws SQLException {
                 user.setPassword(rs.getString("psw"));
                 user.setTipo(rs.getString("tipo"));
                 user.setDataNascita(LocalDate.parse(rs.getDate("dataNascita").toString()));
+                user.setIndirizzoFatt(rs.getString("indirizzoFatt"));
+
+                
                
             }
             
@@ -152,5 +154,32 @@ public UserBean findByCred(String email, String password) throws SQLException {
         }
         
         return user;
+	}
+	@Override
+	public void updateAddress(String address, UserBean user) throws SQLException {
+	    user.setIndirizzoFatt(address);
+
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+
+	    String updateSQL = "UPDATE " + TABLE + " SET indirizzoFatt = ? WHERE ID = ?";
+
+	    try {
+	        connection = ds.getConnection();
+	        preparedStatement = connection.prepareStatement(updateSQL);
+	        preparedStatement.setString(1, address);
+	        preparedStatement.setInt(2, user.getId());
+	        preparedStatement.executeUpdate();
+
+	    } finally {
+	        try {
+	            if (preparedStatement != null)
+	                preparedStatement.close();
+	        } finally {
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        }
+	    }
 	}
 }

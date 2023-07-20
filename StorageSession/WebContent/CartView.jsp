@@ -45,8 +45,8 @@
 				<tr>
 					<td><%=beancart.getName()%></td>
 					<td>
-					<form action = "cart?action=aggiornaCheck&id=<%=beancart.getCode()%>" method = "POST" >
-						<input type = "number" name = "quantita" value = "<%=beancart.getQuantity()%>" required min = "1" max = "<%=beancart.getQuantityStorage()%>" >
+					<form action = "cart?action=aggiorna&id=<%=beancart.getCode()%>" method = "POST" >
+						<input type = "number" name = "quantita" value = "<%= beancart.getQuantity() %>" required min = "1" max = "<%=beancart.getQuantityStorage() %>" >
 						<button class = "checkout-btn" type = "submit">Aggiorna</button>
 		
 					</form>

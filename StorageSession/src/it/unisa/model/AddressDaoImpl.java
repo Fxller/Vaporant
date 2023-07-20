@@ -55,8 +55,6 @@ public class AddressDaoImpl implements AddressDAO {
 
             result = preparedStatement.executeUpdate();
             
-            connection.commit();
-
         } finally {
             try {
                 if (preparedStatement != null)
@@ -94,9 +92,7 @@ public class AddressDaoImpl implements AddressDAO {
             preparedStatement.setInt(1, address.getId());
   
             result = preparedStatement.executeUpdate();   
-            
-            connection.commit();
-        	
+                    	
         } finally {
             try {
                 if (preparedStatement != null)

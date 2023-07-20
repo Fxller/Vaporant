@@ -36,6 +36,9 @@ public class SignControl extends HttpServlet {
 		user.setNumTelefono(request.getParameter("telefono"));
 		user.setEmail(request.getParameter("email"));
 		user.setPassword(request.getParameter("password"));
+		user.setPassword(request.getParameter("indirizzoFatt"));
+
+		
 
 		
 		int result = 0;

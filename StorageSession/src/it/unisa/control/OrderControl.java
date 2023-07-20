@@ -27,6 +27,7 @@ public class OrderControl extends HttpServlet {
 
 	private static OrderDaoImpl orderDao = new OrderDaoImpl();
 	private static ContenutoDaoImpl contDao = new ContenutoDaoImpl();
+	private static UserDaoImpl userDao = new UserDaoImpl();
 	
     public OrderControl() {
         super();
@@ -44,6 +45,14 @@ public class OrderControl extends HttpServlet {
 		
 		String payment = req.getParameter("payment");
 		int idIndirizzo = Integer.parseInt(req.getParameter("addressDropdown"));
+		String indirizzoFatt = req.getParameter("addressDropdown2");
+		
+		try {
+			userDao.updateAddress(indirizzoFatt, user);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		OrderBean order = new OrderBean(idUtente,idIndirizzo, cart.getPrezzoTotale(), LocalDate.now(), payment);
 		
@@ -63,7 +72,6 @@ public class OrderControl extends HttpServlet {
 		
 		for(ProductBean prod : cart.getProducts())
 		{
-			System.out.println(prod.toString());
 			try {
 				contDao.saveContenuto(new ContenutoBean(idOrdine,prod.getCode(),prod.getQuantity(),22,prod.getPrice()));
 			} catch (SQLException e) {
@@ -73,7 +81,7 @@ public class OrderControl extends HttpServlet {
 		
 		session.setAttribute("order", order);
 		session.setAttribute("user", user);
-		session.setAttribute("cart", cart);
+		session.setAttribute("listaProd", cart.getProducts());
 		
 		res.sendRedirect("ordine.jsp");
 		

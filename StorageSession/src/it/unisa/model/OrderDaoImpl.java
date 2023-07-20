@@ -52,7 +52,6 @@ public class OrderDaoImpl implements OrderDAO {
 
       result = preparedStatement.executeUpdate();
 
-      connection.commit();
     } finally {
       try {
         if (preparedStatement != null) preparedStatement.close();
@@ -81,7 +80,6 @@ public class OrderDaoImpl implements OrderDAO {
 
       result = preparedStatement.executeUpdate();
 
-      connection.commit();
     } finally {
       try {
         if (preparedStatement != null) preparedStatement.close();

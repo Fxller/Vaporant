@@ -89,16 +89,25 @@
 				<label for="addressDropdown" class="placeholder">Indirizzo di spedizione</label>
 				<div class="cut cut-short"></div>
 			</div>
+			
+			<div class="input-container ic2">
+				<select id="addressDropdown2" name="addressDropdown2" required>
+					<option value="">Seleziona un indirizzo</option>
+				</select>
+				<label for="addressDropdown2" class="placeholder">Indirizzo di fatturazione</label>
+				<div class="cut cut-short"></div>
+			</div>
+			
 			<a href="AddressForm.jsp">Aggiungi indirizzo</a>
 			<div>
 				<label>Paga con:</label>
 				<div>
-					<input type="radio" id="paypal" name="payment" required value="PayPal">
+					<input type="radio" id="PayPal" name="payment" required value="PayPal">
 					<label for="paypal">PayPal</label>
 				</div>
 				<div>
-					<input type="radio" id="mastercard" name="payment" required value="Mastercard">
-					<label for="mastercard">Mastercard</label>
+					<input type="radio" id="Carta di credito/debito" name="payment" required value="Carta di credito/debito">
+					<label for="mastercard">Carta di credito/debito</label>
 				</div>
 			</div>
 			<button class="checkout-btn" type="submit">Acquista</button>
@@ -115,12 +124,26 @@
 			id: address.id,
 			label: address.indirizzo
 		}));
+		
 		const dropdown = document.getElementById("addressDropdown");
 		addressOptions.forEach(address => {
 			const option = document.createElement("option");
 			option.value = address.id;
   			option.textContent = address.label;
   			dropdown.appendChild(option); 
+		});
+		
+		const addressOptions2 = addresses.map(address => ({
+			id: address.id,
+			label: address.indirizzo
+		}));
+		
+		const dropdown2 = document.getElementById("addressDropdown2");
+		addressOptions.forEach(address => {
+			const option2 = document.createElement("option");
+			option2.value = address.label;
+  			option2.textContent = address.label;
+  			dropdown2.appendChild(option2); 
 		});
 	
 </script>

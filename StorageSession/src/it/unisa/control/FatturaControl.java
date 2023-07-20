@@ -21,7 +21,6 @@ import org.apache.pdfbox.pdmodel.interactive.form.PDField;
 
 import it.unisa.model.AddressBean;
 import it.unisa.model.AddressDaoImpl;
-import it.unisa.model.Cart;
 import it.unisa.model.OrderBean;
 import it.unisa.model.ProductBean;
 import it.unisa.model.UserBean;
@@ -43,7 +42,8 @@ public class FatturaControl extends HttpServlet {
         
     	UserBean user = (UserBean) request.getSession().getAttribute("user");
         OrderBean order = (OrderBean) request.getSession().getAttribute("order");
-        Cart cart = (Cart) request.getSession().getAttribute("cart");
+        @SuppressWarnings("unchecked")
+		List<ProductBean> listaProdotti = (List<ProductBean>) request.getSession().getAttribute("listaProd");
         AddressBean address = null;
         try {
 			 address = AddressDao.findAddressByID(order.getId_indirizzo());
@@ -86,7 +86,6 @@ public class FatturaControl extends HttpServlet {
                 acroForm.getField("indirizzo").setValue(address.toStringScript());
                 acroForm.getField("numeroTelefono").setValue(user.getNumTelefono());
 
-                List<ProductBean> listaProdotti = cart.getProducts();
                 int i = 1;
                 String prodottoRow = "ProdottoRow";
                 String quantitaRow = "QuantitaRow";
