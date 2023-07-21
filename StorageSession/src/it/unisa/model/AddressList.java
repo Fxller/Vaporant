@@ -21,7 +21,7 @@ public class AddressList {
                 setAddressList(new ArrayList<AddressBean>());
                 addressListScript = new ArrayList<AddressScript>();
 
-                // Verifica se la lista di indirizzi  valida
+                // Verifica se la lista di indirizzi è valida
                 ArrayList<AddressBean> userAddressList = addressDao.findByID(user.getId());
                 
                 if (userAddressList != null) {
@@ -66,6 +66,6 @@ public class AddressList {
             String json = gson.toJson(addressListScript);
             return json;
         }
-        return ""; // Ritorna una stringa vuota se la lista nulla
+        return ""; // Ritorna una stringa vuota se la lista è nulla
     }
 }

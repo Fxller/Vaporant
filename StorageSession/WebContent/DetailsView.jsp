@@ -1,5 +1,5 @@
 <%
-    ProductBean product = (ProductBean) request.getAttribute("product");
+    ProductBean product = (ProductBean) request.getSession().getAttribute("product");
 %>
 
 <!DOCTYPE html>
@@ -28,7 +28,12 @@
 
         <div class="product-price">
           <span><%=product.getPrice()%>€</span>
-          <a href="cart?action=addC&id=<%=product.getCode()%>&user=${user}" class="cart-btn">Aggiungi al carrello</a>
+          <% 
+          if(product.getQuantityStorage() == 0) { %>
+              <a href="#" class="cart-btn">Prodotto terminato!</a>
+          <% } else { %>
+              <a href="cart?action=addC&id=<%=product.getCode()%>&user=${user}" class="cart-btn">Aggiungi al carrello</a>
+          <%  } %>
         </div>
       </div>
     </main>

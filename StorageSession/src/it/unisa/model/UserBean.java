@@ -73,6 +73,7 @@ public class UserBean {
 	public void setDataNascita(LocalDate dataNascita) {
 		this.dataNascita = dataNascita;
 	}
+	
 
 	
 	public String toString() {
@@ -102,7 +103,6 @@ public class UserBean {
 		
 	    s += password;
 		s += " - "; 
-		
 		
 	    s += tipo;
 		s += "\n"; 

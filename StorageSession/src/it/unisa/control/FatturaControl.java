@@ -65,6 +65,7 @@ public class FatturaControl extends HttpServlet {
             PDDocument document = null;
             try {
                 document = PDDocument.load(new File("\\C:\\Users\\tulli\\Desktop\\TSW\\struttura_fattura.pdf"));
+
             } catch (IOException e) {
                 // Gestione dell'eccezione: log, reindirizzamento, messaggio di errore, ecc.
                 e.printStackTrace();

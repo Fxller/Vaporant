@@ -28,12 +28,6 @@
 
 <body>
 	<jsp:include page="Header.jsp" />
-	<%if(user!=null){%>
-	    <form action="logoutControl" method="POST" class="form">
-			<button type="submit"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i></button>
-		</form>
-	<% } %>
-	
 		<div id="heroSection">
   			<div class="heroVideoContainer">
     			<video src="herovideo.mp4" autoplay loop playsinline muted></video>

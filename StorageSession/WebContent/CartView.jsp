@@ -39,7 +39,10 @@
 					<div class="content">
 						<h3><%=beancart.getName()%></h3>
 						<h4>Prezzo: <%=beancart.getPrice()%>€</h4>
-						<p class="unit">Quantity: <%=beancart.getQuantity()%></p>
+						<form action="cart?action=aggiorna&id=<%=beancart.getCode()%>" method="POST" class = "none">
+							Quantità: <input type = "number" name = "quantita" value = "<%=beancart.getQuantity()%>"required min = "1" max = "<%=beancart.getQuantityStorage() %>">
+							<button type = "submit" class = "btn">Aggiorna</button>
+						</form>
 						<p class="btn-area">
 						<a href = "cart?action=deleteC&id=<%=beancart.getCode()%>">
 						<i aria-hidden="true" class="fa fa-trash"></i> <span class="btn2">Rimuovi</span>
@@ -68,4 +71,4 @@
 		</div>
 	<jsp:include page="Footer.jsp" />
 </body>
-</html>
+</html>	

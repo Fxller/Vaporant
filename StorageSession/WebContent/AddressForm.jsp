@@ -1,7 +1,5 @@
 <%@  page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import = "it.unisa.model.UserBean"%>
-    
-<%@ include file="Header.jsp" %>
 
 <%
 	UserBean user = null;

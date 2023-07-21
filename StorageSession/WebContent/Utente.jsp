@@ -1,4 +1,3 @@
-<%@page import="java.util.ArrayList"%>
 <%@page import="it.unisa.model.OrderDaoImpl"%>
 <%@ page import="it.unisa.model.UserDaoImpl" %>
 <%@ page import="it.unisa.model.UserBean" %>
@@ -10,24 +9,23 @@
 <%@ page import="it.unisa.control.OrderControl" %>
 <%@ page import="it.unisa.control.ModifyControl" %>
 <%
+	UserBean user = (UserBean) request.getSession().getAttribute("user");
 
-	UserBean user = (UserBean) session.getAttribute("user");
-	AddressDaoImpl addressDao = new AddressDaoImpl();
-	OrderDaoImpl orderDao = new OrderDaoImpl();
-	List<AddressBean> indirizzi = new ArrayList<AddressBean>();
-	List<OrderBean> ordini = new ArrayList<OrderBean>();
-	if(user == null){
+	if(user.getEmail() == null){
 		response.sendRedirect("loginForm.jsp");
-	}else{
-		indirizzi = addressDao.findByID(user.getId());
-		ordini = orderDao.findByIdUtente(user.getId());
 	}
+	   AddressDaoImpl addressDao = new AddressDaoImpl();
+	   List<AddressBean> indirizzi = addressDao.findByID(user.getId());
+	
+	   OrderDaoImpl orderDao = new OrderDaoImpl();
+	   List<OrderBean> ordini = orderDao.findByIdUtente(user.getId());
 %>
 
 <!DOCTYPE html>
 <html>
    <head>
       <title>Dettagli Utente</title>
+      <link rel="stylesheet" type="text/css" href="UtenteStyle.css">
 	  <style>
 	      .hidden {
 	         display: none;
@@ -178,31 +176,36 @@
       </script>
    </head>
    <body>
-      <%if(user != null) {%>
       <%@include file="Header.jsp"%>
       <br>  <br>
-      <h1>Dettagli Utente</h1>
-      <p>Benvenuto, <%= user.getNome().toUpperCase() %>!</p>
-      <p>Nome: <%= user.getNome() %></p>
-      <p>Cognome: <%= user.getCognome() %></p>
-      <p>Data di nascita: <%= user.getDataNascita() %></p>
-      <label id="emailLabel">Email: <%= user.getEmail() %></label>
+      <h1>Benvenuto, <%= user.getNome().toUpperCase() %>!</h1>
+	  <div class = "data">
+      <p><span>Nome:</span> <%= user.getNome() %></p>
+      <p><span>Cognome:</span> <%= user.getCognome() %></p>
+      <p><span>Data di nascita:</span> <%= user.getDataNascita() %></p>
+      <div>
+      <label id="emailLabel"><span>Email:</span> <%= user.getEmail() %></label>
 	  <input type="text" id="emailInput" class="hidden" required/>
-	  <button id="editButton" onclick="showEmailInput()">Modifica Email</button>
-	  <button id="submitButton" class="hidden" onclick="submitEmail()">Conferma</button>
+	  <button id="editButton" class = "btn" onclick="showEmailInput()">MODIFICA</button>
+	  <button id="submitButton" class="hidden btn" onclick="submitEmail()">CONFERMA</button>
+	  </div>
 	  <br>
-	  <button id="editPhoneButton" onclick="showPhoneInput()">Modifica Numero di cellulare</button>
-      <label id="phoneLabel">Numero di cellulare: <%= user.getNumTelefono() %></label>
+	  <div>
+      <label id="phoneLabel"><span>Numero di cellulare:</span> <%= user.getNumTelefono() %></label>
 	  <input type="text" id="phoneInput" class="hidden" required/>
-	  <button id="submitPhoneButton" class="hidden" onclick="submitPhone()">Conferma</button>
+	  <button id="editPhoneButton" class = "btn" onclick="showPhoneInput()">MODIFICA</button>
+	  <button id="submitPhoneButton" class="hidden btn" onclick="submitPhone()">CONFERMA</button>
+	  </div>
 	  <br>
-      <button id="editPasswordButton"  onclick="showPasswordInputs()">Modifica Password</button>
+	  <label id ="passwordLabel"><span>Password:</span></label>
+      <button id="editPasswordButton" class = "btn" onclick="showPasswordInputs()">MODIFICA</button>
 	  <input type="text" id="oldPasswordInput" class="hidden" placeholder="Vecchia password" required/>
 	  <input type="text" id="newPasswordInput"  class="hidden" placeholder="Nuova password" required/>
-	  <button id="submitPasswordButton" class="hidden" onclick="submitPassword()">Conferma</button>
+	  <button id="submitPasswordButton" class="hidden" class = "btn" onclick="submitPassword()">CONFERMA</button>
       <br>
-
-      <h2>Indirizzi</h2>
+	  </div>
+	  <div class = "address">
+      <h2>INDIRIZZI</h2>
       <table>
          <thead>
             <tr>
@@ -221,10 +224,11 @@
             <% } %>
          </tbody>
       </table>
-      <button onclick="location.href='AddressForm.jsp'">Aggiungi indirizzo</button>
+      <button onclick="location.href='AddressForm.jsp'" class = "btn">AGGIUNGI INDIRIZZO</button>
       <br>
-
-      <h2>Ordini Effettuati</h2>
+	  </div>
+	  <div class = "orders">
+      <h2>ORDINI EFFETTUATI</h2>
       <table>
          <thead>
             <tr>
@@ -243,8 +247,7 @@
             <% } %>
          </tbody>
       </table>
-
+	  </div>
       <%@include file="Footer.jsp"%>
-	<%}%>
    </body>
 </html>

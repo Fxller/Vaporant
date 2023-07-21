@@ -41,7 +41,7 @@
 		</div>
 		<div class = "search">
 			<div class = "kek">
-				<form id="searchForm">
+				<form id="searchForm" class = "fm">
 					<input type = "text" id="searchInput" class = "border" placeholder="Cerca">
 				</form>
 			</div>

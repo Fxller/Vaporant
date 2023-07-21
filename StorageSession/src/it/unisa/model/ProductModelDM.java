@@ -153,5 +153,33 @@ public class ProductModelDM implements ProductModel {
 		}
 		return products;
 	}
+	
+	@Override
+	public void updateQuantityStorage(ProductBean prod, int quantita) throws SQLException {
+
+		
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+
+	    String updateSQL = "UPDATE " + ProductModelDM.TABLE_NAME + " SET quantita = ? WHERE ID = ?";
+
+	    try {
+	        connection = DriverManagerConnectionPool.getConnection();
+	        preparedStatement = connection.prepareStatement(updateSQL);
+	        preparedStatement.setInt(1, quantita);
+	        preparedStatement.setInt(2, prod.getCode());
+	        preparedStatement.executeUpdate();
+	        
+			connection.commit();
+
+	    } finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+	}
 
 }

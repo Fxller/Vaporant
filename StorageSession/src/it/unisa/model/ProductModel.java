@@ -12,4 +12,6 @@ public interface ProductModel {
 	
 	public Collection<ProductBean> doRetrieveAll(String order) throws SQLException;
 
+	void updateQuantityStorage(ProductBean prod, int quantita) throws SQLException;
+
 }

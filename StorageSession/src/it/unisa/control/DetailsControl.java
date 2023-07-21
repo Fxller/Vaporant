@@ -25,15 +25,14 @@ public class DetailsControl extends HttpServlet {
 				if (action.equalsIgnoreCase("read")) {
 					int id = Integer.parseInt(request.getParameter("id"));
 					request.removeAttribute("product");
-					request.setAttribute("product", model.doRetrieveByKey(id));
+					request.getSession().setAttribute("product", model.doRetrieveByKey(id));
 				}
 			}
 		}catch (SQLException e) {
 				System.out.println("error:" + e.getMessage());
 		}
 
-		RequestDispatcher d= getServletContext().getRequestDispatcher("/DetailsView.jsp");
-		d.forward(request, response);
+		response.sendRedirect("DetailsView.jsp");
 	}
 
 

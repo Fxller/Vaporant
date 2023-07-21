@@ -119,8 +119,8 @@
                     <label for="paypal">PayPal</label>
                 </div>
                 <div class = "radio">
-                    <input type="radio" id="mastercard" name="payment" required value="Mastercard">
-                    <label for="mastercard">Mastercard</label>
+                    <input type="radio" id="Carta di credito/debito" name="payment" required value="Carta di credito/debito">
+                    <label for="Carta di credito/debito">Carta di credito/debito</label>
                 </div>
              <div class = "checkout">
                 <button class="checkout-btn" type="submit">Acquista</button>
