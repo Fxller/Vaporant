@@ -105,9 +105,6 @@ public class FatturaControl extends HttpServlet {
                 
             	// Gestione dell'eccezione: log, reindirizzamento, messaggio di errore, ecc.
                 e.printStackTrace();
-                
-                // Esempio di reindirizzamento a una pagina di errore
-                response.sendRedirect("error-page.jsp");
                 return;
             }
 
@@ -125,9 +122,6 @@ public class FatturaControl extends HttpServlet {
             	
                 // Gestione dell'eccezione: log, reindirizzamento, messaggio di errore, ecc.
                 e.printStackTrace();
-                
-                // Esempio di reindirizzamento a una pagina di errore
-                response.sendRedirect("error-page.jsp");
                 return;
             } finally {
                 document.close();
@@ -149,8 +143,6 @@ public class FatturaControl extends HttpServlet {
                 // Gestione dell'eccezione: log, reindirizzamento, messaggio di errore, ecc.
                 e.printStackTrace();
                 
-                // Esempio di reindirizzamento a una pagina di errore
-                response.sendRedirect("Prod.jsp");
             }
         } catch (IOException e) {
         	
@@ -158,8 +150,6 @@ public class FatturaControl extends HttpServlet {
             
         	e.printStackTrace();
             
-        	// Esempio di reindirizzamento a una pagina di errore
-            response.sendRedirect("error-page.jsp");
         }
         
         

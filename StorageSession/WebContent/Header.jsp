@@ -7,7 +7,7 @@
    	request.getSession().setAttribute("action", action);
 %>
 <!DOCTYPE html>
-<html>
+<html lang = "it">
 <head>
 	<link href = "HeaderStyle.css" rel = "stylesheet" type = "text/css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />

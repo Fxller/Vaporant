@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang = "it">
 <head>
   <title>Footer Design</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">

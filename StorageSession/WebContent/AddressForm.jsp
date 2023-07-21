@@ -16,7 +16,7 @@
 	}
 %>
 <!DOCTYPE html>
-<html>
+<html lang = "it">
 <head>
 	<link rel="stylesheet" type="text/css" href="AddressStyle.css">
 </head>

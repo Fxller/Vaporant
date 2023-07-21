@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang = "it">
 <head>
 	<title>Registrazione Utente</title>
 	 <link rel="stylesheet" type="text/css" href="SignFormStyle.css">
