@@ -62,11 +62,12 @@ public class FatturaControl extends HttpServlet {
         // Importa modello fattura
             PDDocument document = null;
             try {
-                document = PDDocument.load(new File("\\C:\\Users\\tulli\\Desktop\\TSW\\struttura_fattura.pdf"));
-
+                document = PDDocument.load(new File("C:\\Users\\tulli\\Desktop\\TSW\\struttura_fattura.pdf"));
             } catch (IOException e) {
                 // Gestione dell'eccezione: log, reindirizzamento, messaggio di errore, ecc.
                 e.printStackTrace();
+                // Esempio di reindirizzamento a una pagina di errore
+                response.sendRedirect("error-page.jsp");
                 return;
             }
 
@@ -92,17 +93,21 @@ public class FatturaControl extends HttpServlet {
                 for (ProductBean prod : listaProdotti) {
                     acroForm.getField(prodottoRow + i).setValue(prod.getName());
                     acroForm.getField(quantitaRow + i).setValue(String.valueOf(prod.getQuantity()));
-                    acroForm.getField(prezzoRow + i).setValue("€" + String.valueOf(prod.getPrice()));
-                    acroForm.getField(totaleRow + i).setValue("€" + String.valueOf(prod.getPrice() * prod.getQuantity()));
+                    acroForm.getField(prezzoRow + i).setValue("€ " + String.valueOf(prod.getPrice()));
+                    acroForm.getField(totaleRow + i).setValue("€ " + String.valueOf(prod.getPrice() * prod.getQuantity()));
                     i++;
                 }
 
-                acroForm.getField("Imponibile").setValue("€" + String.valueOf(decimalFormat.format(order.getPrezzoTot())));
+                acroForm.getField("Imponibile").setValue("€ " + String.valueOf(decimalFormat.format(order.getPrezzoTot())));
                 acroForm.getField("totaleIva").setValue(String.valueOf(decimalFormat.format(totaleIva)));
                 acroForm.getField("totaleFattura").setValue(String.valueOf(decimalFormat.format(order.getPrezzoTot() + totaleIva)));
             } catch (IOException e) {
                 
+            	// Gestione dell'eccezione: log, reindirizzamento, messaggio di errore, ecc.
                 e.printStackTrace();
+                
+                // Esempio di reindirizzamento a una pagina di errore
+                response.sendRedirect("error-page.jsp");
                 return;
             }
 
@@ -118,7 +123,11 @@ public class FatturaControl extends HttpServlet {
                 document.save(outputStream);
             } catch (IOException e) {
             	
+                // Gestione dell'eccezione: log, reindirizzamento, messaggio di errore, ecc.
                 e.printStackTrace();
+                
+                // Esempio di reindirizzamento a una pagina di errore
+                response.sendRedirect("error-page.jsp");
                 return;
             } finally {
                 document.close();
@@ -137,11 +146,20 @@ public class FatturaControl extends HttpServlet {
                 outputStream2.flush();
             } catch (IOException e) {
             	
+                // Gestione dell'eccezione: log, reindirizzamento, messaggio di errore, ecc.
                 e.printStackTrace();
+                
+                // Esempio di reindirizzamento a una pagina di errore
+                response.sendRedirect("Prod.jsp");
             }
         } catch (IOException e) {
-
+        	
+            // Gestione dell'eccezione: log, reindirizzamento, messaggio di errore, ecc.
+            
         	e.printStackTrace();
+            
+        	// Esempio di reindirizzamento a una pagina di errore
+            response.sendRedirect("error-page.jsp");
         }
         
         

@@ -10,6 +10,7 @@
 		response.sendRedirect("loginForm.jsp");
 
 	OrderBean order = (OrderBean) request.getSession().getAttribute("order"); 
+	System.out.println(order);
 
 	@SuppressWarnings("unchecked")
 	List<ProductBean> listaProdotti = (List<ProductBean>) request.getSession().getAttribute("listaProd");
