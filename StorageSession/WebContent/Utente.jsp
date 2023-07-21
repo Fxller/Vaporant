@@ -14,11 +14,16 @@
 	if(user.getEmail() == null){
 		response.sendRedirect("loginForm.jsp");
 	}
+	
 	   AddressDaoImpl addressDao = new AddressDaoImpl();
-	   List<AddressBean> indirizzi = addressDao.findByID(user.getId());
+	   List<AddressBean> indirizzi = null;
+	   if(addressDao.findByID(user.getId()) != null)
+	   		indirizzi =  addressDao.findByID(user.getId());
 	
 	   OrderDaoImpl orderDao = new OrderDaoImpl();
-	   List<OrderBean> ordini = orderDao.findByIdUtente(user.getId());
+	   List<OrderBean> ordini = null;
+		if(orderDao.findByIdUtente(user.getId()) != null)
+			  ordini =  orderDao.findByIdUtente(user.getId());
 %>
 
 <!DOCTYPE html>
@@ -204,6 +209,7 @@
 	  <button id="submitPasswordButton" class="hidden" class = "btn" onclick="submitPassword()">CONFERMA</button>
       <br>
 	  </div>
+	  <%if(indirizzi != null){ %>
 	  <div class = "address">
       <h2>INDIRIZZI</h2>
       <table>
@@ -226,7 +232,9 @@
       </table>
       <button onclick="location.href='AddressForm.jsp'" class = "btn">AGGIUNGI INDIRIZZO</button>
       <br>
+      <%} %>
 	  </div>
+	  <%if(ordini != null){ %>
 	  <div class = "orders">
       <h2>ORDINI EFFETTUATI</h2>
       <table>
@@ -248,6 +256,7 @@
          </tbody>
       </table>
 	  </div>
+	  <%} %>
       <%@include file="Footer.jsp"%>
    </body>
 </html>
