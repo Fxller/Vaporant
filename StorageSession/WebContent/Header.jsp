@@ -26,7 +26,7 @@
 		</div>
 		<%if(session.getAttribute("user") != null){ %>
 			<div class = "links">
-			<a href = "logoutControl">Logout</a>
+			<a href = "logout">Logout</a>
 			</div>
 			<div class = "links">
 			<a href = "Utente.jsp">Profilo</a>

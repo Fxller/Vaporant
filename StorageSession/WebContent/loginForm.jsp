@@ -7,32 +7,56 @@
 	
 %>
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-    <title>Il mio form di login</title>
-    <link rel="stylesheet" type="text/css" href="loginFormStyle.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="loginFormStyle.css">
+    <style>
+        .error-message {
+            color: red;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
-    <form action="loginControl" method="POST" class="form">
-      <div class="title">Benvenuto</div>
-      <div class="subtitle">Accedi al tuo account!</div>
-      <div class="input-container ic1">
-        <input id="email" class="input" type="email" name="email" placeholder=" " required>
-        <div class="cut"></div>
-        <label for="email" class="placeholder">Email</label>
-      </div>
-      <div class="input-container ic2">
-        <input id="password" class="input" type="password" name="password" placeholder=" " required>
-        <div class="cut cut-short"></div>
-        <label for="password" class="placeholder">Password</label>
-      </div>
-      <div class="subtitle" align="center">
-      	<h5>Non possiedi un account? <a href="SignForm.jsp"><b>Registrati!</b></a></h5>
-      	<h6>oppure</h6>
-      	<h5>Continua <a href="ProductView.jsp">qui</a> senza accedere</h5>
-      </div>
-      <input type="submit" value=Login class="submit">
-<!--       <input type="submit" value="Continua senza account" class="submit"> -->
-      </form>
+    <div class="login-container">
+        <form action="loginControl" id="login-form" method="POST" class="form">
+            <span class="BorderTopBottom"></span>
+            <span class="BorderLeftRight"></span>
+    
+            <!-- Titolo della tabella -->
+            <h1><a href = "product"><img src = "logo.png" class = "logosite">Accedi</a></h1>
+    
+            <label>Email</label><br>
+            <input type="email" id="email" name="email" autocomplete="off"><br>
+            <p id="error-email" class="error-message"></p>
+    
+            <label>Password</label><br>
+            <input type="password" id="password" name="password" placeholder="********" autocomplete="off"><br>
+            <p id="error-password" class="error-message"></p>
+    
+            <input type="checkbox" id="checkbox" onclick="hidePassword();">
+            <label>Mostra Password</label><br>
+    
+            <input type="submit" id="submit" value="Accedi">
+        </form>
+        <!-- Collegamento alla pagina di registrazione (signup.html) -->
+        <p>Non hai un account? <a href="SignForm.jsp">Registrati qui</a></p>
+    </div>
+    <script>
+        function hidePassword() {
+            var x = document.getElementById('password');
+            if (x.type == "password") {
+                x.type = 'text';
+            } else {
+                x.type = 'password';
+            }
+        }
+    </script>
 </body>
 </html>
