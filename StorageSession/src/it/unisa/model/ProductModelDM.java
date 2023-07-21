@@ -98,9 +98,8 @@ public class ProductModelDM implements ProductModel {
 			Statement stmt =  connection.createStatement();
 			
 			stmt.executeUpdate(autoIncrement); 
-			
 			connection.commit();
-
+			stmt.close();
 		} finally {
 			try {
 				if (preparedStatement != null)

@@ -19,6 +19,7 @@
 <html lang = "it">
 <head>
 	<link rel="stylesheet" type="text/css" href="AddressStyle.css">
+	<title>Aggiungi Indirizzo</title>
 </head>
 <body>
     <jsp:include page="Header.jsp" />

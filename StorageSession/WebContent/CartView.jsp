@@ -35,7 +35,7 @@
 				%>
 
 				<div class="box">
-					<img src="img<%=beancart.getCode()%>.jpg">
+					<img src="img<%=beancart.getCode()%>.jpg" alt = "?">
 					<div class="content">
 						<h3><%=beancart.getName()%></h3>
 						<h4>Prezzo: <%=beancart.getPrice()%>€</h4>

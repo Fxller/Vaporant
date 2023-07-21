@@ -22,7 +22,7 @@
 <body>
 	<nav>
 		<div class = "logo">
-			<a href = "product"><img src = "logo.png" class = "logosite"></a>
+			<a href = "product"><img src = "logo.png" class = "logosite" alt = "?"></a>
 		</div>
 		<%if(session.getAttribute("user") != null){ %>
 			<div class = "links">

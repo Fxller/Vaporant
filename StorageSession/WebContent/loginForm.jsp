@@ -30,7 +30,7 @@
             <span class="BorderLeftRight"></span>
     
             <!-- Titolo della tabella -->
-            <h1><a href = "product"><img src = "logo.png" class = "logosite">Accedi</a></h1>
+            <h1><a href = "product"><img src = "logo.png" class = "logosite" alt = "?">Accedi</a></h1>
     
             <label>Email</label><br>
             <input type="email" id="email" name="email" autocomplete="off"><br>
