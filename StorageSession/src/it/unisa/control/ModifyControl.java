@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import it.unisa.model.AddressBean;
+import it.unisa.model.AddressDaoImpl;
 import it.unisa.model.UserBean;
 import it.unisa.model.UserDaoImpl;
 
@@ -61,6 +63,8 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
         	        } else {
         	            response.setStatus(HttpServletResponse.SC_OK);
         	        }
+
+        	        // Creazione del JSON di risposta manualmente
         	        String jsonResponse = "{\"success\": " + success + "}";
 
         	        // Impostazione dei corretti header della risposta JSON
@@ -73,6 +77,26 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
         	        }
 				} catch (SQLException e) {
 						e.printStackTrace();
+				}
+        	} else if (action.equals("eliminaIndirizzo")) {
+        		String indirizzoId = request.getParameter("idIndirizzo");
+        		AddressDaoImpl addressDao = new AddressDaoImpl();
+        		AddressBean indirizzo = null;
+				try {
+					indirizzo = addressDao.findAddressByID(Integer.parseInt(indirizzoId));
+				} catch (NumberFormatException e1) {
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+        	    try {
+					if (addressDao.deleteAddress(indirizzo) != 0) {
+						response.setStatus(HttpServletResponse.SC_OK);
+					} else {
+						   response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
         	}else {
         		response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

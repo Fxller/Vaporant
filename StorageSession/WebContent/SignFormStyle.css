@@ -3,16 +3,13 @@ body {
   background-color: #000;
   display: flex;
   justify-content: center;
-  height: 100vh;
 }
 
 .form {
   background-color: #15172b;
   border-radius: 20px;
   box-sizing: border-box;
-  height: 500px;
-  padding: 20px;
-  width: 320px;
+  padding: 100px;
 }
 
 .title {
@@ -21,7 +18,6 @@ body {
   font-size: 36px;
   font-weight: 600;
   margin-top: 30px;
-  text-align: center;
 }
 
 .subtitle {
@@ -30,7 +26,6 @@ body {
   font-size: 16px;
   font-weight: 600;
   margin-top: 10px;
-  text-align: center;
 }
 
 .input-container {
@@ -115,6 +110,8 @@ body {
   cursor: pointer;
   font-size: 18px;
   height: 50px;
+  margin-top: 38px;
+  // outline: 0;
   text-align: center;
   width: 100%;
 }

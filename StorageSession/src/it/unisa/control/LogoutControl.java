@@ -25,7 +25,7 @@ public class LogoutControl extends HttpServlet {
 			currentSession.setAttribute("tipo", null);
 			currentSession.setAttribute("cart", null);
 		
-			resp.sendRedirect("ProductView.jsp");
+			resp.sendRedirect("loginForm.jsp");
 	}
 
 

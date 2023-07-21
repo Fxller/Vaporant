@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import it.unisa.model.AddressDaoImpl;
 import it.unisa.model.Cart;
 import it.unisa.model.ContenutoBean;
 import it.unisa.model.ContenutoDaoImpl;
@@ -28,8 +27,6 @@ public class OrderControl extends HttpServlet {
 
 	private static OrderDaoImpl orderDao = new OrderDaoImpl();
 	private static ContenutoDaoImpl contDao = new ContenutoDaoImpl();
-	private static UserDaoImpl userDao = new UserDaoImpl();
-	private static AddressDaoImpl addressDao = new AddressDaoImpl();
 	
     public OrderControl() {
         super();
@@ -47,24 +44,6 @@ public class OrderControl extends HttpServlet {
 		
 		String payment = req.getParameter("payment");
 		int idIndirizzo = Integer.parseInt(req.getParameter("addressDropdown"));
-		int idIndirizzoFatt = Integer.parseInt(req.getParameter("addressDropdown2"));
-		
-		
-		
-		String indirizzoFatt = null;
-		try {
-			indirizzoFatt = addressDao.findAddressByID(idIndirizzoFatt).toStringScript();
-		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		
-		try {
-			userDao.updateAddress(indirizzoFatt, user);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		
 		OrderBean order = new OrderBean(idUtente,idIndirizzo, cart.getPrezzoTotale(), LocalDate.now(), payment);
 		
@@ -84,6 +63,7 @@ public class OrderControl extends HttpServlet {
 		
 		for(ProductBean prod : cart.getProducts())
 		{
+			System.out.println(prod.toString());
 			try {
 				contDao.saveContenuto(new ContenutoBean(idOrdine,prod.getCode(),prod.getQuantity(),22,prod.getPrice()));
 			} catch (SQLException e) {
@@ -93,7 +73,7 @@ public class OrderControl extends HttpServlet {
 		
 		session.setAttribute("order", order);
 		session.setAttribute("user", user);
-		session.setAttribute("listaProd", cart.getProducts());
+		session.setAttribute("cart", cart);
 		
 		res.sendRedirect("ordine.jsp");
 		
@@ -105,3 +85,4 @@ public class OrderControl extends HttpServlet {
 	}
 
 }
+;

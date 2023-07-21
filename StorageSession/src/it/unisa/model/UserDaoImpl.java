@@ -38,8 +38,8 @@ public class UserDaoImpl implements UserDAO {
         int result;
 
         String insertSQL = "INSERT INTO " + UserDaoImpl.TABLE
-                           + " (nome, cognome, dataNascita, CF, numTelefono, email, psw, indirizzoFatt)"
-                           + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                           + " (nome, cognome, dataNascita, CF, numTelefono, email, psw)"
+                           + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
         	connection = ds.getConnection();
@@ -51,11 +51,9 @@ public class UserDaoImpl implements UserDAO {
             preparedStatement.setString(4, user.getCodF());
             preparedStatement.setString(5, user.getNumTelefono());
             preparedStatement.setString(6, user.getEmail());
-            preparedStatement.setString(7, user.getPassword());
-            preparedStatement.setString(8, user.getIndirizzoFatt());
-
  
             result = preparedStatement.executeUpdate();
+            connection.commit();
 
         } finally {
             try {
@@ -93,6 +91,8 @@ public class UserDaoImpl implements UserDAO {
   
             result = preparedStatement.executeUpdate();   
             
+            connection.commit();
+        	
         } finally {
             try {
                 if (preparedStatement != null)
@@ -128,16 +128,15 @@ public UserBean findByCred(String email, String password) throws SQLException {
            
            while (rs.next()) {
 
-        	   user.setEmail(rs.getString("email"));
-               user.setCodF(rs.getString("CF"));
-               user.setNome(rs.getString("nome"));
-               user.setCognome(rs.getString("cognome"));
-               user.setNumTelefono(rs.getString("numTelefono"));
-               user.setId(rs.getInt("ID"));
-               user.setPassword(rs.getString("psw"));
-               user.setTipo(rs.getString("tipo"));
-               user.setDataNascita(LocalDate.parse(rs.getDate("dataNascita").toString()));
-               user.setIndirizzoFatt(rs.getString("indirizzoFatt"));
+                user.setEmail(rs.getString("email"));
+                user.setCodF(rs.getString("CF"));
+                user.setNome(rs.getString("nome"));
+                user.setCognome(rs.getString("cognome"));
+                user.setNumTelefono(rs.getString("numTelefono"));
+                user.setId(rs.getInt("ID"));
+                user.setPassword(rs.getString("psw"));
+                user.setTipo(rs.getString("tipo"));
+                user.setDataNascita(LocalDate.parse(rs.getDate("dataNascita").toString()));
                
             }
             
@@ -155,7 +154,7 @@ public UserBean findByCred(String email, String password) throws SQLException {
         return user;
 	}
 
-@Override
+
 public UserBean findById(int ID) throws SQLException {
 	
 	Connection connection = null;
@@ -204,7 +203,7 @@ public UserBean findById(int ID) throws SQLException {
     return user;
 }
 
-@Override
+
 public void modifyMail(UserBean user, String email) throws SQLException{
 	Connection connection = null;
     PreparedStatement preparedStatement = null;
@@ -231,7 +230,7 @@ public void modifyMail(UserBean user, String email) throws SQLException{
         }
     }
 }
-@Override
+
 public void modifyTelefono(UserBean user, String cell) throws SQLException{
 	Connection connection = null;
     PreparedStatement preparedStatement = null;
@@ -260,7 +259,6 @@ public void modifyTelefono(UserBean user, String cell) throws SQLException{
     }
 }
 
-@Override
 public int modifyPsw(String newPsw, String oldPsw, UserBean user) throws SQLException{
 	Connection connection = null;
     PreparedStatement preparedStatement = null;
@@ -292,32 +290,5 @@ public int modifyPsw(String newPsw, String oldPsw, UserBean user) throws SQLExce
         }
     }
     return 1;
-}
-@Override
-public void updateAddress(String address, UserBean user) throws SQLException {
-    user.setIndirizzoFatt(address);
-
-    Connection connection = null;
-    PreparedStatement preparedStatement = null;
-
-    String updateSQL = "UPDATE " + TABLE + " SET indirizzoFatt = ? WHERE ID = ?";
-
-    try {
-        connection = ds.getConnection();
-        preparedStatement = connection.prepareStatement(updateSQL);
-        preparedStatement.setString(1, address);
-        preparedStatement.setInt(2, user.getId());
-        preparedStatement.executeUpdate();
-
-    } finally {
-        try {
-            if (preparedStatement != null)
-                preparedStatement.close();
-        } finally {
-            if (connection != null) {
-                connection.close();
-            }
-        }
-    }
 }
 }

@@ -28,9 +28,4 @@ public class AddressScript {
 		this.indirizzo = indirizzo;
 	}
 	
-	public String toString() {
-		
-		return id + " " + indirizzo;
-		
-	}
 }

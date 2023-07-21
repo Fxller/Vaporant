@@ -53,7 +53,10 @@ public class AddressControl extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
-
+		else
+		
+		response.sendRedirect("AddressForm.jsp");
+    	
     }
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

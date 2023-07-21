@@ -10,55 +10,28 @@
 		response.sendRedirect("loginForm.jsp");
 
 	OrderBean order = (OrderBean) request.getSession().getAttribute("order"); 
-
-	@SuppressWarnings("unchecked")
-	List<ProductBean> listaProdotti = (List<ProductBean>) request.getSession().getAttribute("listaProd");
-	request.getSession().removeAttribute("cart");
+	
+	
 	
 %>    
 
 
 <!DOCTYPE html>
 <html>
-	<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.ProductBean,it.unisa.model.Cart"%>
+<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.ProductBean,it.unisa.model.Cart"%>
 
 <head>
-	<meta charset="UTF-8">
-	<title>Ordine</title>
-    <link rel="stylesheet" type="text/css" href="OrdineStyle.css">
+<meta charset="UTF-8">
+<title>Ordine</title>
 </head>
 <body>
-	<jsp:include page="Header.jsp" />
-	<h1><span>Acquisto effettuato!</span></h1>
-	<div class = "resoconto">
-	<% 	
-		for(ProductBean beancart : listaProdotti) {
-	%>
-	<table>
-        	<thead>        
-            	<tr>
-                	<th>Prodotto</th>
-                	<th>Quantità</th>
-                	<th>Prezzo</th>
-            	</tr>
-        	</thead>
-			<tbody>
-				<tr>
-					<td><span><%=beancart.getName()%></span></td>
-					<td>
-						<%=beancart.getQuantity()%>
-					</td>
-					<td><%=beancart.getPrice()+"€"%></td>
-				</tr>
-			</tbody>
-		</table>
-	<% } %>
+	Acquisto effettuato<br>
+	Torna alla <a href="ProductView.jsp">HOME</a>
+
 	<form action = "fattura" method = "Post">
-		<button type = "submit" class = "btn">SCARICA QUI LA TUA FATTURA</button>
+		<button type = submit >fattura</button>
 	</form>
-	</div>
-	
-	<jsp:include page="Footer.jsp" />
+
 </body>
 
 </html>
