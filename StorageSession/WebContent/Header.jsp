@@ -1,95 +1,101 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page import="it.unisa.model.UserBean"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
     
 <% 
 	String action = (String) request.getSession().getAttribute("action");
-   	request.getSession().setAttribute("action", action); 
+   	request.getSession().setAttribute("action", action);
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<script src="https://kit.fontawesome.com/9e8b7791f2.js" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="HeaderStyle.css">
-<style>
-	      .search-item {
-			  cursor: pointer;
-			}
-</style>   
+	<link href = "HeaderStyle.css" rel = "stylesheet" type = "text/css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<style>
+          .search-item {
+              cursor: pointer;
+            }
+	</style>
 </head>
 <body>
-	<header>
-		<nav class = "navbar">
-		<ul>
-		<li><a class = "active" href = "ProductView.jsp"><img src = "logo.png" width = 50% height = "auto"></a></li>
-		<li><a href = "loginForm.jsp">Login</a></li>
-		<li><a href = "CartView.jsp"><i class="fa-solid fa-cart-shopping"></i></a></li>
-		<li style = "li {float:right;}">  
-			<form id="searchForm">
-			  <input type="text" id="searchInput" placeholder="Cerca prodotti">
-			  <div id="searchResults" class="search-results"></div>
-			</form>
-        </li>
-		</ul>
-		</nav>
-		<script>
-		/* Funzione per mostrare/nascondere gli elementi del menu sulla navbar per dispositivi mobili */
-		function toggleMenu() {
-  			var x = document.querySelector(".navbar ul");
-  			if (x.className === "responsive") {
-    			x.className = "";
-  			} else {
-    			x.className = "responsive";
-  			}
-		}
-		</script>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		 <script>
-				$(document).ready(function() {
-				  let searchInput = $("#searchInput");
-				  let searchResults = $("#searchResults");
-				
-				  searchInput.on("input", function() {
-				    let searchQuery = searchInput.val().trim();
-				    if (searchQuery !== "") {
-				      $.ajax({
-				        url: "SearchBar", // Inserisci il percorso della tua servlet
-				        type: "POST",
-				        data: { nome: searchQuery, descrizione: searchQuery },
-				        success: function(data) {
-				          let results = data;
-				          let html = "";
-				          if (results.length > 0) {
-				            for (let i = 0; i < results.length; i++) {
-				              let obj = results[i];
-				              html += '<div class="search-item" onclick="redirectToProduct(' + obj.ID + ')">';
-				              html += '<p>' + obj.nome + '</p>';
-				              html += '</div>';
-				            }
-				          } else {
-				            html = '<div class="search-item">Nessun risultato trovato</div>';
-				          }
-				          searchResults.html(html);
-				          searchResults.show();
-				        },
-				        error: function() {
-				          console.log("errore");
-				        }
-				      });
-				    } else {
-				      searchResults.html("");
-				      searchResults.hide();
-				    }
-				  });
-				});
-				
-				function redirectToProduct(productId) {
-				  window.location.href = "details?action=read&id=" + productId; // Inserisci l'URL della pagina di descrizione del prodotto
-					
-				}
-	</script>
-		 
-	</header>
+	<nav>
+		<div class = "logo">
+			<a href = "product"><img src = "logo.png" class = "logosite"></a>
+		</div>
+		<%if(session.getAttribute("user") != null){ %>
+			<div class = "links">
+			<a href = "logoutControl">Logout</a>
+			</div>
+			<div class = "links">
+			<a href = "Utente.jsp">Profilo</a>
+			</div>
+		<%}else{%>
+			<div class = "links">
+			<a href = "loginForm.jsp">Login</a>
+			</div>
+		<%}%>
+		<div class = "links">
+			<a href = "CartView.jsp">Carrello</a>
+		</div>
+		<div class = "search">
+			<div class = "kek">
+				<form id="searchForm">
+					<input type = "text" id="searchInput" class = "border" placeholder="Cerca">
+				</form>
+			</div>
+		</div>
+		
+	</nav>
+	<br><div id="searchResults" class="search-results"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script>
+        $(document).ready(function() {
+          let searchInput = $("#searchInput");
+          let searchResults = $("#searchResults");
+        
+          searchInput.on("input", function() {
+            let searchQuery = searchInput.val().trim();
+            if (searchQuery !== "") {
+              $.ajax({
+                url: "SearchBar", // Inserisci il percorso della tua servlet
+                type: "POST",
+                data: { nome: searchQuery, descrizione: searchQuery },
+                success: function(data) {
+                    let results = data;
+                    let html = '<table class="search-table">';
+                    if (results.length > 0) {
+                        for (let i = 0; i < results.length; i++) {
+                            let obj = results[i];
+                            html += '<tr class="search-item" onclick="redirectToProduct(' + obj.ID + ')">';
+                            html += '<td> -> ' + obj.nome + '</td>';
+                            // Puoi aggiungere altre colonne della tabella qui, se necessario
+                            html += '</tr>';
+                        }
+                    } else {
+                        html += '<tr class="search-item"><td colspan="2">Nessun risultato trovato</td></tr>';
+                    }
+                    html += '</table>';
+                    searchResults.html(html);
+                    searchResults.show();
+                },
+
+                error: function() {
+                  console.log("errore");
+                }
+              });
+            } else {
+              searchResults.html("");
+              searchResults.hide();
+            }
+          });
+        });
+        
+        function redirectToProduct(productId) {
+          window.location.href = "details?action=read&id=" + productId; // Inserisci l'URL della pagina di descrizione del prodotto
+          
+        }
+  </script>
 </body>
 </html>

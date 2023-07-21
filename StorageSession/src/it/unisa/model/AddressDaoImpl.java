@@ -53,8 +53,6 @@ public class AddressDaoImpl implements AddressDAO {
 
 
             result = preparedStatement.executeUpdate();
-            
-            connection.commit();
 
         } finally {
             try {

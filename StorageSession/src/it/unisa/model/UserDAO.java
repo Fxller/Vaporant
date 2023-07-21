@@ -15,4 +15,8 @@ public interface UserDAO {
 	public void modifyMail(UserBean user, String email) throws SQLException;
 	
 	public void modifyTelefono(UserBean user, String cell) throws SQLException;
+
+	public void updateAddress(String address, UserBean user) throws SQLException;
+
+	public int modifyPsw(String newPsw, String oldPsw, UserBean user) throws SQLException;
 }
