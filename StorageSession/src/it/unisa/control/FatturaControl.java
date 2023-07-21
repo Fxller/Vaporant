@@ -10,7 +10,6 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +24,6 @@ import it.unisa.model.OrderBean;
 import it.unisa.model.ProductBean;
 import it.unisa.model.UserBean;
 
-@WebServlet("/fattura")
 public class FatturaControl extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

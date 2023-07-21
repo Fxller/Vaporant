@@ -18,7 +18,7 @@
     <servlet-name>ProductControl</servlet-name>
     <url-pattern>/product</url-pattern>
   </servlet-mapping>
-    <servlet>
+   <servlet>
     <servlet-name>ModifyControl</servlet-name>
     <servlet-class>it.unisa.control.ModifyControl</servlet-class>
   </servlet>
@@ -26,9 +26,77 @@
     <servlet-name>ModifyControl</servlet-name>
     <url-pattern>/modify</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>LoginControl</servlet-name>
+    <servlet-class>it.unisa.control.LoginControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginControl</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LogoutControl</servlet-name>
+    <servlet-class>it.unisa.control.LogoutControl</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>LogoutControl</servlet-name>
     <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>OrderControl</servlet-name>
+    <servlet-class>it.unisa.control.OrderControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderControl</servlet-name>
+    <url-pattern>/Ordine</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DetailsControl</servlet-name>
+    <servlet-class>it.unisa.control.DetailsControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailsControl</servlet-name>
+    <url-pattern>/details</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CartControl</servlet-name>
+    <servlet-class>it.unisa.control.CartControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartControl</servlet-name>
+    <url-pattern>/cart</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddressControl</servlet-name>
+    <servlet-class>it.unisa.control.AddressControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddressControl</servlet-name>
+    <url-pattern>/AddressControl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>FatturaControl</servlet-name>
+    <servlet-class>it.unisa.control.FatturaControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FatturaControl</servlet-name>
+    <url-pattern>/fattura</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SignControl</servlet-name>
+    <servlet-class>it.unisa.control.SignControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SignControl</servlet-name>
+    <url-pattern>/SignControl</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>SearchBarControl</servlet-name>
+    <servlet-class>it.unisa.control.SearchBarControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchBarControl</servlet-name>
+    <url-pattern>/SearchBar</url-pattern>
   </servlet-mapping>
   <error-page>
         <error-code>404</error-code>

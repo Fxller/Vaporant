@@ -59,7 +59,7 @@
             let searchQuery = searchInput.val().trim();
             if (searchQuery !== "") {
               $.ajax({
-                url: "SearchBar", // Inserisci il percorso della tua servlet
+                url: "SearchBar", 
                 type: "POST",
                 data: { nome: searchQuery, descrizione: searchQuery },
                 success: function(data) {

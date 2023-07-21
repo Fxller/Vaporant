@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +13,7 @@ import it.unisa.model.AddressDaoImpl;
 import it.unisa.model.UserBean;
 import it.unisa.model.UserDaoImpl;
 
-@WebServlet("/AddressControl")
+
 public class AddressControl extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
@@ -34,24 +33,19 @@ public class AddressControl extends HttpServlet{
 		
 		if(user != null)
 		{
+			String citta = request.getParameter("citta");
+			String prov = request.getParameter("provincia");
+			String via = request.getParameter("via");
 			address.setCap(request.getParameter("cap"));
-			address.setCitta(request.getParameter("citta"));
+			address.setCitta(citta);
 			address.setId_utente(user.getId());
-			address.setNumCivico(request.getParameter("numCivico"));
-			address.setProvincia(request.getParameter("provincia"));
+			address.setNumCivico(request.getParameter("numero_civico"));
+			address.setProvincia(prov);
 			address.setStato(request.getParameter("stato"));
-			address.setVia(request.getParameter("via"));
-			
-			System.out.println(address.toString());
-
-		
+			address.setVia(via);
 			try {
 				addressDao.saveAddress(address);
-				if(request.getSession().getAttribute("action").equals("User")) {
-					response.sendRedirect("Utente.jsp");
-				}else {
-					response.sendRedirect("checkout.jsp");
-				}
+				response.sendRedirect("Utente.jsp");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

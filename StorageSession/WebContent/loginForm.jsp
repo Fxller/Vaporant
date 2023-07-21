@@ -25,7 +25,7 @@
 </head>
 <body>
     <div class="login-container">
-        <form action="loginControl" id="login-form" method="POST" class="form">
+        <form action="login" id="login-form" method="POST" class="form">
             <span class="BorderTopBottom"></span>
             <span class="BorderLeftRight"></span>
     
