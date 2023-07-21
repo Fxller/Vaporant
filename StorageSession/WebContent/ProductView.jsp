@@ -11,7 +11,7 @@
 	}
 	ProductBean product = (ProductBean) session.getAttribute("product");
 	UserBean user = (UserBean) request.getSession().getAttribute("user");
-	
+
 %>
 
 <!DOCTYPE html>

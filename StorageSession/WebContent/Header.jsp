@@ -70,7 +70,6 @@
                             let obj = results[i];
                             html += '<tr class="search-item" onclick="redirectToProduct(' + obj.ID + ')">';
                             html += '<td> -> ' + obj.nome + '</td>';
-                            // Puoi aggiungere altre colonne della tabella qui, se necessario
                             html += '</tr>';
                         }
                     } else {

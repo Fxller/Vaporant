@@ -13,10 +13,13 @@
 	
   	UserBean user = null;
 	if(session.getAttribute("user") == null)
-		response.sendRedirect("loginForm.jsp");//aggiungere pagina errore che dice stai cercando di accedere dove non puoi
+		response.sendRedirect("loginForm.jsp");//aggiungere pagina errore che dice stai cercando di accedere dove non puoi 
 	else
-		user = (UserBean) session.getAttribute("user");  
-
+		user = (UserBean) session.getAttribute("user");
+	
+	if (user.getTipo() != "admin")
+		response.sendRedirect("ErrorPageAccess.jsp");	
+ 	
 %>
 
 <!DOCTYPE html>

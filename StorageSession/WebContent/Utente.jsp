@@ -22,7 +22,7 @@
 %>
 
 <!DOCTYPE html>
-<html lang = "it">>
+<html lang = "it">
    <head>
       <title>Dettagli Utente</title>
       <link rel="stylesheet" type="text/css" href="UtenteStyle.css">
