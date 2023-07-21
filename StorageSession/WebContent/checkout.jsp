@@ -113,7 +113,6 @@
         <% } %>
 
         <span>Paga con:</span>
-            <br><br>
                 <div class = "radio">
                     <input type="radio" id="paypal" name="payment" required value="PayPal">
                     <label for="paypal">PayPal</label>
